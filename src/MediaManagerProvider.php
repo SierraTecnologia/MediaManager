@@ -14,13 +14,13 @@ use Illuminate\Support\ServiceProvider;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use Log;
 
+use MediaManager\Facades\MediaManager as MediaManagerFacade;
+
+use MediaManager\Services\MediaManagerService;
+use MediaManager\Services\Midia\FileService;
 use Muleta\Traits\Providers\ConsoleTools;
 
 use Route;
-use MediaManager\Facades\MediaManager as MediaManagerFacade;
-use MediaManager\Services\Midia\FileService;
-
-use MediaManager\Services\MediaManagerService;
 
 class MediaManagerProvider extends ServiceProvider
 {
