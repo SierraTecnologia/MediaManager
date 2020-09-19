@@ -4,13 +4,13 @@ namespace MediaManager\Http\Controllers\Admin;
 
 use Config;
 use Crypto;
-use Facilitador\Services\ValidationService;
+use Muleta\Services\ValidationService;
 use FileService;
 use Illuminate\Http\Request;
-use Siravel;
 use MediaManager\Http\Requests\ImagesRequest;
 use MediaManager\Models\Image;
 use MediaManager\Repositories\ImageRepository;
+use Siravel;
 use Storage;
 use Support\Services\RiCaResponseService;
 
@@ -118,9 +118,10 @@ class ImagesController extends Controller
      */
     public function upload(Request $request)
     {
-        $validation = app(ValidationService::class)->check([
-            'location' => ['required'],
-        ]);
+        // @todo
+        // $validation = app(ValidationService::class)->check([
+        //     'location' => ['required'],
+        // ]);
 
         if (!$validation['errors']) {
             $file = $request->file('location');
