@@ -83,7 +83,7 @@ class MediaManagerProvider extends ServiceProvider
                     'section'       => 'painel',
                     // 'access' => \App\Models\Role::$ADMIN
                 ],
-            // ],
+                // ],
         ],
     ];
 
@@ -97,9 +97,11 @@ class MediaManagerProvider extends ServiceProvider
         $this->registerDirectories();
 
         // Rotas
-        $this->app->booted(function () {
-            $this->routes();
-        });
+        $this->app->booted(
+            function () {
+                $this->routes();
+            }
+        );
 
         $this->loadLogger();
     }

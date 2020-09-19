@@ -108,9 +108,11 @@ class FilesController extends BaseController
      */
     public function upload(Request $request)
     {
-        $validation = $this->validation->check([
+        $validation = $this->validation->check(
+            [
             'location' => [],
-        ]);
+            ]
+        );
 
         if (!$validation['errors']) {
             $file = $request->file('location');

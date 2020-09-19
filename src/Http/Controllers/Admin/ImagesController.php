@@ -224,7 +224,7 @@ class ImagesController extends Controller
     /**
      * Bulk image delete
      *
-     * @param  string $ids
+     * @param string $ids
      *
      * @return Redirect
      */
