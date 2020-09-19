@@ -12,7 +12,7 @@ use MediaManager\Models\Image;
 use MediaManager\Repositories\ImageRepository;
 use Siravel;
 use Storage;
-use Support\Services\RiCaResponseService;
+use Muleta\Services\RiCaResponseService;
 
 class ImagesController extends Controller
 {
