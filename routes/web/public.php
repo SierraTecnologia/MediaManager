@@ -9,8 +9,6 @@ Route::get('medias', 'HomeController@medias')->name('medias');
  * Midia @todo
  */
 // Route::group(['namespace' => 'Midia', 'as' => 'midia.'], function () {
-    Route::get('gallery', 'GalleryController@all');
-    Route::get('gallery/{tag}', 'GalleryController@show');
     
     Route::get('midia-preview/{midiaId}', 'MidiaController@asPreview');
     Route::get('midia-full/{midiaId}', 'MidiaController@asFull');
