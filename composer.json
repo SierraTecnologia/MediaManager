@@ -1,0 +1,78 @@
+{
+    "name": "sierratecnologia/media-manager",
+    "description": "MediaManager de Arquivos",
+    "type": "library",
+    "keywords": [
+        "sierratecnologia",
+        "media-manager"
+    ],
+    "license": "MIT",
+    "homepage": "https://sierratecnologia.com/packages/media-manager/",
+    "support": {
+        "email": "help@sierratecnologia.com.br",
+        "issues": "https://github.com/sierratecnologia/media-manager/issues",
+        "source": "https://github.com/sierratecnologia/media-manager",
+        "docs": "https://github.com/sierratecnologia/media-manager/blob/master/README.md"
+    },
+    "authors": [
+        {
+            "name": "SierraTecnologia",
+            "homepage": "https://sierratecnologia.com.br",
+            "email": "help@sierratecnologia.com.br"
+        },
+        {
+            "name": "Ricardo Rebello Sierra",
+            "email": "contato@ricardosierra.com.br"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "laravel/framework": "^7.0 || ^8.0",
+        "sierratecnologia/muleta": "dev-master",
+        "fideloper/proxy": ">=4.0",
+        "league/pipeline": "*",
+        "league/flysystem": "*",
+        "league/flysystem-cached-adapter": "*",
+        "league/flysystem-sftp": "*",
+        "league/flysystem-ziparchive": "*",
+        "nao-pon/flysystem-google-drive": "~1.1",
+        "srmklive/flysystem-dropbox-v2": "*",
+        "google/photos-library": ">=1.4",
+        "league/mime-type-detection": ">=1.1",
+        "intervention/image": ">=2.4",
+        "intervention/imagecache": ">=2.3",
+        "spatie/laravel-medialibrary": "^8.0"
+    },
+    "suggest": {
+        "cipemotion/medialibrary": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "MediaManager\\": "src/"
+        }
+    },
+    "bin": ["bin/media-manager"],
+    "scripts": {
+        "post-install-cmd": [],
+        "post-update-cmd": [],
+        "post-create-project-cmd": []
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../**",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MediaManager\\MediaManagerProvider"
+            ]
+        }
+    }
+}

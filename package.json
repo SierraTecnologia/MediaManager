@@ -1,0 +1,44 @@
+{
+    "author": "Ricardo Sierra",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "axios": "^0.18",
+        "bootstrap": "^4.0.0",
+        "cross-env": "^5.1",
+        "jquery": "^3.2",
+        "laravel-mix": "^2.0",
+        "lodash": "^4.17.5",
+        "popper.js": "^1.12",
+        "vue": "^2.5.17"
+    },
+    "dependencies": {
+        "cropperjs": "^1.5.6",
+        "datatables": "^1.10.18",
+        "datatables-bootstrap3-plugin": "^0.6.0",
+        "dropzone": "^5.0.1",
+        "gojs": "^2.0.9",
+        "justifiedGallery": "^3.8.1",
+        "laravel-echo": "^1.5.3",
+        "mime-matcher": "^1.0.5",
+        "nestable2": "^1.6.0",
+        "socket.io-client": "^2.2.0",
+        "toastr": "^2.1.2",
+        "vue-core-video-player": "^0.1.9",
+        "vue-gallery": "^2.0.1",
+        "vue-playlist": "^1.1.6",
+        "vue-video-player": "^5.0.2",
+        "vue-visual": "^2.3.0",
+        "vue2-admin-lte": "^0.4.3",
+        "vuefinder": "^0.2.0"
+    }
+}

@@ -1,0 +1,37 @@
+#!/usr/bin/env php
+<?php
+/**
+ * 
+ */
+$composerAutoload = [
+    __DIR__ . '/../../../autoload.php',
+    __DIR__ . '/../vendor/autoload.php',
+    'vendor/autoload.php',
+];
+$vendorPath = $binariesPath = null;
+foreach ($composerAutoload as $autoload) {
+    if (file_exists($autoload)) {
+        require($autoload);
+        $vendorPath = dirname($autoload);
+        $binariesPath = $vendorPath . '/bin/';
+        break;
+    }
+}
+
+$loadLaravel = new \Support\Helps\LoadLaravel(
+    [
+        __DIR__.'/../vendor/sierratecnologia/informate/src/Migrations/',
+        __DIR__.'/../vendor/sierratecnologia/population/src/Migrations/',
+        __DIR__.'/../database/migrations/',
+    ]
+);
+$loadLaravel->runMigrations();
+
+$cliMate = new \League\CLImate\CLImate;
+$analyser = new \MediaManager\Console\External\Explorer\DirectoryExplorer($cliMate, $binariesPath, $_SERVER['argv']);
+if ($analyser->run()) {
+    // No issues found
+    exit(0);
+}
+// Issues found
+exit(1);
