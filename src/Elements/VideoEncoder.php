@@ -1,6 +1,6 @@
 <?php
 
-namespace Support\Elements\Fields;
+namespace Pedreiro\Elements\Fields;
 
 use Route;
 use Illuminate\Container\Container;
@@ -11,7 +11,7 @@ use Illuminate\Container\Container;
  */
 class VideoEncoder extends Upload
 {
-    use \Support\Elements\Fields\Traits\Helpers;
+    use \Pedreiro\Elements\Fields\Traits\Helpers;
 
     /**
      * The encoding row for the field

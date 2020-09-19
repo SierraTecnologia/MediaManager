@@ -19,7 +19,8 @@
         "laravel-mix": "^2.0",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
-        "vue": "^2.5.17"
+        "vue": "^2.5.17",
+        "worker-loader": "^3.0.2"
     },
     "dependencies": {
         "cropperjs": "^1.5.6",
