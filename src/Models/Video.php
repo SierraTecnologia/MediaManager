@@ -2,7 +2,7 @@
 
 namespace MediaManager\Models;
 
-use Support\Models\Base;
+use MediaManager\Models\Model as Base;
 
 class Video extends Base
 {

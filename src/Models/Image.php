@@ -3,8 +3,8 @@
 namespace MediaManager\Models;
 
 use Croppa;
+use MediaManager\Models\Model as Base;
 use MediaManager\Template\Markup\ImageElement;
-use Support\Models\Base;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**

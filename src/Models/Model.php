@@ -2,12 +2,12 @@
 
 namespace MediaManager\Models;
 
-use Support\Models\Base;
+use Illuminate\Database\Eloquent\Model as Base;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * Polymorphic one to many class that stores images for any model.
  */
-class Model extends Base
+abstract class Model extends Base
 {
-
 }

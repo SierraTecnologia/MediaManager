@@ -4,7 +4,7 @@ namespace MediaManager\Models;
 
 use MediaManager\Builders\ThumbnailBuilder;
 use MediaManager\Entities\ThumbnailEntity;
-use Support\Models\Base;
+use MediaManager\Models\Model as Base;
 
 /**
  * Class Thumbnail.

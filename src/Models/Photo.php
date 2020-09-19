@@ -7,7 +7,7 @@ use App\Contants\Tables;
 use Carbon\Carbon;
 use MediaManager\Entities\PhotoEntity;
 use Illuminate\Database\Eloquent\Collection;
-use Support\Models\Base;
+use MediaManager\Models\Model as Base;
 use Siravel\Models\Blog\Post;
 use Locaravel\Models\Localization;
 use Translation\Models\Language;
