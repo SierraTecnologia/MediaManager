@@ -96,10 +96,10 @@ class MediaManagerProvider extends ServiceProvider
         // Register configs, migrations, etc
         $this->registerDirectories();
 
-        // // COloquei no register pq nao tava reconhecendo as rotas para o adminlte
-        // $this->app->booted(function () {
-        //     $this->routes();
-        // });
+        // Rotas
+        $this->app->booted(function () {
+            $this->routes();
+        });
 
         $this->loadLogger();
     }
@@ -136,7 +136,6 @@ class MediaManagerProvider extends ServiceProvider
         
 
         $this->setProviders();
-        $this->routes();
 
         $this->app->singleton(
             'media-manager',
