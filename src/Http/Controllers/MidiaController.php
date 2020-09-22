@@ -3,7 +3,7 @@
 namespace MediaManager\Http\Controllers;
 
 use Illuminate\Filesystem\Filesystem;
-use MediaManager\Services\Midia\MidiaService;
+use Stalker\Services\MidiaService;
 
 class MidiaController extends BaseController
 {

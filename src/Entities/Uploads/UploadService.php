@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaManager\Entitys\Uploads;
+namespace MediaManager\Entities\Uploads;
 
 use Illuminate\Contracts\Filesystem\Factory as FileSystem;
 use Illuminate\Contracts\Filesystem\Filesystem as FileSystemInstance;

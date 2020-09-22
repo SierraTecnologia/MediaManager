@@ -8,7 +8,7 @@ use CryptoService;
 use Informate\Models\Tag;
 use Muleta\Repositories\BaseRepository;
 use MediaManager\Models\Imagen as Image;
-use MediaManager\Services\Midia\FileService;
+use Stalker\Services\FileService;
 
 
 class ImageRepository extends BaseRepository

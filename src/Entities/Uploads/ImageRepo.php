@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaManager\Entitys\Uploads;
+namespace MediaManager\Entities\Uploads;
 
 use Population\Models\Components\Book\Permissions\PermissionService;
 use Population\Models\Components\Book\Page;

@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaManager\Entitys\Uploads;
+namespace MediaManager\Entities\Uploads;
 
 use Support\Models\Ownable;
 use Images;

@@ -17,7 +17,7 @@ use Log;
 use MediaManager\Facades\MediaManager as MediaManagerFacade;
 
 use MediaManager\Services\MediaManagerService;
-use MediaManager\Services\Midia\FileService;
+use Stalker\Services\FileService;
 use Muleta\Traits\Providers\ConsoleTools;
 
 use Route;

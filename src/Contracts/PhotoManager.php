@@ -1,13 +1,13 @@
 <?php
 
-namespace MediaManager\Managers;
+namespace MediaManager\Contracts;
 
 use MediaManager\Entities\PhotoEntity;
 
 /**
  * Interface PhotoManager.
  *
- * @package Core\Contracts
+ * @package MediaManager\Contracts
  */
 interface PhotoManager
 {

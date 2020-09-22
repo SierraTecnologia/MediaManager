@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaManager\Entitys\Uploads;
+namespace MediaManager\Entities\Uploads;
 
 use Population\Models\Components\Book\Page;
 use Support\Models\Ownable;

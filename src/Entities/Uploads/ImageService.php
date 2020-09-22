@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaManager\Entitys\Uploads;
+namespace MediaManager\Entities\Uploads;
 
 use App\Models\User;
 use SiUtils\Exceptions\HttpFetchException;
