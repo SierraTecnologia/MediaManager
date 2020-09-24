@@ -382,7 +382,7 @@ class MediaService
         return compact('success', 'message');
     }
 
-    private function addWatermarkToImage($image, $options)
+    private function addWatermarkToImage(\Intervention\Image\Image $image, $options)
     {
         $watermark = Image::make(Storage::disk($this->filesystem)->path($options->source));
         // Resize watermark

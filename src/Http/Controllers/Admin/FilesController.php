@@ -2,20 +2,20 @@
 
 namespace MediaManager\Http\Controllers\Admin;
 
-use Siravel;
+use App\Http\Requests\FileRequest;
 use Config;
-use Storage;
-use Redirect;
-use Response;
-use Exception;
 use Crypto;
+use Exception;
 use Finder\Models\Digital\Midia\File;
 use Illuminate\Http\Request;
-use App\Http\Requests\FileRequest;
-use Stalker\Services\FileService;
-use Muleta\Services\ValidationService;
 use MediaManager\Repositories\FileRepository;
+use MediaManager\Services\FileService;
 use Muleta\Services\RiCaResponseService;
+use Muleta\Services\ValidationService;
+use Redirect;
+use Response;
+use Siravel;
+use Storage;
 
 class FilesController extends Controller
 {

@@ -124,7 +124,10 @@ class Imagen extends ArchiveTrait
         );
     }
 
-    public function remember($attribute, $closure)
+    /**
+     * @param \Closure|\Closure $closure
+     */
+    public function remember(string $attribute, $closure)
     {
         $key = $attribute.'_'.$this->location;
 

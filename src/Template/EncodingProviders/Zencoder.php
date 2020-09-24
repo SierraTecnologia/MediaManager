@@ -125,7 +125,7 @@ class Zencoder extends EncodingProvider
      * @param  array $config
      * @return array
      */
-    protected function addCommonProps($outputs)
+    protected function addCommonProps(array $outputs)
     {
         // Facilitador settings
         $common = [

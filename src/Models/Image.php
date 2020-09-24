@@ -520,7 +520,7 @@ class Image extends Base
      * @param  number $scale
      * @return string url
      */
-    public function urlify($size, $multiplier = 1)
+    public function urlify($size, int $multiplier = 1)
     {
         // Get fluent config
         $config = $this->getConfig();
@@ -633,7 +633,10 @@ class Image extends Base
         );
     }
 
-    public function remember($attribute, $closure)
+    /**
+     * @param \Closure $closure
+     */
+    public function remember(string $attribute, \Closure $closure)
     {
         $key = $attribute.'_'.$this->location;
 

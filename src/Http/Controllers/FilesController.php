@@ -12,7 +12,7 @@ use Crypto;
 use Finder\Models\Digital\Midia\File;
 use Illuminate\Http\Request;
 use App\Http\Requests\FileRequest;
-use Stalker\Services\FileService;
+use MediaManager\Services\FileService;
 use Muleta\Services\ValidationService;
 use MediaManager\Repositories\FileRepository;
 use Muleta\Services\RiCaResponseService;

@@ -103,7 +103,7 @@ class ImageService extends UploadService
      * @return mixed
      * @throws \Exception
      */
-    private function saveNewFromUrl($url, $type, $imageName = false)
+    private function saveNewFromUrl(string $url, $type, $imageName = false)
     {
         $imageName = $imageName ? $imageName : basename($url);
         try {
