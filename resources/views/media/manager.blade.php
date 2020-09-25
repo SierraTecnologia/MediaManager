@@ -455,7 +455,7 @@
             getFiles: function() {
                 var vm = this;
                 vm.is_loading = true;
-                $.post('{{ route('admin.media-manager.media.files') }}', { folder: vm.current_folder, _token: '{{ csrf_token() }}', details: vm.details }, function(data) {
+                $.post('{{ route('master.media-manager.media.files') }}', { folder: vm.current_folder, _token: '{{ csrf_token() }}', details: vm.details }, function(data) {
                     vm.files = [];
                     for (var i = 0, file; file = data[i]; i++) {
                         if (vm.filter(file)) {
@@ -639,7 +639,7 @@
                 if (!this.allowRename || vm.selected_file.name == object.target.value) {
                     return;
                 }
-                $.post('{{ route('admin.media-manager.media.rename') }}', {
+                $.post('{{ route('master.media-manager.media.rename') }}', {
                     folder_location: vm.current_folder,
                     filename: vm.selected_file.name,
                     new_filename: object.target.value,
@@ -659,7 +659,7 @@
                 }
                 var vm = this;
                 var name = this.modals.new_folder.name;
-                $.post('{{ route('admin.media-manager.media.new_folder') }}', { new_folder: vm.current_folder+'/'+name, _token: '{{ csrf_token() }}' }, function(data) {
+                $.post('{{ route('master.media-manager.media.new_folder') }}', { new_folder: vm.current_folder+'/'+name, _token: '{{ csrf_token() }}' }, function(data) {
                     if(data.success == true){
                         toastr.success('{{ __('facilitador::generic.successfully_created') }} ' + name, "{{ __('facilitador::generic.sweet_success') }}");
                         vm.getFiles();
@@ -675,7 +675,7 @@
                     return;
                 }
                 var vm = this;
-                $.post('{{ route('admin.media-manager.media.delete') }}', {
+                $.post('{{ route('master.media-manager.media.delete') }}', {
                     path: vm.current_folder,
                     files: vm.selected_files,
                     _token: '{{ csrf_token() }}'
@@ -701,7 +701,7 @@
                     return;
                 }
                 $('#move_files_modal_'+vm._uid).modal('hide');
-                $.post('{{ route('admin.media-manager.media.move') }}', {
+                $.post('{{ route('master.media-manager.media.move') }}', {
                     path: vm.current_folder,
                     files: vm.selected_files,
                     destination: destination,
@@ -733,7 +733,7 @@
 
                 var vm = this;
                 var postData = Object.assign(croppedData, { _token: '{{ csrf_token() }}' });
-                $.post('{{ route('admin.media-manager.media.crop') }}', postData, function(data) {
+                $.post('{{ route('master.media-manager.media.crop') }}', postData, function(data) {
                     if (data.success) {
                         toastr.success(data.message);
                         vm.getFiles();
@@ -831,7 +831,7 @@
             if (this.allowUpload && !dropzone.hasClass('dz-clickable')) {
                 dropzone.dropzone({
                     timeout: 180000,
-                    url: '{{ route('admin.media-manager.media.upload') }}',
+                    url: '{{ route('master.media-manager.media.upload') }}',
                     previewsContainer: "#uploadPreview",
                     totaluploadprogress: function(uploadProgress, totalBytes, totalBytesSent) {
                         progress_bar.css('width', uploadProgress + '%');
