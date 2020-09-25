@@ -75,7 +75,7 @@ class MidiaController extends BaseController
     {
         return $this->service->asset($encPath, $contentType, $fileSystem);
     }
-    // public function show($id)
+    // public function show(Request $request, $id)
     // {
     //     $photo_album = PhotoAlbum::find($id);
     //     $photos = Photo::where('photo_album_id', $id)->get();

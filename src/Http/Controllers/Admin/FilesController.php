@@ -126,7 +126,7 @@ class FilesController extends Controller
     //  *
     //  * @return Response
     //  */
-    // public function edit($id)
+    // public function edit(Request $request, $id)
     // {
     //     $files = $this->repository->find($id);
 
@@ -171,7 +171,7 @@ class FilesController extends Controller
     //  *
     //  * @return Response
     //  */
-    // public function destroy($id)
+    // public function destroy(Request $request, $id)
     // {
     //     $files = $this->repository->find($id);
 
