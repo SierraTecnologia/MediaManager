@@ -39,7 +39,7 @@ class FilesController extends BaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $result = $this->repository->paginated();
 

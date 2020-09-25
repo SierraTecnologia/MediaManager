@@ -28,7 +28,7 @@ class MediaController extends Controller
         $this->mediaService = $mediaService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         // Check permission
         // $this->authorize('browse_media');
