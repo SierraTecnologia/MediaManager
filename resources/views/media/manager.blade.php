@@ -35,7 +35,7 @@
         </ol>
     </div>
     <div v-if="hidden_element">
-        <div class="btn btn-sm btn-default" v-on:click="expanded = !expanded;" style="width:100%">
+        <div class="btn btn-sm btn-secondary" v-on:click="expanded = !expanded;" style="width:100%">
             <div v-if="!expanded"><i class="facilitador-double-down"></i> {{ __('facilitador::generic.open') }}</div>
             <div v-if="expanded"><i class="facilitador-double-up"></i> {{ __('facilitador::generic.close') }}</div>
         </div>
@@ -51,19 +51,19 @@
                 {{ __('facilitador::generic.add_folder') }}
             </button>
         </div>
-        <button type="button" class="btn btn-default" v-on:click="getFiles()">
+        <button type="button" class="btn btn-secondary" v-on:click="getFiles()">
             <i class="facilitador-refresh"></i>
         </button>
         <div class="btn-group offset-right">
-            <button type="button" v-if="showFolders && allowMove" class="btn btn-default" data-toggle="modal" :data-target="'#move_files_modal_'+this._uid">
+            <button type="button" v-if="showFolders && allowMove" class="btn btn-secondary" data-toggle="modal" :data-target="'#move_files_modal_'+this._uid">
                 <i class="facilitador-move"></i>
                 {{ __('facilitador::generic.move') }}
             </button>
-            <button type="button" v-if="allowDelete" :disabled="selected_files.length == 0" class="btn btn-default" data-toggle="modal" :data-target="'#confirm_delete_modal_'+this._uid">
+            <button type="button" v-if="allowDelete" :disabled="selected_files.length == 0" class="btn btn-secondary" data-toggle="modal" :data-target="'#confirm_delete_modal_'+this._uid">
                 <i class="facilitador-trash"></i>
                 {{ __('facilitador::generic.delete') }}
             </button>
-            <button v-if="allowCrop" :disabled="selected_files.length != 1 || !fileIs(selected_file, 'image')" type="button" class="btn btn-default" data-toggle="modal" :data-target="'#crop_modal_'+this._uid">
+            <button v-if="allowCrop" :disabled="selected_files.length != 1 || !fileIs(selected_file, 'image')" type="button" class="btn btn-secondary" data-toggle="modal" :data-target="'#crop_modal_'+this._uid">
                 <i class="facilitador-crop"></i>
                 {{ __('facilitador::media.crop') }}
             </button>
@@ -228,7 +228,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <img :src="selected_file.path" class="img img-responsive" style="margin: 0 auto;">
+                    <img :src="selected_file.path" class="img img-fluid" style="margin: 0 auto;">
                 </div>
 
                 <div class="modal-footer text-left">
@@ -254,7 +254,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
                     <button type="button" class="btn btn-info" v-on:click="createFolder">{{ __('facilitador::media.create_new_folder') }}
                     </button>
                 </div>
@@ -283,7 +283,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
                     <button type="button" class="btn btn-danger" v-on:click="deleteFiles">{{ __('facilitador::generic.delete_confirm') }}
                     </button>
                 </div>
@@ -312,7 +312,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
                     <button type="button" class="btn btn-warning" v-on:click="moveFiles">{{ __('facilitador::generic.move') }}</button>
                 </div>
             </div>
@@ -332,7 +332,7 @@
 
                 <div class="modal-body">
                     <div class="crop-container">
-                        <img :id="'cropping-image_'+this._uid" v-if="selected_files.length == 1 && fileIs(selected_file, 'image')" class="img img-responsive" :src="selected_file.path + '?' + selected_file.last_modified" />
+                        <img :id="'cropping-image_'+this._uid" v-if="selected_files.length == 1 && fileIs(selected_file, 'image')" class="img img-fluid" :src="selected_file.path + '?' + selected_file.last_modified" />
                     </div>
                     <div class="new-image-info">
                         {{ __('facilitador::media.width') }} <span :id="'new-image-width_'+this._uid"></span>, {{ __('facilitador::media.height') }}<span :id="'new-image-height_'+this._uid"></span>
@@ -340,7 +340,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
                     <button type="button" class="btn btn-warning" v-on:click="crop(false)">{{ __('facilitador::media.crop') }}</button>
                     <button type="button" class="btn btn-warning" v-on:click="crop(true)">{{ __('facilitador::media.crop_and_create') }}</button>
                 </div>

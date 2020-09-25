@@ -17,7 +17,7 @@
             {!! FormMaker::fromTable('files', Config::get('siravel.forms.images')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! URL::to('admin/images') !!}" class="btn btn-default raw-left">{!! trans('features.cancel') !!}</a>
+                <a href="{!! URL::to('admin/images') !!}" class="btn btn-secondary raw-left">{!! trans('features.cancel') !!}</a>
                 {!! Form::submit(trans('features.save'), ['class' => 'btn btn-primary', 'id' => 'saveImagesBtn']) !!}
             </div>
 

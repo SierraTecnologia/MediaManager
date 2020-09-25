@@ -9,7 +9,7 @@
     @include('facilitador::midia.files.breadcrumbs', ['location' => ['edit']])
 
     <div class="row raw-margin-bottom-48 raw-margin-top-48 text-center">
-        <a class="btn btn-default" href="{!! FileService::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> {!! trans('features.download') !!}: {!! $files->name !!}</a>
+        <a class="btn btn-secondary" href="{!! FileService::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> {!! trans('features.download') !!}: {!! $files->name !!}</a>
     </div>
 
     <div class="row">
@@ -18,7 +18,7 @@
             {!! FormMaker::fromObject($files, Config::get('cms.forms.file-edit')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! URL::to('admin/files') !!}" class="btn btn-default raw-left">{!! trans('features.cancel') !!}</a>
+                <a href="{!! URL::to('admin/files') !!}" class="btn btn-secondary raw-left">{!! trans('features.cancel') !!}</a>
                 {!! Form::submit(trans('features.save'), ['class' => 'btn btn-primary']) !!}
             </div>
 

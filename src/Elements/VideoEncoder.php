@@ -150,7 +150,7 @@ class VideoEncoder extends Upload
             title="<b>Encoding quality.</b><br>Change to re-encode videos.">
             '.$hidden.'
             <button type="button"
-                class="btn btn-default dropdown-toggle"
+                class="btn btn-secondary dropdown-toggle"
                 data-toggle="dropdown" >
                     <span class="selected">Presets</span>
                     <span class="caret"></span>

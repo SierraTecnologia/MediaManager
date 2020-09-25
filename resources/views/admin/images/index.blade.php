@@ -13,7 +13,7 @@
                     <p>Are you sure want to delete this image?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a id="deleteBtn" type="button" class="btn btn-warning" href="#">{!! trans('features.confirmDelete') !!}</a>
                 </div>
             </div>
@@ -21,10 +21,10 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route('admin.images.create') !!}">{!! trans('features.addNew') !!}</a>
-        <div class="raw-m-hide raw-m-hide pull-right">
+        <a class="btn btn-primary float-right" href="{!! route('admin.images.create') !!}">{!! trans('features.addNew') !!}</a>
+        <div class="raw-m-hide raw-m-hide float-right">
             {!! Form::open(['url' => 'admin/images/search']) !!}
-            <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
+            <input class="form-control header-input float-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
         <h1 class="page-header">{!! trans('features.images') !!}</h1>
@@ -50,18 +50,18 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     @if ($image->is_published)
-                                        <span clas="pull-left"><span class="pull-left fa fa-check"></span> Published</span>
+                                        <span clas="float-left"><span class="float-left fa fa-check"></span> Published</span>
                                     @else
-                                        <span clas="pull-left"><span class="pull-left fa fa-close"></span> Published</span>
+                                        <span clas="float-left"><span class="float-left fa fa-close"></span> Published</span>
                                     @endif
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <form method="post" action="{!! url('admin/images/'.$image->id) !!}">
                                         {!! csrf_field() !!}
                                         {!! method_field('DELETE') !!}
-                                        <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i></button>
+                                        <button class="delete-btn btn btn-xs btn-danger float-right" type="submit"><i class="fa fa-trash"></i></button>
                                     </form>
-                                    <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('admin.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-xs btn-secondary float-right raw-margin-right-8" href="{!! route('admin.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
                                 </div>
                             </div>
                         </div>

@@ -9,8 +9,8 @@
     <div class="page-header">
         <h3>
             {!! trans("admin/photoalbum.photoalbum") !!}
-            <div class="pull-right">
-                <div class="pull-right">
+            <div class="float-right">
+                <div class="float-right">
                     <a href="{!! url('admin/photoalbum/create') !!}"
                        class="btn btn-sm  btn-primary iframe"><span
                                 class="glyphicon glyphicon-plus-sign"></span> {{ trans("admin/modal.new") }}</a>

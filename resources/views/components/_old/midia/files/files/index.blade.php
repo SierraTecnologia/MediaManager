@@ -13,7 +13,7 @@
                     <p>Are you sure want to delete this file?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a id="deleteBtn" type="button" class="btn btn-warning" href="#">{!! trans('features.confirmDelete') !!}</a>
                 </div>
             </div>
@@ -21,10 +21,10 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route('admin.files.create') !!}">{!! trans('features.addNew') !!}</a>
-        <div class="raw-m-hide pull-right raw-m-hide">
+        <a class="btn btn-primary float-right" href="{!! route('admin.files.create') !!}">{!! trans('features.addNew') !!}</a>
+        <div class="raw-m-hide float-right raw-m-hide">
             {!! Form::open(['url' => 'admin/files/search']) !!}
-            <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
+            <input class="form-control header-input float-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
         <h1 class="page-header">{!! trans('features.files') !!}</h1>
@@ -56,9 +56,9 @@
                             <form method="post" action="{!! url('admin/files/'.$file->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
-                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> {!! trans('features.delete') !!}</button>
+                                <button class="delete-btn btn btn-xs btn-danger float-right" type="submit"><i class="fa fa-trash"></i> {!! trans('features.delete') !!}</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('admin.files.edit', [$file->id]) !!}"><i class="fa fa-pencil"></i> {!! trans('features.edit') !!}</a>
+                            <a class="btn btn-xs btn-secondary float-right raw-margin-right-8" href="{!! route('admin.files.edit', [$file->id]) !!}"><i class="fa fa-pencil"></i> {!! trans('features.edit') !!}</a>
                         </td>
                     </tr>
                 @endforeach
