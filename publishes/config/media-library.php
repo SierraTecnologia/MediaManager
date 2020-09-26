@@ -52,15 +52,15 @@ return [
             'x'              => 0,
             'y'              => 0,
             'size'           => 15,
-       ],
-       'thumbnails'          => [
+        ],
+        'thumbnails'          => [
            [
                 'type'  => 'fit',
                 'name'  => 'fit-500',
                 'width' => 500,
                 'height'=> 500
            ],
-       ]
+        ]
     ],
     
     's3' => [
@@ -273,7 +273,7 @@ return [
 
         'attachment' => [
 
-//            'post' => 'Siravel\Models\Blog\Post',
+        //            'post' => 'Siravel\Models\Blog\Post',
 
         ],
 

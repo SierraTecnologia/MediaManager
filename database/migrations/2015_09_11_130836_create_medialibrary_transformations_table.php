@@ -12,36 +12,38 @@ class CreateMedialibraryTransformationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('medialibrary_transformations', function (Blueprint $table) {
+        Schema::create(
+            'medialibrary_transformations', function (Blueprint $table) {
 
-            // Primary keys
-            $table->increments('id');
+                // Primary keys
+                $table->increments('id');
 
-            // Foreign keys
-            $table->char('file_id', 36);
-            $table->foreign('file_id')
-                  ->references('id')
-                  ->on('medialibrary_files')
-                  ->onUpdate('CASCADE')
-                  ->onDelete('CASCADE');
+                // Foreign keys
+                $table->char('file_id', 36);
+                $table->foreign('file_id')
+                    ->references('id')
+                    ->on('medialibrary_files')
+                    ->onUpdate('CASCADE')
+                    ->onDelete('CASCADE');
 
-            // Metadata
-            $table->timestamps();
-            $table->text('properties')->nullable();
-            $table->smallInteger('width')->nullable();
-            $table->smallInteger('height')->nullable();
+                // Metadata
+                $table->timestamps();
+                $table->text('properties')->nullable();
+                $table->smallInteger('width')->nullable();
+                $table->smallInteger('height')->nullable();
 
-            // Properties
-            $table->string('name');
-            $table->string('type');
-            $table->string('extension');
-            $table->string('mime_type');
-            $table->integer('size');
+                // Properties
+                $table->string('name');
+                $table->string('type');
+                $table->string('extension');
+                $table->string('mime_type');
+                $table->integer('size');
 
-            // Flags
-            $table->boolean('completed')->default(false);
+                // Flags
+                $table->boolean('completed')->default(false);
 
-        });
+            }
+        );
     }
 
     /**

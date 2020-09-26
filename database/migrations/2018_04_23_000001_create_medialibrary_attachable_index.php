@@ -12,9 +12,11 @@ class CreateMedialibraryAttachableIndex extends Migration
      */
     public function up()
     {
-        Schema::table('medialibrary_attachable', function (Blueprint $table) {
-            $table->index(['attachable_id', 'attachable_type']);
-        });
+        Schema::table(
+            'medialibrary_attachable', function (Blueprint $table) {
+                $table->index(['attachable_id', 'attachable_type']);
+            }
+        );
     }
 
     /**
@@ -24,8 +26,10 @@ class CreateMedialibraryAttachableIndex extends Migration
      */
     public function down()
     {
-        Schema::table('medialibrary_attachable', function (Blueprint $table) {
-            $table->dropIndex('medialibrary_attachable_attachable_id_attachable_type_index');
-        });
+        Schema::table(
+            'medialibrary_attachable', function (Blueprint $table) {
+                $table->dropIndex('medialibrary_attachable_attachable_id_attachable_type_index');
+            }
+        );
     }
 }

@@ -12,9 +12,11 @@ class AddGroupMedialibraryFilesTable extends Migration
      */
     public function up()
     {
-        Schema::table('medialibrary_files', function (Blueprint $table) {
-            $table->string('group')->default('default');
-        });
+        Schema::table(
+            'medialibrary_files', function (Blueprint $table) {
+                $table->string('group')->default('default');
+            }
+        );
     }
 
     /**
@@ -24,8 +26,10 @@ class AddGroupMedialibraryFilesTable extends Migration
      */
     public function down()
     {
-        Schema::table('medialibrary_files', function (Blueprint $table) {
-            $table->dropColumn('group');
-        });
+        Schema::table(
+            'medialibrary_files', function (Blueprint $table) {
+                $table->dropColumn('group');
+            }
+        );
     }
 }

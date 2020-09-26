@@ -12,9 +12,11 @@ class RenamedHiddenToIsHiddenMedialibraryFilesTable extends Migration
      */
     public function up()
     {
-        Schema::table('medialibrary_files', function (Blueprint $table) {
-            $table->renameColumn('hidden', 'is_hidden');
-        });
+        Schema::table(
+            'medialibrary_files', function (Blueprint $table) {
+                $table->renameColumn('hidden', 'is_hidden');
+            }
+        );
     }
 
     /**
@@ -24,8 +26,10 @@ class RenamedHiddenToIsHiddenMedialibraryFilesTable extends Migration
      */
     public function down()
     {
-        Schema::table('medialibrary_files', function (Blueprint $table) {
-            $table->renameColumn('is_hidden', 'hidden');
-        });
+        Schema::table(
+            'medialibrary_files', function (Blueprint $table) {
+                $table->renameColumn('is_hidden', 'hidden');
+            }
+        );
     }
 }
