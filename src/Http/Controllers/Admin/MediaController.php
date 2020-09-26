@@ -21,7 +21,7 @@ class MediaController extends Controller
 
     // public static $title = 'Medias';
     // public static $description = 'Medias';
-    public static $icon = 'fas fa-fw fa-video text-red';
+    public static string $icon = 'fas fa-fw fa-video text-red';
 
     public function __construct(MediaService $mediaService)
     {

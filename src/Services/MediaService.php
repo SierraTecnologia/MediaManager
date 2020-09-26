@@ -34,13 +34,7 @@ class MediaService
      */
     private $directory = '';
 
-    public function __construct()
-    {
-        $this->mimeTypes = include base_path('config'.DIRECTORY_SEPARATOR.'mime.php');
-        $this->filesystem = \Illuminate\Support\Facades\Config::get('rica.storage.disk', env('FILESYSTEM_DRIVER', 'public'));
-    }
-
-    public function allFiles($folder = '')
+    public function allFiles($folder = ''): array
     {
         $allFiles = [];
         $tempFiles = $this->files($folder);
@@ -54,7 +48,12 @@ class MediaService
         return $allFiles;
     }
 
-    public function files($folder = '', $details = [])
+    /**
+     * @return (array|mixed|string)[][]
+     *
+     * @psalm-return array<int, array{name: mixed, filename?: mixed, type: mixed|string, path: mixed, relative_path: mixed, size?: mixed, last_modified: mixed|string, thumbnails?: list<mixed>, items?: string}>
+     */
+    public function files($folder = '', $details = []): array
     {
         // Check permission
         // $this->authorize('browse_media');
@@ -121,27 +120,12 @@ class MediaService
         return $files;
     }
 
-    public function new_folder($new_folder)
-    {
-        // Check permission
-        // $this->authorize('browse_media');
-
-        $new_folder = $new_folder;
-        $success = false;
-        $error = '';
-
-        if (Storage::disk($this->filesystem)->exists($new_folder)) {
-            $error = __('media.folder_exists_already');
-        } elseif (Storage::disk($this->filesystem)->makeDirectory($new_folder)) {
-            $success = true;
-        } else {
-            $error = __('media.error_creating_dir');
-        }
-
-        return compact('success', 'error');
-    }
-
-    public function delete($path, $files)
+    /**
+     * @return array
+     *
+     * @psalm-return array<string, mixed>
+     */
+    public function delete($path, $files): array
     {
         // Check permission
         // $this->authorize('browse_media');
@@ -169,220 +153,7 @@ class MediaService
         return compact('success', 'error');
     }
 
-    public function move($path, $destination, $files = [])
-    {
-        // Check permission
-        // $this->authorize('browse_media');
-        $path = str_replace('//', '/', Str::finish($path, '/'));
-        $dest = str_replace('//', '/', Str::finish($destination, '/'));
-        if (strpos($dest, '/../') !== false) {
-            $dest = substr($path, 0, -1);
-            $dest = substr($dest, 0, strripos($dest, '/') + 1);
-        }
-        $dest = str_replace('//', '/', Str::finish($dest, '/'));
-
-        $success = true;
-        $error = '';
-
-        foreach ($files as $file) {
-            $old_path = $path.$file['name'];
-            $new_path = $dest.$file['name'];
-
-            try {
-                Storage::disk($this->filesystem)->move($old_path, $new_path);
-            } catch (\Exception $ex) {
-                $success = false;
-                $error = $ex->getMessage();
-
-                return compact('success', 'error');
-            }
-            // @todo
-            if ($file = File::where('url', $old_path)->first()) {
-                $file->url = $new_path;
-                $file->save();
-            }
-        }
-
-        return compact('success', 'error');
-    }
-
-    public function rename($folder_location, $filename, $new_filename)
-    {
-        $success = false;
-        $error = false;
-
-        if (is_array($folderLocation)) {
-            $folderLocation = rtrim(implode('/', $folderLocation), '/');
-        }
-
-        $location = "{$this->directory}/{$folderLocation}";
-
-        if (!Storage::disk($this->filesystem)->exists("{$location}/{$newFilename}")) {
-            if (Storage::disk($this->filesystem)->move("{$location}/{$filename}", "{$location}/{$newFilename}")) {
-                $success = true;
-            } else {
-                $error = __('media.error_moving');
-            }
-        } else {
-            $error = __('media.error_may_exist');
-        }
-
-        return compact('success', 'error');
-    }
-
-    public function upload($file, $details, $upload_path, $filename = false)
-    {
-        // Check permission
-        // $this->authorize('browse_media');
-
-        $extension = $file->getClientOriginalExtension();
-        $name = Str::replaceLast('.'.$extension, '', $file->getClientOriginalName());
-        $details = json_decode($details ?? '{}');
-        $absolute_path = Storage::disk($this->filesystem)->path($upload_path);
-
-        try {
-            $realPath = Storage::disk($this->filesystem)->getDriver()->getAdapter()->getPathPrefix();
-
-            $allowedMimeTypes = \Illuminate\Support\Facades\Config::get('media-library.media.allowed_mimetypes', '*');
-            if ($allowedMimeTypes != '*' && (is_array($allowedMimeTypes) && !in_array($file->getMimeType(), $allowedMimeTypes))) {
-                throw new Exception(__('generic.mimetype_not_allowed'));
-            }
-
-            if (!$filename || $filename == 'null') {
-                while (Storage::disk($this->filesystem)->exists(Str::finish($upload_path, '/').$name.'.'.$extension, $this->filesystem)) {
-                    $name = get_file_name($name);
-                }
-            } else {
-                $name = str_replace('{uid}', Auth::user()->getKey(), $filename);
-                if (Str::contains($name, '{date:')) {
-                    $name = preg_replace_callback(
-                        '/\{date:([^\/\}]*)\}/', function ($date) {
-                            return \Carbon\Carbon::now()->format($date[1]);
-                        }, $name
-                    );
-                }
-                if (Str::contains($name, '{random:')) {
-                    $name = preg_replace_callback(
-                        '/\{random:([0-9]+)\}/', function ($random) {
-                            return Str::random($random[1]);
-                        }, $name
-                    );
-                }
-            }
-
-            $file = $file->storeAs($upload_path, $name.'.'.$extension, $this->filesystem);
-
-            $imageMimeTypes = [
-                'image/jpeg',
-                'image/png',
-                'image/gif',
-                'image/bmp',
-                'image/svg+xml',
-            ];
-            if (in_array($file->getMimeType(), $imageMimeTypes)) {
-                $image = Image::make($realPath.$file);
-
-                if ($file->getClientOriginalExtension() == 'gif') {
-                    copy($file->getRealPath(), $realPath.$file);
-                } else {
-                    $image = $image->orientate();
-                    // Generate thumbnails
-                    if (property_exists($details, 'thumbnails') && is_array($details->thumbnails)) {
-                        foreach ($details->thumbnails as $thumbnail_data) {
-                            $type = $thumbnail_data->type ?? 'fit';
-                            $thumbnail = Image::make(clone $image);
-                            if ($type == 'fit') {
-                                $thumbnail = $thumbnail->fit(
-                                    $thumbnail_data->width,
-                                    ($thumbnail_data->height ?? null),
-                                    function ($constraint) {
-                                        $constraint->aspectRatio();
-                                    }, ($thumbnail_data->position ?? 'center')
-                                );
-                            } elseif ($type == 'crop') {
-                                $thumbnail = $thumbnail->crop(
-                                    $thumbnail_data->width,
-                                    $thumbnail_data->height,
-                                    ($thumbnail_data->x ?? null),
-                                    ($thumbnail_data->y ?? null)
-                                );
-                            } elseif ($type == 'resize') {
-                                $thumbnail = $thumbnail->resize(
-                                    $thumbnail_data->width,
-                                    ($thumbnail_data->height ?? null),
-                                    function ($constraint) use ($thumbnail_data) {
-                                        $constraint->aspectRatio();
-                                        if (!($thumbnail_data->upsize ?? true)) {
-                                            $constraint->upsize();
-                                        }
-                                    }
-                                );
-                            }
-                            if (property_exists($details, 'watermark') 
-                                && property_exists($details->watermark, 'source') 
-                                && property_exists($thumbnail_data, 'watermark') 
-                                && $thumbnail_data->watermark
-                            ) {
-                                $thumbnail = $this->addWatermarkToImage($thumbnail, $details->watermark);
-                            }
-                            $thumbnail->save($realPath.$upload_path.$name.'-'.($thumbnail_data->name ?? 'thumbnail').'.'.$extension, ($details->quality ?? 90));
-                        }
-                    }
-                    // Add watermark to image
-                    if (property_exists($details, 'watermark') && property_exists($details->watermark, 'source')) {
-                        $image = $this->addWatermarkToImage($image, $details->watermark);
-                    }
-                    $image->save($realPath.$file, ($details->quality ?? 90));
-                }
-            }
-
-            $success = true;
-            $message = __('media.success_uploaded_file');
-            $path = preg_replace('/^public\//', '', $file);
-
-            event(new MediaFileAdded($path));
-        } catch (Exception $e) {
-            $success = false;
-            $message = $e->getMessage();
-            $path = '';
-        }
-
-        $this->updateMediaEloquent();
-
-        return compact('success', 'message', 'path');
-    }
-
-    public function crop($createMode, $x, $y, $height, $width, $upload_path, $originImageName)
-    {
-
-        $realPath = Storage::disk($this->filesystem)->getDriver()->getAdapter()->getPathPrefix();
-        $originImagePath = $realPath.$upload_path.'/'.$originImageName;
-
-        try {
-            if ($createMode) {
-                // create a new image with the cpopped data
-                $fileNameParts = explode('.', $originImageName);
-                array_splice($fileNameParts, count($fileNameParts) - 1, 0, 'cropped_'.time());
-                $newImageName = implode('.', $fileNameParts);
-                $destImagePath = $realPath.$upload_path.'/'.$newImageName;
-            } else {
-                // override the original image
-                $destImagePath = $originImagePath;
-            }
-
-            Image::make($originImagePath)->crop($width, $height, $x, $y)->save($destImagePath);
-
-            $success = true;
-            $message = __('media.success_crop_image');
-        } catch (Exception $e) {
-            $success = false;
-            $message = $e->getMessage();
-        }
-
-        return compact('success', 'message');
-    }
-
-    private function addWatermarkToImage(\Intervention\Image\Image $image, $options)
+    private function addWatermarkToImage(\Intervention\Image\Image $image, $options): \Intervention\Image\Image
     {
         $watermark = Image::make(Storage::disk($this->filesystem)->path($options->source));
         // Resize watermark
@@ -404,9 +175,9 @@ class MediaService
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
-    public function updateMediaEloquent()
+    public function updateMediaEloquent(): void
     {
         $files = $this->allFiles();
 

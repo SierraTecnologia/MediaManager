@@ -17,16 +17,25 @@ use MediaManager\Models\Model as Base;
  */
 class Thumbnail extends Base
 {
-    public static $classeBuilder = ThumbnailBuilder::class;
+    /**
+     * @var ThumbnailBuilder::class
+     */
+    public static string $classeBuilder = ThumbnailBuilder::class;
     /**
      * @inheritdoc
+     *
+     * @var false
      */
-    public $timestamps = false;
+    public bool $timestamps = false;
 
     /**
      * @inheritdoc
+     *
+     * @var string[]
+     *
+     * @psalm-var array{0: string, 1: string, 2: string}
      */
-    protected $fillable = [
+    protected array $fillable = [
         'path',
         'width',
         'height',

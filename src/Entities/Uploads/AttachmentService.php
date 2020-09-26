@@ -123,8 +123,10 @@ class AttachmentService extends UploadService
      *
      * @param array $attachmentList
      * @param $pageId
+     *
+     * @return void
      */
-    public function updateFileOrderWithinPage($attachmentList, $pageId)
+    public function updateFileOrderWithinPage($attachmentList, $pageId): void
     {
         foreach ($attachmentList as $index => $attachment) {
             Attachment::where('uploaded_to', '=', $pageId)->where('id', '=', $attachment['id'])->update(['order' => $index]);
@@ -156,8 +158,11 @@ class AttachmentService extends UploadService
     /**
      * Delete a File from the database and storage.
      *
-     * @param  Attachment $attachment
+     * @param Attachment $attachment
+     *
      * @throws Exception
+     *
+     * @return void
      */
     public function deleteFile(Attachment $attachment)
     {
@@ -175,8 +180,10 @@ class AttachmentService extends UploadService
      * Cleans any empty leftover folders.
      *
      * @param Attachment $attachment
+     *
+     * @return void
      */
-    protected function deleteFileInStorage(Attachment $attachment)
+    protected function deleteFileInStorage(Attachment $attachment): void
     {
         $storage = $this->getStorage();
         $dirPath = dirname($attachment->path);
@@ -194,7 +201,7 @@ class AttachmentService extends UploadService
      * @return string
      * @throws FileUploadException
      */
-    protected function putFileInStorage(UploadedFile $uploadedFile)
+    protected function putFileInStorage(UploadedFile $uploadedFile): string
     {
         $attachmentData = file_get_contents($uploadedFile->getRealPath());
 

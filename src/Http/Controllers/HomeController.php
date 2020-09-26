@@ -9,7 +9,7 @@ use MediaManager\Models\Media;
 
 class HomeController extends BaseController
 {
-    protected $service;
+    protected MediaManagerService $service;
 
     public function __construct(MediaManagerService $service)
     {
@@ -18,6 +18,9 @@ class HomeController extends BaseController
         $this->service = $service;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
 
@@ -28,6 +31,9 @@ class HomeController extends BaseController
         );
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function medias()
     {
 

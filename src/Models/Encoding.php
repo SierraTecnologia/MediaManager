@@ -28,8 +28,12 @@ class Encoding extends Base
 
     /**
      * Comprehensive list of states
+     *
+     * @var string[]
+     *
+     * @psalm-var array{0: string, 1: string, 2: string, 3: string, 4: string, 5: string}
      */
-    private static $states = [
+    private static array $states = [
         'error',      // Any type of error
         'pending',    // No response from encoder yet
         'queued',     // The encoder API has been hit
@@ -52,9 +56,9 @@ class Encoding extends Base
      * Return an assoc array for output to JSON when admin asks
      * for progress on an encode
      *
-     * @return MediaManager\Models\Encoding
+     * @return self
      */
-    public function forProgress()
+    public function forProgress(): self
     {
         $this->setVisible(['status', 'message', 'admin_player', 'progress']);
         $this->setAppends(['admin_player', 'progress']);
@@ -94,8 +98,10 @@ class Encoding extends Base
 
     /**
      * Delete encoded files that are local to this filesystem
+     *
+     * @return void
      */
-    public function onDeleted()
+    public function onDeleted(): void
     {
         // Get the directory of an output
         if (($sources = (array) $this->outputs)      // Convert sources to an array
@@ -112,10 +118,11 @@ class Encoding extends Base
     /**
      * Don't log changes since they aren't really the result of admin input
      *
-     * @param  string $action
-     * @return boolean
+     * @param string $action
+     *
+     * @return false
      */
-    public function shouldLogChange($action)
+    public function shouldLogChange($action): bool
     {
         return false;
     }
@@ -134,10 +141,11 @@ class Encoding extends Base
     /**
      * Get an instance of the configured encoding provider
      *
-     * @param  MediaManager\Models\Encoding
-     * @return MediaManager\Template\EncodingProviders\EncodingProvider
+     * @param MediaManager\Models\Encoding
+     *
+     * @return object
      */
-    public static function encoder(Encoding $model = null)
+    public static function encoder(Encoding $model = null): object
     {
         $class = Config::get('sitec.encode.provider');
 
@@ -220,7 +228,7 @@ class Encoding extends Base
      *
      * @return string
      */
-    public function getAdminPlayerAttribute()
+    public function getAdminPlayerAttribute(): string
     {
         return '<div class="player">'
             .$this->getAdminVideoTagAttribute()
@@ -278,7 +286,9 @@ class Encoding extends Base
     /**
      * Read an array of stats from the response
      *
-     * @return array|void
+     * @return null|string[]
+     *
+     * @psalm-return array{Bitrate: string, Filesize: string, Duration: string, Dimensions: string, Download: string}|null
      */
     protected function getStatsAttribute()
     {

@@ -13,15 +13,9 @@ use MediaManager\Services\FileService;
 
 class ImageRepository extends BaseRepository
 {
-    public $model;
+    public Image $model;
 
-    public $table;
-
-    public function __construct(Image $model)
-    {
-        $this->model = $model;
-        $this->table = \Illuminate\Support\Facades\Config::get('cms.db-prefix').'images';
-    }
+    public string $table;
 
     public function published()
     {
@@ -38,32 +32,6 @@ class ImageRepository extends BaseRepository
     public function apiPrepared()
     {
         return $this->model->orderBy('created_at', 'desc')->where('is_published', 1)->get();
-    }
-
-    /**
-     * Returns all Images for the API.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function getImagesByTag($tag = null)
-    {
-        $images = $this->model->orderBy('created_at', 'desc')->where('is_published', 1);
-
-        if (!is_null($tag)) {
-            $images->withAnyTags([$tag]);
-        }
-
-        return $images;
-    }
-
-    /**
-     * Returns all Images tags.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function allTags()
-    {
-        return Tag::all();
     }
 
     /**
@@ -129,14 +97,14 @@ class ImageRepository extends BaseRepository
      * Updates Images
      *
      * @param Images $images
-     * @param array  $input
+     * @param array  $payload
      *
      * @return Images
      */
-    public function update($image, $input)
+    public function update($model, $payload)
     {
-        if (isset($input['location']) && !empty($input['location'])) {
-            $savedFile = app(FileService::class)->saveFile($input['location'], 'public/images', [], true);
+        if (isset($payload['location']) && !empty($payload['location'])) {
+            $savedFile = app(FileService::class)->saveFile($payload['location'], 'public/images', [], true);
 
             if (!$savedFile) {
                 Cms::notification('Image could not be updated.', 'danger');
@@ -144,24 +112,24 @@ class ImageRepository extends BaseRepository
                 return false;
             }
 
-            $input['location'] = $savedFile['name'];
-            $input['original_name'] = $savedFile['original'];
+            $payload['location'] = $savedFile['name'];
+            $payload['original_name'] = $savedFile['original'];
         } else {
-            $input['location'] = $image->location;
+            $payload['location'] = $model->location;
         }
 
-        if (!isset($input['is_published'])) {
-            $input['is_published'] = 0;
+        if (!isset($payload['is_published'])) {
+            $payload['is_published'] = 0;
         } else {
-            $input['is_published'] = 1;
+            $payload['is_published'] = 1;
         }
 
-        $image->forgetCache();
+        $model->forgetCache();
 
-        $image->update($input);
+        $model->update($payload);
 
-        $image->setCaches();
+        $model->setCaches();
 
-        return $image;
+        return $model;
     }
 }

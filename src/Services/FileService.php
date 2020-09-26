@@ -11,22 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FileService
 {
-    /**
-     * Generate a name from the file path.
-     *
-     * @param string $file File path
-     *
-     * @return string
-     */
-    public static function getFileClass($file)
-    {
-        $sections = explode(DIRECTORY_SEPARATOR, $file);
-        $fileName = $sections[count($sections) - 1];
 
-        $class = str_replace('.php', '', $fileName);
-
-        return $class;
-    }
 
     /**
      * Saves File.
@@ -34,9 +19,11 @@ class FileService
      * @param string $fileName File input name
      * @param string $location Storage location
      *
-     * @return array
+     * @return string[]
+     *
+     * @psalm-return array{original: string, name: string}
      */
-    public static function saveClone($fileName, $directory = '', $fileTypes = [])
+    public static function saveClone($fileName, $directory = '', $fileTypes = []): array
     {
         $fileInfo = pathinfo($fileName);
 
@@ -68,7 +55,9 @@ class FileService
      * @param string $fileName File input name
      * @param string $location Storage location
      *
-     * @return array
+     * @return (mixed|string)[]|false
+     *
+     * @psalm-return array{original: mixed|string, name: string}|false
      */
     public static function saveFile($fileName, $directory = '', $fileTypes = [])
     {
@@ -108,46 +97,5 @@ class FileService
             'original' => $originalName ?: $file->getFilename().'.'.$extension,
             'name' => $directory.$newFileName.'.'.$extension,
         ];
-    }
-
-    /**
-     * Provide a URL for the file as a public asset.
-     *
-     * @param string $fileName File name
-     *
-     * @return string
-     */
-    public static function fileAsPublicAsset($fileName)
-    {
-        return '/public-asset/'.CryptoServiceForFiles::encrypt($fileName);
-    }
-
-    /**
-     * Provides a URL for the file as a download.
-     *
-     * @param string $fileName     File name
-     * @param string $realFileName Real file name
-     *
-     * @return string
-     */
-    public static function fileAsDownload($fileName, $realFileName)
-    {
-        return '/public-download/'.CryptoServiceForFiles::encrypt($fileName).'/'.CryptoServiceForFiles::encrypt($realFileName);
-    }
-
-    /**
-     * Provide a URL for the file as a public preview.
-     *
-     * @param string $fileName File name
-     *
-     * @return string
-     */
-    public static function filePreview($fileName)
-    {
-        if (@get_headers(url('storage/'.str_replace('public/', '', $fileName)))) {
-            return url('storage/'.str_replace('public/', '', $fileName));
-        }
-
-        return '/public-preview/'.CryptoServiceForFiles::encrypt($fileName);
     }
 }

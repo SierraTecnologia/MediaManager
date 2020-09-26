@@ -11,10 +11,6 @@ namespace MediaManager\Services;
 class MediaManagerService
 {
 
-    protected $config;
-
-    protected $modelServices = false;
-
     public function __construct($config = false)
     {
         // if (!$this->config = $config) {

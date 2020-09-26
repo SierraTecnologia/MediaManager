@@ -60,16 +60,6 @@ class Image extends Base
 
 
     /**
-     * Validation rules
-     *
-     * @return array
-     */
-    public $rules = [
-        'file' => 'image',
-        'location' => 'mimes:jpeg,jpg,bmp,png,gif',
-    ];
-
-    /**
      * Uploadable attributes
      *
      * @var array
@@ -150,8 +140,10 @@ class Image extends Base
 
     /**
      * Polymorphic relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function imageable()
+    public function imageable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }
@@ -226,7 +218,7 @@ class Image extends Base
     {
         // Get at the file path using "original" so this function can be called as
         // part of an "updating" callback
-        $file = $this->getOriginal('file');
+        $this->getOriginal('file');
 
         // Tell Croppa to delete the crops.  The actual file will be deleted by
         // Upchuck automatically.
@@ -236,8 +228,9 @@ class Image extends Base
     /**
      * Get file type
      *
-     * @param  UploadedFile
-     * @return string
+     * @param UploadedFile
+     *
+     * @return null|string
      */
     protected function guessFileType(UploadedFile $file)
     {
@@ -273,9 +266,11 @@ class Image extends Base
      * Get the config, merging defaults in so that all keys in the array are
      * present.  This also applies the crop choices from the DB.
      *
-     * @return array
+     * @return ((float[]|mixed)[]|mixed|null)[]
+     *
+     * @psalm-return array{width: mixed|null, height: mixed|null, options: array{trim_perc: array{0: float, 1: float, 2: float, 3: float}}|mixed|null}
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         // Create default keys for the config
         $config = array_merge(
@@ -383,7 +378,7 @@ class Image extends Base
     /**
      * Convert the focal_point attribute to a CSS background-position.
      *
-     * @return string
+     * @return null|string
      */
     public function getBackgroundPositionAttribute()
     {
@@ -399,7 +394,7 @@ class Image extends Base
      * background-position.  This is also used in the serialization conversion
      * and is named to be friendly to that format.
      *
-     * @return string
+     * @return null|string
      */
     public function getBkgdPosAttribute()
     {
@@ -516,11 +511,12 @@ class Image extends Base
      * Make paths full URLs so these can be used directly in APIs or for Open
      * Graph tags, for example.
      *
-     * @param  string $size
-     * @param  number $scale
-     * @return string url
+     * @param string $size
+     * @param number $scale
+     *
+     * @return null|string url
      */
-    public function urlify($size, int $multiplier = 1)
+    public function urlify($size, int $multiplier = 1): ?string
     {
         // Get fluent config
         $config = $this->getConfig();
@@ -528,21 +524,20 @@ class Image extends Base
         // Setup vars
         $size = $this->sizes[$size];
         $scale = $size[0] / $this->bench;
-        $width = $height = null;
 
         // Figure out percentage sizes.  First one of the dimensnios is tested
         // to see if it looks a percentage.  If so, make it a percentage of one of
         // the hard coded sizes.  Otherwise, scale the dimension by comaring the
         // size to a the benchmark (laptop).
         if ($perc = $this->perc($config['width'])) {
-            $width = $perc * $size[0] * $multiplier;
+            $perc * $size[0] * $multiplier;
         } elseif ($config['width']) {
-            $width = $config['width'] * $scale * $multiplier;
+            $config['width'] * $scale * $multiplier;
         }
         if ($perc = $this->perc($config['height'])) {
-            $height = $perc * $size[1] * $multiplier;
+            $perc * $size[1] * $multiplier;
         } elseif ($config['height']) {
-            $height = $config['height'] * $scale * $multiplier;
+            $config['height'] * $scale * $multiplier;
         }
 
         // Produce the Croppa URL
@@ -560,10 +555,11 @@ class Image extends Base
     /**
      * Get a percent number from a string
      *
-     * @param  string|number val
-     * @return float
+     * @param string|number val
+     *
+     * @return float|null
      */
-    protected function perc($val)
+    protected function perc($val): ?float
     {
         if (preg_match('#([\d\.]+)%$#', $val, $matches)) {
             return floatval($matches[1])/100;
@@ -573,10 +569,11 @@ class Image extends Base
     /**
      * Don't log changes since they aren't really the result of admin input
      *
-     * @param  string $action
-     * @return boolean
+     * @param string $action
+     *
+     * @return false
      */
-    public function shouldLogChange($action)
+    public function shouldLogChange($action): bool
     {
         return false;
     }
@@ -621,9 +618,9 @@ class Image extends Base
         return $this->remember(
             'data_url', function () {
                 if ($this->isLocalFile()) {
-                    $imagePath = storage_path('app/'.$this->location);
+                    storage_path('app/'.$this->location);
                 } else {
-                    $imagePath = Storage::disk(\Illuminate\Support\Facades\Config::get('gpower.storage-location', 'local'))->url($this->location);
+                    Storage::disk(\Illuminate\Support\Facades\Config::get('gpower.storage-location', 'local'))->url($this->location);
                 }
 
                 $image = InterventionImage::make($imagePath)->resize(800, null);
@@ -638,10 +635,9 @@ class Image extends Base
      */
     public function remember(string $attribute, \Closure $closure)
     {
-        $key = $attribute.'_'.$this->location;
 
         if (!Cache::has($key)) {
-            $expiresAt = Carbon::now()->addMinutes(15);
+            Carbon::now()->addMinutes(15);
             Cache::put($key, $closure(), $expiresAt);
         }
 

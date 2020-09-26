@@ -14,6 +14,9 @@ use MediaManager\Events\MediaFileAdded;
 class MediaController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function vlc(Request $request)
     {
         // Check permission

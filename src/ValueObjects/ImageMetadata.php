@@ -13,7 +13,7 @@ use JsonSerializable;
  */
 final class ImageMetadata implements Arrayable, JsonSerializable
 {
-    private $attributes;
+    private array $attributes;
 
     /**
      * ImageMetadata constructor.
@@ -42,7 +42,7 @@ final class ImageMetadata implements Arrayable, JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getExposureTime(): ?string
     {
@@ -64,7 +64,7 @@ final class ImageMetadata implements Arrayable, JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getAperture(): ?string
     {
@@ -86,9 +86,9 @@ final class ImageMetadata implements Arrayable, JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return float|null
      */
-    public function getFocalLength(): ?string
+    public function getFocalLength(): ?float
     {
         $raw = $this->attributes['exif.FocalLength'] ?? null;
 
@@ -108,9 +108,9 @@ final class ImageMetadata implements Arrayable, JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return null|numeric
      */
-    public function getFocalLengthIn35mm(): ?string
+    public function getFocalLengthIn35mm()
     {
         $value = $this->attributes['exif.FocalLengthIn35mmFilm'] ?? null;
 

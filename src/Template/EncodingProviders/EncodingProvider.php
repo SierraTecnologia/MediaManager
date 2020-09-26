@@ -32,7 +32,7 @@ abstract class EncodingProvider
     /**
      * Inject dependencies
      *
-     * @param MediaManager\Models\Encoding $model
+     * @param Encoding|null $model
      */
     public function __construct(Encoding $model = null)
     {
@@ -44,7 +44,7 @@ abstract class EncodingProvider
      *
      * @return string
      */
-    protected function destination()
+    protected function destination(): string
     {
         return Config::get('facilitador.encode.destination').'/'.Str::random(32).'/';
     }
@@ -69,12 +69,15 @@ abstract class EncodingProvider
     /**
      * Update the default configwith the user config
      *
-     * @param  string $preset
-     * @return array
+     * @param string $preset
+     *
+     * @return array[]
      *
      * @throws Exception
+     *
+     * @psalm-return array{mp4: array}
      */
-    protected function mergeConfigWithDefaults($preset)
+    protected function mergeConfigWithDefaults($preset): array
     {
         // Get the preset settings
         if (!$settings = Config::get('facilitador.encode.presets.'.$preset.'.settings')) {

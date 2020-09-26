@@ -26,8 +26,10 @@ class FileRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array
+     *
+     * @psalm-return array<empty, empty>
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }

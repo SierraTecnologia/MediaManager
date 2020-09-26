@@ -11,7 +11,10 @@ use Facilitador\Exceptions\Exception;
 /**
  * Encode videos with Zencoder
  */
-class Zencoder extends EncodingProvider
+class Zencoder extends /**
+ * @param Encoding|null $model
+ */
+EncodingProvider
 {
     /**
      * Default outputs configuration
@@ -122,10 +125,13 @@ class Zencoder extends EncodingProvider
     /**
      * Update the config with properties that are common to all outputs
      *
-     * @param  array $config
+     * @param array $config
+     *
      * @return array
+     *
+     * @psalm-return list<mixed>
      */
-    protected function addCommonProps(array $outputs)
+    protected function addCommonProps(array $outputs): array
     {
         // Facilitador settings
         $common = [

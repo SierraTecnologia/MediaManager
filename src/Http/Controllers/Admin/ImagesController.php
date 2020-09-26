@@ -112,7 +112,7 @@ class ImagesController extends Controller
     /**
      * Store a newly created Files in storage.
      *
-     * @param FileRequest $request
+     * @param Request $request
      *
      * @return Response
      */
@@ -226,7 +226,7 @@ class ImagesController extends Controller
      *
      * @param string $ids
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function bulkDelete($ids)
     {

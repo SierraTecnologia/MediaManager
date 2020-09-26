@@ -22,18 +22,13 @@ class MidiaService
 {
     protected $mimeTypes;
 
-    public function __construct()
-    {
-        $this->mimeTypes = include base_path('config'.DIRECTORY_SEPARATOR.'mime.php');
-    }
-
-    private function setModel(string $midiaId)
+    private function setModel(string $midiaId): void
     {
         $this->midiaId = CryptoServiceFacade::url_decode($midiaId);
         $this->midia = ModelImage::find($this->midiaId);
     }
 
-    private function getCacheName()
+    private function getCacheName(): string
     {
         return md5($this->midiaId);
     }
@@ -124,7 +119,6 @@ class MidiaService
                     $ext = $fileTool->getExtension();
                     $contentType = $this->getMimeType($ext);
 
-                    $headers = ['Content-Type' => $contentType];
                     $fileContent = $this->getFileContent($realFileName, $contentType, $ext);
 
                     return Response::make(
@@ -142,21 +136,5 @@ class MidiaService
 
             return redirect('errors/general');
         }
-    }
-
-    /**
-     * Generate an image
-     *
-     * @param string $ext
-     *
-     * @return Image
-     */
-    public function generateImage($ext)
-    {
-        if ($ext == 'File Not Found') {
-            return __DIR__.'/../Assets/src/images/blank-file-not-found.jpg';
-        }
-
-        return __DIR__.'/../Assets/src/images/blank-file.jpg';
     }
 }

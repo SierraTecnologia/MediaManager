@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ImageRepo
 {
 
-    protected $image;
-    protected $imageService;
-    protected $restrictionService;
-    protected $page;
+    protected Image $image;
+    protected ImageService $imageService;
+    protected PermissionService $restrictionService;
+    protected Page $page;
 
     /**
      * ImageRepo constructor.
@@ -46,12 +46,15 @@ class ImageRepo
      * Execute a paginated query, returning in a standard format.
      * Also runs the query through the restriction system.
      *
-     * @param  $query
-     * @param  int $page
-     * @param  int $pageSize
-     * @return array
+     * @param $query
+     * @param int $page
+     * @param int $pageSize
+     *
+     * @return (bool|mixed)[]
+     *
+     * @psalm-return array{images: mixed, hasMore: bool}
      */
-    private function returnPaginated($query, $page = 0, $pageSize = 24)
+    private function returnPaginated($query, $page = 0, $pageSize = 24): array
     {
         $images = $this->restrictionService->filterRelatedPages($query, 'images', 'uploaded_to');
         $images = $images->orderBy('created_at', 'desc')->skip($pageSize * $page)->take($pageSize + 1)->get();
@@ -185,11 +188,13 @@ class ImageRepo
     /**
      * Destroys an Image object along with its revisions, files and thumbnails.
      *
-     * @param  Image $image
-     * @return bool
+     * @param Image $image
+     *
+     * @return true
+     *
      * @throws \Exception
      */
-    public function destroyImage(Image $image)
+    public function destroyImage(Image $image): bool
     {
         $this->imageService->destroy($image);
         return true;
@@ -199,11 +204,14 @@ class ImageRepo
     /**
      * Load thumbnails onto an image object.
      *
-     * @param  Image $image
+     * @param Image $image
+     *
      * @throws \SiUtils\Exceptions\ImageUploadException
      * @throws \Exception
+     *
+     * @return void
      */
-    protected function loadThumbs(Image $image)
+    protected function loadThumbs(Image $image): void
     {
         $image->thumbs = [
             'gallery' => $this->getThumbnail($image, 150, 150),
@@ -216,15 +224,17 @@ class ImageRepo
      * If $keepRatio is true only the width will be used.
      * Checks the cache then storage to avoid creating / accessing the filesystem on every check.
      *
-     * @param  Image $image
-     * @param  int   $width
-     * @param  int   $height
-     * @param  bool  $keepRatio
-     * @return string
+     * @param Image $image
+     * @param int   $width
+     * @param int   $height
+     * @param bool  $keepRatio
+     *
+     * @return null|string
+     *
      * @throws \SiUtils\Exceptions\ImageUploadException
      * @throws \Exception
      */
-    public function getThumbnail(Image $image, $width = 220, $height = 220, $keepRatio = false)
+    public function getThumbnail(Image $image, $width = 220, $height = 220, $keepRatio = false): ?string
     {
         try {
             return $this->imageService->getThumbnail($image, $width, $height, $keepRatio);

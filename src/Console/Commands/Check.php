@@ -34,9 +34,9 @@ class Check extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $mediaService = new \App\Services\MediaService();
         $files = $mediaService->allFiles();
@@ -64,7 +64,7 @@ class Check extends Command
         }
     }
 
-    protected function moreThenZero($array)
+    protected function moreThenZero($array): bool
     {
         $count = 0;
         foreach ($array as $arrayResult) {

@@ -21,8 +21,11 @@ class UrlWindow extends LaravelUrlWindow
     /**
      * Get the slider of URLs when too close to beginning of window.
      *
-     * @param  int $window
-     * @return array
+     * @param int $window
+     *
+     * @return (array|null)[]
+     *
+     * @psalm-return array{first: array, slider: null, last: array}
      */
     protected function getSliderTooCloseToBeginning($window, $onEachSide)
     {
@@ -36,8 +39,11 @@ class UrlWindow extends LaravelUrlWindow
     /**
      * Get the slider of URLs when too close to ending of window.
      *
-     * @param  int $window
-     * @return array
+     * @param int $window
+     *
+     * @return (array|null)[]
+     *
+     * @psalm-return array{first: array, slider: null, last: array}
      */
     protected function getSliderTooCloseToEnding($window, $onEachSide)
     {
@@ -56,7 +62,7 @@ class UrlWindow extends LaravelUrlWindow
     /**
      * Get the starting URLs of a pagination slider.
      *
-     * @return array
+     * @return false
      */
     public function getStart()
     {
@@ -66,7 +72,7 @@ class UrlWindow extends LaravelUrlWindow
     /**
      * Get the ending URLs of a pagination slider.
      *
-     * @return array
+     * @return false
      */
     public function getFinish()
     {

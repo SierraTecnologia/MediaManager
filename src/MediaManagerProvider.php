@@ -25,18 +25,26 @@ use Route;
 class MediaManagerProvider extends ServiceProvider
 {
     use ConsoleTools;
-
-    public $packageName = 'media-manager';
     const pathVendor = 'sierratecnologia/media-manager';
 
     use ConsoleTools;
 
-    public static $aliasProviders = [
+    /**
+     * @var Facades\MediaManager::class|Services\FileService::class[]
+     *
+     * @psalm-var array{MediaManager: Facades\MediaManager::class, FileService: Services\FileService::class}
+     */
+    public static array $aliasProviders = [
         'MediaManager' => \MediaManager\Facades\MediaManager::class,
         'FileService' => FileService::class,
     ];
 
-    public static $providers = [
+    /**
+     * @var \CipeMotion\Medialibrary\ServiceProvider::class|\Intervention\Image\ImageServiceProvider::class|\SierraTecnologia\Crypto\CryptoProvider::class|\Spatie\MediaLibrary\MediaLibraryServiceProvider::class|\Tracking\TrackingProvider::class[]
+     *
+     * @psalm-var array{0: \Tracking\TrackingProvider::class, 1: \SierraTecnologia\Crypto\CryptoProvider::class, 2: \Intervention\Image\ImageServiceProvider::class, 3: \Spatie\MediaLibrary\MediaLibraryServiceProvider::class, 4: \CipeMotion\Medialibrary\ServiceProvider::class}
+     */
+    public static array $providers = [
 
         \Tracking\TrackingProvider::class,
 
@@ -50,61 +58,6 @@ class MediaManagerProvider extends ServiceProvider
 
         \CipeMotion\Medialibrary\ServiceProvider::class,
     ];
-
-    /**
-     * Rotas do Menu
-     */
-    public static $menuItens = [
-        [
-            'text' => 'Painel',
-            'icon' => 'fas fa-fw fa-search',
-            'icon_color' => "blue",
-            'label_color' => "success",
-            'section' => "painel",
-            'level'       => 3, // 0 (Public), 1, 2 (Admin) , 3 (Root)
-        ],
-        'Painel' => [
-            // 'MediaManager' => [
-                [
-                    'text'        => 'Albums',
-                    'route'       => 'media-manager.medias', // @todo
-                    'icon'        => 'fas fa-fw fa-gavel',
-                    'icon_color'  => 'blue',
-                    'label_color' => 'success',
-                    'section'       => 'painel',
-                    // 'access' => \App\Models\Role::$ADMIN
-                ],
-                [
-                    'text'        => 'Biblioteca',
-                    'route'       => 'media-manager.medias',
-                    'icon'        => 'fas fa-fw fa-gavel',
-                    'icon_color'  => 'blue',
-                    'label_color' => 'success',
-                    'section'       => 'painel',
-                    // 'access' => \App\Models\Role::$ADMIN
-                ],
-                // ],
-        ],
-    ];
-
-    /**
-     * Alias the services in the boot.
-     */
-    public function boot()
-    {
-        
-        // Register configs, migrations, etc
-        $this->registerDirectories();
-
-        // Rotas
-        $this->app->booted(
-            function () {
-                $this->routes();
-            }
-        );
-
-        $this->loadLogger();
-    }
 
     /**
      * Register the tool's routes.
@@ -200,7 +153,9 @@ class MediaManagerProvider extends ServiceProvider
     /**
      * Get the services provided by the provider.
      *
-     * @return array
+     * @return string[]
+     *
+     * @psalm-return array{0: string}
      */
     public function provides()
     {
@@ -244,7 +199,7 @@ class MediaManagerProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
-    private function loadViews()
+    private function loadViews(): void
     {
         // View namespace
         $viewsPath = $this->getResourcesPath('views');
@@ -257,7 +212,7 @@ class MediaManagerProvider extends ServiceProvider
         );
     }
     
-    private function loadTranslations()
+    private function loadTranslations(): void
     {
         // Publish lanaguage files
         $this->publishes(
@@ -273,9 +228,9 @@ class MediaManagerProvider extends ServiceProvider
 
 
     /**
-     *
+     * @return void
      */
-    private function loadLogger()
+    private function loadLogger(): void
     {
         Config::set(
             'logging.channels.sitec-media-manager',

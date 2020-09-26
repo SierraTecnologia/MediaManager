@@ -12,15 +12,9 @@ use MediaManager\Services\FileService;
 
 class FileRepository extends BaseRepository
 {
-    public $model;
+    public File $model;
 
-    public $table;
-
-    public function __construct(File $model)
-    {
-        $this->model = $model;
-        $this->table = \Illuminate\Support\Facades\Config::get('cms.db-prefix').'files';
-    }
+    public string $table;
 
     /**
      * Stores Files into database.
@@ -51,12 +45,12 @@ class FileRepository extends BaseRepository
     /**
      * Updates Files into database.
      *
-     * @param Files $files
+     * @param Files $model
      * @param array $payload
      *
      * @return Files
      */
-    public function update($files, $payload)
+    public function update($model, $payload)
     {
         if (isset($payload['location'])) {
             $savedFile = app(FileService::class)->saveFile($payload['location'], 'files/');
@@ -73,15 +67,17 @@ class FileRepository extends BaseRepository
 
         $filePayload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
 
-        return $files->update($filePayload);
+        return $model->update($filePayload);
     }
 
     /**
      * Files output for API calls
      *
-     * @return array
+     * @return (mixed|string)[][]
+     *
+     * @psalm-return list<array{file_identifier: string, file_name: mixed, file_date: mixed}>
      */
-    public function apiPrepared()
+    public function apiPrepared(): array
     {
         $files = File::orderBy('created_at', 'desc')->where('is_published', 1)->get();
         $allFiles = [];

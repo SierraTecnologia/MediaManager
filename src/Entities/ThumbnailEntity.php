@@ -26,63 +26,6 @@ final class ThumbnailEntity extends AbstractEntity
     }
 
     /**
-     * @param  string $path
-     * @return $this
-     */
-    private function setPath(string $path): ThumbnailEntity
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath(): string
-    {
-        return $this->path;
-    }
-
-    /**
-     * @param  int $width
-     * @return $this
-     */
-    private function setWidth(int $width): ThumbnailEntity
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getWidth(): int
-    {
-        return $this->width;
-    }
-
-    /**
-     * @param  int $height
-     * @return $this
-     */
-    private function setHeight(int $height): ThumbnailEntity
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHeight(): int
-    {
-        return $this->height;
-    }
-
-    /**
      * @inheritdoc
      */
     public function __toString(): string

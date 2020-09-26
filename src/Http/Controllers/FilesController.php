@@ -80,7 +80,7 @@ class FilesController extends BaseController
     /**
      * Store a newly created Files in storage.
      *
-     * @param FileRequest $request
+     * @param Request $request
      *
      * @return Response
      */
@@ -89,7 +89,7 @@ class FilesController extends BaseController
         $validation = $this->validation->check(File::$rules);
 
         if (!$validation['errors']) {
-            $file = $this->repository->store($request->all());
+            $this->repository->store($request->all());
         } else {
             return $validation['redirect'];
         }
@@ -102,7 +102,7 @@ class FilesController extends BaseController
     /**
      * Store a newly created Files in storage.
      *
-     * @param FileRequest $request
+     * @param Request $request
      *
      * @return Response
      */
@@ -185,7 +185,7 @@ class FilesController extends BaseController
             return redirect(route('admin.files.index'));
         }
 
-        $files = $this->repository->update($files, $request->all());
+        $this->repository->update($files, $request->all());
 
         Siravel::notification('File updated successfully.', 'success');
 
@@ -197,7 +197,7 @@ class FilesController extends BaseController
      *
      * @param int $id
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Request $request, $id)
     {

@@ -7,7 +7,7 @@ use Support\Models\Ownable;
 
 class Attachment extends Ownable
 {
-    protected $fillable = ['name', 'order'];
+
 
     /**
      * Get the downloadable file name for this upload.
@@ -20,28 +20,5 @@ class Attachment extends Ownable
             return $this->name;
         }
         return $this->name . '.' . $this->extension;
-    }
-
-    /**
-     * Get the page this file was uploaded to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function page()
-    {
-        return $this->belongsTo(Page::class, 'uploaded_to');
-    }
-
-    /**
-     * Get the url of this file.
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        if ($this->external && strpos($this->path, 'http') !== 0) {
-            return $this->path;
-        }
-        return baseUrl('/attachments/' . $this->id);
     }
 }

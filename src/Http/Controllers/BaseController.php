@@ -28,43 +28,7 @@ use Illuminate\Http\Request;
  */
 class BaseController extends Controller
 {
-    public function sendResponse($result, $message)
-    {
-        return Response::json(ResponseUtil::makeResponse($message, $result));
-    }
-
-    public function sendError($error, $code = 404)
-    {
-        return Response::json(ResponseUtil::makeError($error), $code);
-    }
 
 
-    public function assets(Request $request)
-    {
-        try {
-            $path = dirname(__DIR__, 3).'/publishes/assets/'.Util::normalizeRelativePath(urldecode($request->path));
-        } catch (\LogicException $e) {
-            abort(404);
-        }
-
-        if (File::exists($path)) {
-            $mime = '';
-            if (Str::endsWith($path, '.js')) {
-                $mime = 'text/javascript';
-            } elseif (Str::endsWith($path, '.css')) {
-                $mime = 'text/css';
-            } else {
-                $mime = File::mimeType($path);
-            }
-            $response = response(File::get($path), 200, ['Content-Type' => $mime]);
-            $response->setSharedMaxAge(31536000);
-            $response->setMaxAge(31536000);
-            $response->setExpires(new \DateTime('+1 year'));
-
-            return $response;
-        }
-
-        return response('', 404);
-    }
 
 }

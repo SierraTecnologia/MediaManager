@@ -11,11 +11,5 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class ThumbnailBuilder extends Builder
 {
-    /**
-     * @return $this
-     */
-    public function whereHasNoPhotos()
-    {
-        return $this->doesntHave('photos');
-    }
+
 }

@@ -16,29 +16,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ImageService extends UploadService
 {
 
-    protected $imageTool;
-    protected $cache;
+    protected ImageManager $imageTool;
+    protected Cache $cache;
     protected $storageUrl;
-    protected $image;
-    protected $http;
-
-    /**
-     * ImageService constructor.
-     *
-     * @param Image        $image
-     * @param ImageManager $imageTool
-     * @param FileSystem   $fileSystem
-     * @param Cache        $cache
-     * @param HttpFetcher  $http
-     */
-    public function __construct(Image $image, ImageManager $imageTool, FileSystem $fileSystem, Cache $cache, HttpFetcher $http)
-    {
-        $this->image = $image;
-        $this->imageTool = $imageTool;
-        $this->cache = $cache;
-        $this->http = $http;
-        parent::__construct($fileSystem);
-    }
+    protected Image $image;
+    protected HttpFetcher $http;
 
     /**
      * Get the storage that will be used for storing images.
@@ -256,10 +238,13 @@ class ImageService extends UploadService
     /**
      * Destroy an image along with its revisions, thumbnails and remaining folders.
      *
-     * @param  Image $image
+     * @param Image $image
+     *
      * @throws Exception
+     *
+     * @return void
      */
-    public function destroy(Image $image)
+    public function destroy(Image $image): void
     {
         $this->destroyImagesFromPath($image->path);
         $image->delete();
@@ -269,10 +254,11 @@ class ImageService extends UploadService
      * Destroys an image at the given path.
      * Searches for image thumbnails in addition to main provided path..
      *
-     * @param  string $path
-     * @return bool
+     * @param string $path
+     *
+     * @return true
      */
-    protected function destroyImagesFromPath(string $path)
+    protected function destroyImagesFromPath(string $path): bool
     {
         $storage = $this->getStorage();
 
@@ -301,46 +287,6 @@ class ImageService extends UploadService
     }
 
     /**
-     * Save an avatar image from an external service.
-     *
-     * @param  \App\Models\User $user
-     * @param  int              $size
-     * @return Image
-     * @throws Exception
-     */
-    public function saveUserAvatar(User $user, $size = 500)
-    {
-        $avatarUrl = $this->getAvatarUrl();
-        $email = strtolower(trim($user->email));
-
-        $replacements = [
-            '${hash}' => md5($email),
-            '${size}' => $size,
-            '${email}' => urlencode($email),
-        ];
-
-        $userAvatarUrl = strtr($avatarUrl, $replacements);
-        $imageName = str_replace(' ', '-', $user->name . '-avatar.png');
-        $image = $this->saveNewFromUrl($userAvatarUrl, 'user', $imageName);
-        $image->created_by = $user->id;
-        $image->updated_by = $user->id;
-        $image->save();
-
-        return $image;
-    }
-
-    /**
-     * Check if fetching external avatars is enabled.
-     *
-     * @return bool
-     */
-    public function avatarFetchEnabled()
-    {
-        $fetchUrl = $this->getAvatarUrl();
-        return is_string($fetchUrl) && strpos($fetchUrl, 'http') === 0;
-    }
-
-    /**
      * Get the URL to fetch avatars from.
      *
      * @return string|mixed
@@ -354,89 +300,6 @@ class ImageService extends UploadService
         }
 
         return $url;
-    }
-
-    /**
-     * Delete gallery and drawings that are not within HTML content of pages or page revisions.
-     * Checks based off of only the image name.
-     * Could be much improved to be more specific but kept it generic for now to be safe.
-     *
-     * Returns the path of the images that would be/have been deleted.
-     *
-     * @param  bool  $checkRevisions
-     * @param  bool  $dryRun
-     * @param  array $types
-     * @return array
-     */
-    public function deleteUnusedImages($checkRevisions = true, $dryRun = true, $types = ['gallery', 'drawio'])
-    {
-        $types = array_intersect($types, ['gallery', 'drawio']);
-        $deletedPaths = [];
-
-        $this->image->newQuery()->whereIn('type', $types)
-            ->chunk(
-                1000, function ($images) use ($types, $checkRevisions, &$deletedPaths, $dryRun) {
-                    foreach ($images as $image) {
-                        $searchQuery = '%' . basename($image->path) . '%';
-                        $inPage = DB::table('pages')
-                            ->where('html', 'like', $searchQuery)->count() > 0;
-                        $inRevision = false;
-                        if ($checkRevisions) {
-                            $inRevision =  DB::table('page_revisions')
-                                ->where('html', 'like', $searchQuery)->count() > 0;
-                        }
-
-                        if (!$inPage && !$inRevision) {
-                            $deletedPaths[] = $image->path;
-                            if (!$dryRun) {
-                                $this->destroy($image);
-                            }
-                        }
-                    }
-                }
-            );
-        return $deletedPaths;
-    }
-
-    /**
-     * Convert a image URI to a Base64 encoded string.
-     * Attempts to find locally via set storage method first.
-     *
-     * @param  string $uri
-     * @return null|string
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-     */
-    public function imageUriToBase64(string $uri)
-    {
-        $isLocal = strpos(trim($uri), 'http') !== 0;
-
-        // Attempt to find local files even if url not absolute
-        $base = baseUrl('/');
-        if (!$isLocal && strpos($uri, $base) === 0) {
-            $isLocal = true;
-            $uri = str_replace($base, '', $uri);
-        }
-
-        $imageData = null;
-
-        if ($isLocal) {
-            $uri = trim($uri, '/');
-            $storage = $this->getStorage();
-            if ($storage->exists($uri)) {
-                $imageData = $storage->get($uri);
-            }
-        } else {
-            try {
-                $imageData = $this->http->fetch($uri);
-            } catch (\Exception $e) {
-            }
-        }
-
-        if ($imageData === null) {
-            return null;
-        }
-
-        return 'data:image/' . pathinfo($uri, PATHINFO_EXTENSION) . ';base64,' . base64_encode($imageData);
     }
 
     /**

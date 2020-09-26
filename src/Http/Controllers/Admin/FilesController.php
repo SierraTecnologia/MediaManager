@@ -197,7 +197,7 @@ class FilesController extends Controller
     /**
      * Store a newly created Files in storage.
      *
-     * @param FileRequest $request
+     * @param Request $request
      *
      * @return Response
      */
