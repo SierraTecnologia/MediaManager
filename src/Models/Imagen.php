@@ -16,21 +16,21 @@ use Storage;
 
 class Imagen extends ArchiveTrait
 {
-    public string $table = 'imagens';
+    public $table = 'imagens';
 
-    public string $primaryKey = 'id';
+    public $primaryKey = 'id';
 
     /**
      * @var array
      */
-    protected array $guarded = [];
+    protected $guarded = [];
 
     /**
      * @var string[]
      *
      * @psalm-var array{0: string, 1: string, 2: string}
      */
-    protected array $appends = [
+    protected $appends = [
         'url',
         'js_url',
         'data_url',
@@ -85,7 +85,8 @@ class Imagen extends ArchiveTrait
     public function getUrlAttribute()
     {
         return $this->remember(
-            'url', function () {
+            'url',
+            function () {
                 if ($this->isLocalFile()) {
                     return url(str_replace('public/', 'storage/', $this->location));
                 }
@@ -105,7 +106,8 @@ class Imagen extends ArchiveTrait
     public function getJsUrlAttribute()
     {
         return $this->remember(
-            'js_url', function () {
+            'js_url',
+            function () {
                 if ($this->isLocalFile()) {
                     $file = url(str_replace('public/', 'storage/', $this->location));
                 } else {
@@ -127,7 +129,8 @@ class Imagen extends ArchiveTrait
     public function getDataUrlAttribute()
     {
         return $this->remember(
-            'data_url', function () {
+            'data_url',
+            function () {
                 if ($this->isLocalFile()) {
                     $imagePath = storage_path('app/'.$this->location);
                 } else {

@@ -14,7 +14,7 @@ class FileRepository extends BaseRepository
 {
     public File $model;
 
-    public string $table;
+    public $table;
 
     /**
      * Stores Files into database.

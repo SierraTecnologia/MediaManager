@@ -15,7 +15,7 @@ class ImageRepository extends BaseRepository
 {
     public Image $model;
 
-    public string $table;
+    public $table;
 
     public function published()
     {
