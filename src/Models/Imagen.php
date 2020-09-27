@@ -41,7 +41,7 @@ class Imagen extends ArchiveTrait
      *
      * @psalm-var array{location: string}
      */
-    public array $rules = [
+    public $rules = [
         'location' => 'mimes:jpeg,jpg,bmp,png,gif',
     ];
 

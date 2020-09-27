@@ -26,7 +26,7 @@ class Thumbnail extends Base
      *
      * @var false
      */
-    public bool $timestamps = false;
+    public $timestamps = false;
 
     /**
      * @inheritdoc
@@ -35,7 +35,7 @@ class Thumbnail extends Base
      *
      * @psalm-var array{0: string, 1: string, 2: string}
      */
-    protected array $fillable = [
+    protected $fillable = [
         'path',
         'width',
         'height',
