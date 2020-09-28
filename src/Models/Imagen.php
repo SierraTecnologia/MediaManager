@@ -62,7 +62,7 @@ class Imagen extends ArchiveTrait
      */
     public function users(): \Illuminate\Database\Eloquent\Relations\MorphToMany
     {
-        return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('sitec.core.models.user', \App\Models\User::class), 'imagenable');
+        return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('application.directorys.models.users', \App\Models\User::class), 'imagenable');
     }
 
     /**
@@ -72,7 +72,7 @@ class Imagen extends ArchiveTrait
      */
     public function persons(): \Illuminate\Database\Eloquent\Relations\MorphToMany
     {
-        return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('sitec.core.models.person', \Telefonica\Models\Actors\Person::class), 'imagenable');
+        return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('application.directorys.models.persons', \Telefonica\Models\Actors\Person::class), 'imagenable');
     }
 
     /**
@@ -188,7 +188,7 @@ class Imagen extends ArchiveTrait
      */
     public static function createByExternalLink($link, $target, $data = [])
     {
-        $personClass = \Illuminate\Support\Facades\Config::get('sitec.core.models.person', \Telefonica\Models\Actors\Person::class);
+        $personClass = \Illuminate\Support\Facades\Config::get('application.directorys.models.persons', \Telefonica\Models\Actors\Person::class);
 
         $person = $personClass::createIfNotExistAndReturn($target);
 
@@ -203,7 +203,7 @@ class Imagen extends ArchiveTrait
     public static function createByMediaFromDisk($disk, $link, $target, $data = [])
     {
         if (is_string($target)) {
-            $personClass = \Illuminate\Support\Facades\Config::get('sitec.core.models.person', \Telefonica\Models\Actors\Person::class);
+            $personClass = \Illuminate\Support\Facades\Config::get('application.directorys.models.persons', \Telefonica\Models\Actors\Person::class);
             $person = $personClass::createIfNotExistAndReturn($target);
         } else {
             $person = $target;

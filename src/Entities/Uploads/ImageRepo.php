@@ -2,7 +2,7 @@
 
 namespace MediaManager\Entities\Uploads;
 
-use Population\Models\Components\Book\Permissions\PermissionService;
+use Porteiro\Models\Permissions\PermissionService;
 use Population\Models\Components\Book\Page;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -19,7 +19,7 @@ class ImageRepo
      *
      * @param Image                                                            $image
      * @param ImageService                                                     $imageService
-     * @param \Population\Models\Components\Book\Permissions\PermissionService $permissionService
+     * @param \Porteiro\Models\Permissions\PermissionService $permissionService
      * @param \Population\Models\Components\Book\Page                          $page
      */
     public function __construct(Image $image, ImageService $imageService, PermissionService $permissionService, Page $page)
