@@ -42,7 +42,8 @@
         "intervention/image": ">=2.4",
         "ctf0/media-manager": "dev-master",
         "intervention/imagecache": ">=2.3",
-        "spatie/laravel-medialibrary": "^8.0"
+        "spatie/laravel-medialibrary": "^8.0",
+        "doctrine/dbal": "^2.11"
     },
     "suggest": {
         "cipemotion/medialibrary": "*"

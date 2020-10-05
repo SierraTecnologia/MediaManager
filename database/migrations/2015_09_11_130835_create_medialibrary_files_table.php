@@ -72,7 +72,6 @@ class CreateMedialibraryFilesTable extends Migration
                 $table->boolean('completed')->default(false);
             });
         } catch (\Throwable $th) {
-            //throw $th;
         }
     }
 

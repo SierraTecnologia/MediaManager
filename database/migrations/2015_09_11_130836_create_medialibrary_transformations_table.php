@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateMedialibraryTransformationsTable extends Migration
 {
@@ -12,36 +12,38 @@ class CreateMedialibraryTransformationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('medialibrary_transformations', function (Blueprint $table) {
+        try {
+            Schema::create('medialibrary_transformations', function (Blueprint $table) {
 
             // Primary keys
-            $table->increments('id');
+                $table->increments('id');
 
-            // Foreign keys
-            $table->char('file_id', 36);
-            $table->foreign('file_id')
+                // Foreign keys
+                $table->char('file_id', 36);
+                $table->foreign('file_id')
                   ->references('id')
                   ->on('medialibrary_files')
                   ->onUpdate('CASCADE')
                   ->onDelete('CASCADE');
 
-            // Metadata
-            $table->timestamps();
-            $table->text('properties')->nullable();
-            $table->smallInteger('width')->nullable();
-            $table->smallInteger('height')->nullable();
+                // Metadata
+                $table->timestamps();
+                $table->text('properties')->nullable();
+                $table->smallInteger('width')->nullable();
+                $table->smallInteger('height')->nullable();
 
-            // Properties
-            $table->string('name');
-            $table->string('type');
-            $table->string('extension');
-            $table->string('mime_type');
-            $table->integer('size');
+                // Properties
+                $table->string('name');
+                $table->string('type');
+                $table->string('extension');
+                $table->string('mime_type');
+                $table->integer('size');
 
-            // Flags
-            $table->boolean('completed')->default(false);
-
-        });
+                // Flags
+                $table->boolean('completed')->default(false);
+            });
+        } catch (\Throwable $th) {
+        }
     }
 
     /**
