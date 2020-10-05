@@ -36,19 +36,19 @@
     </div>
     <div v-if="hidden_element">
         <div class="btn btn-sm btn-secondary" v-on:click="expanded = !expanded;" style="width:100%">
-            <div v-if="!expanded"><i class="facilitador-double-down"></i> {{ __('facilitador::generic.open') }}</div>
-            <div v-if="expanded"><i class="facilitador-double-up"></i> {{ __('facilitador::generic.close') }}</div>
+            <div v-if="!expanded"><i class="facilitador-double-down"></i> {{ __('pedreiro::generic.open') }}</div>
+            <div v-if="expanded"><i class="facilitador-double-up"></i> {{ __('pedreiro::generic.close') }}</div>
         </div>
     </div>
     <div id="toolbar" v-if="showToolbar" :style="expanded ? 'display:block' : 'display:none'">
         <div class="btn-group offset-right">
             <button type="button" class="btn btn-primary" id="upload" v-if="allowUpload">
                 <i class="facilitador-upload"></i>
-                {{ __('facilitador::generic.upload') }}
+                {{ __('pedreiro::generic.upload') }}
             </button>
             <button type="button" class="btn btn-primary" v-if="allowCreateFolder" data-toggle="modal" :data-target="'#create_dir_modal_'+this._uid">
                 <i class="facilitador-folder"></i>
-                {{ __('facilitador::generic.add_folder') }}
+                {{ __('pedreiro::generic.add_folder') }}
             </button>
         </div>
         <button type="button" class="btn btn-secondary" v-on:click="getFiles()">
@@ -57,15 +57,15 @@
         <div class="btn-group offset-right">
             <button type="button" v-if="showFolders && allowMove" class="btn btn-secondary" data-toggle="modal" :data-target="'#move_files_modal_'+this._uid">
                 <i class="facilitador-move"></i>
-                {{ __('facilitador::generic.move') }}
+                {{ __('pedreiro::generic.move') }}
             </button>
             <button type="button" v-if="allowDelete" :disabled="selected_files.length == 0" class="btn btn-secondary" data-toggle="modal" :data-target="'#confirm_delete_modal_'+this._uid">
                 <i class="facilitador-trash"></i>
-                {{ __('facilitador::generic.delete') }}
+                {{ __('pedreiro::generic.delete') }}
             </button>
             <button v-if="allowCrop" :disabled="selected_files.length != 1 || !fileIs(selected_file, 'image')" type="button" class="btn btn-secondary" data-toggle="modal" :data-target="'#crop_modal_'+this._uid">
                 <i class="facilitador-crop"></i>
-                {{ __('facilitador::media.crop') }}
+                {{ __('pedreiro::media.crop') }}
             </button>
         </div>
     </div>
@@ -78,7 +78,7 @@
             <ol class="breadcrumb filemanager">
                 <li class="media_breadcrumb" v-on:click="setCurrentPath(-1)">
                     <span class="arrow"></span>
-                    <strong>{{ __('facilitador::media.library') }}</strong>
+                    <strong>{{ __('pedreiro::media.library') }}</strong>
                 </li>
                 <li v-for="(folder, i) in getCurrentPath()" v-on:click="setCurrentPath(i)">
                     <span class="arrow"></span>
@@ -129,18 +129,18 @@
                     @else
                     <img src="{{ Facilitador::image($admin_loader_img) }}" alt="Facilitador Loader">
                     @endif
-                    <p>{{ __('facilitador::media.loading') }}</p>
+                    <p>{{ __('pedreiro::media.loading') }}</p>
                 </div>
 
                 <div id="no_files" v-if="files.length == 0">
-                    <h3><i class="facilitador-meh"></i> {{ __('facilitador::media.no_files_in_folder') }}</h3>
+                    <h3><i class="facilitador-meh"></i> {{ __('pedreiro::media.no_files_in_folder') }}</h3>
                 </div>
             </div>
             <div id="right">
                 <div class="right_details">
                     <div v-if="selected_files.length > 1" class="right_none_selected">
                         <i class="facilitador-list"></i>
-                        <p>@{{ selected_files.length }} {{ __('facilitador::media.files_selected') }}</p>
+                        <p>@{{ selected_files.length }} {{ __('pedreiro::media.files_selected') }}</p>
                     </div>
                     <div v-else-if="selected_files.length == 1" class="right_details">
                         <div class="detail_img">
@@ -152,7 +152,7 @@
                                     <source :src="selected_file.path" type="video/mp4">
                                     <source :src="selected_file.path" type="video/ogg">
                                     <source :src="selected_file.path" type="video/webm">
-                                    {{ __('facilitador::media.browser_video_support') }}
+                                    {{ __('pedreiro::media.browser_video_support') }}
                                 </video>
                             </div>
                             <div v-else-if="fileIs(selected_file, 'audio')">
@@ -160,7 +160,7 @@
                                 <audio controls style="width:100%; margin-top:5px;" ref="audioplayer">
                                     <source :src="selected_file.path" type="audio/ogg">
                                     <source :src="selected_file.path" type="audio/mpeg">
-                                    {{ __('facilitador::media.browser_audio_support') }}
+                                    {{ __('pedreiro::media.browser_audio_support') }}
                                 </audio>
                             </div>
                             <div v-else-if="fileIs(selected_file, 'zip')">
@@ -175,26 +175,26 @@
                         </div>
                         <div class="detail_info">
                             <span>
-                                <h4>{{ __('facilitador::media.title') }}:</h4>
+                                <h4>{{ __('pedreiro::media.title') }}:</h4>
                                 <input v-if="allowRename" type="text" class="form-control" :value="selected_file.name" @keydown.enter.prevent="renameFile">
                                 <p v-else>@{{ selected_file.name }}</p>
                             </span>
                             <span>
-                                <h4>{{ __('facilitador::media.type') }}:</h4>
+                                <h4>{{ __('pedreiro::media.type') }}:</h4>
                                 <p>@{{ selected_file.type }}</p>
                             </span>
 
                             <template v-if="!fileIs(selected_file, 'folder')">
                                 <span>
-                                    <h4>{{ __('facilitador::media.size') }}:</h4>
+                                    <h4>{{ __('pedreiro::media.size') }}:</h4>
                                     <p><span class="selected_file_size">@{{ bytesToSize(selected_file.size) }}</span></p>
                                 </span>
                                 <span>
-                                    <h4>{{ __('facilitador::media.public_url') }}:</h4>
-                                    <p><a :href="selected_file.path" target="_blank">{{ __('facilitador::generic.click_here') }}</a></p>
+                                    <h4>{{ __('pedreiro::media.public_url') }}:</h4>
+                                    <p><a :href="selected_file.path" target="_blank">{{ __('pedreiro::generic.click_here') }}</a></p>
                                 </span>
                                 <span>
-                                    <h4>{{ __('facilitador::media.last_modified') }}:</h4>
+                                    <h4>{{ __('pedreiro::media.last_modified') }}:</h4>
                                     <p>@{{ dateFilter(selected_file.last_modified) }}</p>
                                 </span>
                             </template>
@@ -213,7 +213,7 @@
                     </div>
                     <div v-else class="right_none_selected">
                         <i class="facilitador-cursor"></i>
-                        <p>{{ __('facilitador::media.nothing_selected') }}</p>
+                        <p>{{ __('pedreiro::media.nothing_selected') }}</p>
                     </div>
                 </div>
             </div>
@@ -246,16 +246,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><i class="facilitador-folder"></i> {{ __('facilitador::media.add_new_folder') }}</h4>
+                    <h4 class="modal-title"><i class="facilitador-folder"></i> {{ __('pedreiro::media.add_new_folder') }}</h4>
                 </div>
 
                 <div class="modal-body">
-                    <input name="new_folder_name" placeholder="{{ __('facilitador::media.new_folder_name') }}" class="form-control" value="" v-model="modals.new_folder.name" />
+                    <input name="new_folder_name" placeholder="{{ __('pedreiro::media.new_folder_name') }}" class="form-control" value="" v-model="modals.new_folder.name" />
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
-                    <button type="button" class="btn btn-info" v-on:click="createFolder">{{ __('facilitador::media.create_new_folder') }}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('pedreiro::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-info" v-on:click="createFolder">{{ __('pedreiro::media.create_new_folder') }}
                     </button>
                 </div>
             </div>
@@ -269,22 +269,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><i class="facilitador-warning"></i> {{ __('facilitador::generic.are_you_sure') }}</h4>
+                    <h4 class="modal-title"><i class="facilitador-warning"></i> {{ __('pedreiro::generic.are_you_sure') }}</h4>
                 </div>
 
                 <div class="modal-body">
-                    <h4>{{ __('facilitador::media.delete_question') }}</h4>
+                    <h4>{{ __('pedreiro::media.delete_question') }}</h4>
                     <ul>
                         <li v-for="file in selected_files">@{{ file.name }}</li>
                     </ul>
                     <h5 class="folder_warning">
-                        <i class="facilitador-warning"></i> {{ __('facilitador::media.delete_folder_question') }}
+                        <i class="facilitador-warning"></i> {{ __('pedreiro::media.delete_folder_question') }}
                     </h5>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
-                    <button type="button" class="btn btn-danger" v-on:click="deleteFiles">{{ __('facilitador::generic.delete_confirm') }}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('pedreiro::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-danger" v-on:click="deleteFiles">{{ __('pedreiro::generic.delete_confirm') }}
                     </button>
                 </div>
             </div>
@@ -299,21 +299,21 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
                             aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><i class="facilitador-move"></i> {{ __('facilitador::media.move_file_folder') }}</h4>
+                    <h4 class="modal-title"><i class="facilitador-move"></i> {{ __('pedreiro::media.move_file_folder') }}</h4>
                 </div>
 
                 <div class="modal-body">
-                    <h4>{{ __('facilitador::media.destination_folder') }}</h4>
+                    <h4>{{ __('pedreiro::media.destination_folder') }}</h4>
                     <select class="form-control" v-model="modals.move_files.destination">
-                        <option value="" disabled>{{ __('facilitador::media.destination_folder') }}</option>
+                        <option value="" disabled>{{ __('pedreiro::media.destination_folder') }}</option>
                         <option v-if="current_folder != basePath && showFolders" value="/../">../</option>
                         <option v-for="file in files" v-if="file.type == 'folder' && !selected_files.includes(file)" :value="current_folder+'/'+file.name">@{{ file.name }}</option>
                     </select>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
-                    <button type="button" class="btn btn-warning" v-on:click="moveFiles">{{ __('facilitador::generic.move') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('pedreiro::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-warning" v-on:click="moveFiles">{{ __('pedreiro::generic.move') }}</button>
                 </div>
             </div>
         </div>
@@ -327,7 +327,7 @@
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><i class="facilitador-warning"></i> {{ __('facilitador::media.crop_image') }}</h4>
+                    <h4 class="modal-title"><i class="facilitador-warning"></i> {{ __('pedreiro::media.crop_image') }}</h4>
                 </div>
 
                 <div class="modal-body">
@@ -335,14 +335,14 @@
                         <img :id="'cropping-image_'+this._uid" v-if="selected_files.length == 1 && fileIs(selected_file, 'image')" class="img img-fluid" :src="selected_file.path + '?' + selected_file.last_modified" />
                     </div>
                     <div class="new-image-info">
-                        {{ __('facilitador::media.width') }} <span :id="'new-image-width_'+this._uid"></span>, {{ __('facilitador::media.height') }}<span :id="'new-image-height_'+this._uid"></span>
+                        {{ __('pedreiro::media.width') }} <span :id="'new-image-width_'+this._uid"></span>, {{ __('pedreiro::media.height') }}<span :id="'new-image-height_'+this._uid"></span>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('facilitador::generic.cancel') }}</button>
-                    <button type="button" class="btn btn-warning" v-on:click="crop(false)">{{ __('facilitador::media.crop') }}</button>
-                    <button type="button" class="btn btn-warning" v-on:click="crop(true)">{{ __('facilitador::media.crop_and_create') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('pedreiro::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-warning" v-on:click="crop(false)">{{ __('pedreiro::media.crop') }}</button>
+                    <button type="button" class="btn btn-warning" v-on:click="crop(true)">{{ __('pedreiro::media.crop_and_create') }}</button>
                 </div>
             </div>
         </div>
@@ -646,10 +646,10 @@
                     _token: '{{ csrf_token() }}'
                 }, function(data){
                     if (data.success == true) {
-                        toastr.success('{{ __('facilitador::media.success_renamed') }}', "{{ __('facilitador::generic.sweet_success') }}");
+                        toastr.success('{{ __('pedreiro::media.success_renamed') }}', "{{ __('pedreiro::generic.sweet_success') }}");
                         vm.getFiles();
                     } else {
-                        toastr.error(data.error, "{{ __('facilitador::generic.whoopsie') }}");
+                        toastr.error(data.error, "{{ __('pedreiro::generic.whoopsie') }}");
                     }
                 });
             },
@@ -661,10 +661,10 @@
                 var name = this.modals.new_folder.name;
                 $.post('{{ route('master.media-manager.media.new_folder') }}', { new_folder: vm.current_folder+'/'+name, _token: '{{ csrf_token() }}' }, function(data) {
                     if(data.success == true){
-                        toastr.success('{{ __('facilitador::generic.successfully_created') }} ' + name, "{{ __('facilitador::generic.sweet_success') }}");
+                        toastr.success('{{ __('pedreiro::generic.successfully_created') }} ' + name, "{{ __('pedreiro::generic.sweet_success') }}");
                         vm.getFiles();
                     } else {
-                        toastr.error(data.error, "{{ __('facilitador::generic.whoopsie') }}");
+                        toastr.error(data.error, "{{ __('pedreiro::generic.whoopsie') }}");
                     }
                     vm.modals.new_folder.name = '';
                     $('#create_dir_modal_'+vm._uid).modal('hide');
@@ -681,11 +681,11 @@
                     _token: '{{ csrf_token() }}'
                 }, function(data){
                     if(data.success == true){
-                        toastr.success('', "{{ __('facilitador::generic.sweet_success') }}");
+                        toastr.success('', "{{ __('pedreiro::generic.sweet_success') }}");
                         vm.getFiles();
                         $('#confirm_delete_modal_'+vm._uid).modal('hide');
                     } else {
-                        toastr.error(data.error, "{{ __('facilitador::generic.whoopsie') }}");
+                        toastr.error(data.error, "{{ __('pedreiro::generic.whoopsie') }}");
                         vm.getFiles();
                         $('#confirm_delete_modal_'+vm._uid).modal('hide');
                     }
@@ -708,10 +708,10 @@
                     _token: '{{ csrf_token() }}'
                 }, function(data){
                     if(data.success == true){
-                        toastr.success('{{ __('facilitador::media.success_moved') }}', "{{ __('facilitador::generic.sweet_success') }}");
+                        toastr.success('{{ __('pedreiro::media.success_moved') }}', "{{ __('pedreiro::generic.sweet_success') }}");
                         vm.getFiles();
                     } else {
-                        toastr.error(data.error, "{{ __('facilitador::generic.whoopsie') }}");
+                        toastr.error(data.error, "{{ __('pedreiro::generic.whoopsie') }}");
                     }
 
                     vm.modals.move_files.destination = '';
@@ -722,7 +722,7 @@
                     return;
                 }
                 if (!mode) {
-                    if (!window.confirm('{{ __('facilitador::media.crop_override_confirm') }}')) {
+                    if (!window.confirm('{{ __('pedreiro::media.crop_override_confirm') }}')) {
                         return;
                     }
                 }
@@ -739,7 +739,7 @@
                         vm.getFiles();
                         $('#crop_modal_'+vm._uid).modal('hide');
                     } else {
-                        toastr.error(data.error, "{{ __('facilitador::generic.whoopsie') }}");
+                        toastr.error(data.error, "{{ __('pedreiro::generic.whoopsie') }}");
                     }
                 });
             },
@@ -852,13 +852,13 @@
                     },
                     success: function(e, res) {
                         if (res.success) {
-                            toastr.success(res.message, "{{ __('facilitador::generic.sweet_success') }}");
+                            toastr.success(res.message, "{{ __('pedreiro::generic.sweet_success') }}");
                         } else {
-                            toastr.error(res.message, "{{ __('facilitador::generic.whoopsie') }}");
+                            toastr.error(res.message, "{{ __('pedreiro::generic.whoopsie') }}");
                         }
                     },
                     error: function(e, res, xhr) {
-                        toastr.error(res, "{{ __('facilitador::generic.whoopsie') }}");
+                        toastr.error(res, "{{ __('pedreiro::generic.whoopsie') }}");
                     },
                     queuecomplete: function() {
                         vm.getFiles();
