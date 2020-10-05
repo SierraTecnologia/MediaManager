@@ -28,7 +28,7 @@
     "require": {
         "php": "^7.4",
         "laravel/framework": "^7.0 || ^8.0",
-        "sierratecnologia/muleta": "dev-master",
+        "sierratecnologia/muleta": "^0.4.0",
         "fideloper/proxy": ">=4.0",
         "league/pipeline": "*",
         "league/flysystem": "*",
@@ -59,7 +59,6 @@
         "post-update-cmd": [],
         "post-create-project-cmd": []
     },
-    "repositories": [{"type": "path","url":"../**","options":{"symlink": true}}],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
