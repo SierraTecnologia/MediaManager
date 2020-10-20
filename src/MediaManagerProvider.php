@@ -295,7 +295,7 @@ class MediaManagerProvider extends ServiceProvider
             'logging.channels.sitec-media-manager',
             [
             'driver' => 'single',
-            'path' => storage_path('logs'.DIRECTORY_SEPARACTOR.'sitec-media-manager.log'),
+            'path' => storage_path('logs'.DIRECTORY_SEPARATOR.'sitec-media-manager.log'),
             'level' => env('APP_LOG_LEVEL', 'debug'),
             ]
         );
