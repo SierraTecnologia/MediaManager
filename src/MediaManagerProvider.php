@@ -142,7 +142,7 @@ class MediaManagerProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom($this->getPublishesPath('config/sitec/media-manager.php'), 'sitec.media-manager');
+        $this->mergeConfigFrom($this->getPublishesPath('config'.DIRECTORY_SEPARATOR.'sitec'.DIRECTORY_SEPARATOR.'media-manager.php'), 'sitec.media-manager');
         $this->mergeConfigFrom($this->getPublishesPath('config/encode.php'), 'encode');
         $this->mergeConfigFrom($this->getPublishesPath('config/image.php'), 'image');
         $this->mergeConfigFrom($this->getPublishesPath('config/imagecache.php'), 'imagecache');
@@ -255,7 +255,7 @@ class MediaManagerProvider extends ServiceProvider
 
 
         // Register Migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'migrations');
     }
 
     private function loadViews()
