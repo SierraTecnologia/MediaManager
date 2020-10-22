@@ -40,7 +40,7 @@
         "google/photos-library": ">=1.4",
         "league/mime-type-detection": ">=1.1",
         "intervention/image": ">=2.4",
-        "ctf0/media-manager": "dev-master",
+        "ctf0/media-manager": "^3.7",
         "intervention/imagecache": ">=2.3",
         "spatie/laravel-medialibrary": "^8.0",
         "doctrine/dbal": "^2.11"

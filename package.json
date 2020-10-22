@@ -37,6 +37,7 @@
         "vue-core-video-player": "^0.1.9",
         "vue-gallery": "^2.0.1",
         "vue-playlist": "^1.1.6",
+        "vue-responsive-video-background-player": "^1.1.2",
         "vue-video-player": "^5.0.2",
         "vue-visual": "^2.3.0",
         "vue2-admin-lte": "^0.4.3",

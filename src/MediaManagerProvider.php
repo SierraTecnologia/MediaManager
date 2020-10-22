@@ -16,8 +16,8 @@ use Log;
 
 use MediaManager\Facades\MediaManager as MediaManagerFacade;
 
-use MediaManager\Services\MediaManagerService;
 use MediaManager\Services\FileService;
+use MediaManager\Services\MediaManagerService;
 use Muleta\Traits\Providers\ConsoleTools;
 
 use Route;
@@ -85,6 +85,20 @@ class MediaManagerProvider extends ServiceProvider
                 ],
                 // ],
         ],
+
+        'Admin' => [
+            // 'MediaManager' => [
+                [
+                    'text'        => 'Imagens',
+                    'route'       => 'admin.media-manager.images.index', // @todo
+                    'icon'        => 'fas fa-fw fa-gavel',
+                    'icon_color'  => 'blue',
+                    'label_color' => 'success',
+                    'section'       => 'admin',
+                    // 'access' => \App\Models\Role::$ADMIN
+                ],
+        ]
+        
     ];
 
     /**
