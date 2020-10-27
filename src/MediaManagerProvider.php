@@ -134,7 +134,7 @@ class MediaManagerProvider extends ServiceProvider
         /**
          * MediaManager Routes
          */
-        $this->loadRoutesForRiCa(__DIR__.'/../routes');
+        $this->loadRoutesForRiCa(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'routes');
     }
 
     /**
@@ -142,7 +142,7 @@ class MediaManagerProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom($this->getPublishesPath('config/sitec/media-manager.php'), 'sitec.media-manager');
+        $this->mergeConfigFrom($this->getPublishesPath('config'.DIRECTORY_SEPARATOR.'sitec'.DIRECTORY_SEPARATOR.'media-manager.php'), 'sitec.media-manager');
         $this->mergeConfigFrom($this->getPublishesPath('config/encode.php'), 'encode');
         $this->mergeConfigFrom($this->getPublishesPath('config/image.php'), 'image');
         $this->mergeConfigFrom($this->getPublishesPath('config/imagecache.php'), 'imagecache');
@@ -234,7 +234,7 @@ class MediaManagerProvider extends ServiceProvider
         $this->publishes(
             [
             // Paths
-            $this->getPublishesPath('config/sitec') => config_path('sitec'),
+            $this->getPublishesPath('config'.DIRECTORY_SEPARATOR.'sitec') => config_path('sitec'),
             $this->getPublishesPath('config/encode.php') => config_path('encode.php'),
             $this->getPublishesPath('config/image.php') => config_path('image.php'),
             $this->getPublishesPath('config/imagecache.php') => config_path('imagecache.php'),
@@ -255,7 +255,7 @@ class MediaManagerProvider extends ServiceProvider
 
 
         // Register Migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'migrations');
     }
 
     private function loadViews()
@@ -265,7 +265,7 @@ class MediaManagerProvider extends ServiceProvider
         $this->loadViewsFrom($viewsPath, 'media-manager');
         $this->publishes(
             [
-            $viewsPath => base_path('resources/views/vendor/media-manager'),
+            $viewsPath => base_path('resources'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'media-manager'),
             ],
             ['views',  'sitec', 'sitec-views', 'media-manager']
         );
@@ -276,7 +276,7 @@ class MediaManagerProvider extends ServiceProvider
         // Publish lanaguage files
         $this->publishes(
             [
-            $this->getResourcesPath('lang') => resource_path('lang/vendor/media-manager')
+            $this->getResourcesPath('lang') => resource_path('lang'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'media-manager')
             ],
             ['lang',  'sitec', 'media-manager']
         );
@@ -295,7 +295,7 @@ class MediaManagerProvider extends ServiceProvider
             'logging.channels.sitec-media-manager',
             [
             'driver' => 'single',
-            'path' => storage_path('logs/sitec-media-manager.log'),
+            'path' => storage_path('logs'.DIRECTORY_SEPARATOR.'sitec-media-manager.log'),
             'level' => env('APP_LOG_LEVEL', 'debug'),
             ]
         );
