@@ -13,7 +13,7 @@
     </div>
 
     <div class="row">
-        {!! Form::open(['route' => 'admin.files.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']); !!}
+        {!! Form::open(['route' => 'admin.media-manager.files.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']); !!}
 
             {!! FormMaker::fromTable('files', Config::get('siravel.forms.files')) !!}
 

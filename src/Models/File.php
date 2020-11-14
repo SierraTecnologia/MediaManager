@@ -33,6 +33,72 @@ class File extends Model
         ],
     );
 
+    
+    protected $formFields = [
+        [
+            'name' => 'name',
+            'label' => 'name',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'description',
+            'label' => 'description',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'url',
+            'label' => 'url',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'path',
+            'label' => 'path',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'name',
+            'label' => 'name',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'type',
+            'label' => 'type',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'filename',
+            'label' => 'filename',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'size',
+            'label' => 'size',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'last_modified',
+            'label' => 'last_modified',
+            'type' => 'text'
+        ],
+        // [
+        //     'name' => 'tags',
+        //     'label' => 'Tags',
+        //     'type' => 'select_multiple',
+        //     'relationship' => 'tags'
+        // ],
+    ];
+
+
+    protected $indexFields = [
+        'name',
+        'description',
+        'url',
+        'path',
+        'type',
+        'filename',
+        'size',
+        'last_modified',
+    ];
         
     // // /**
     // //  * Get all of the owning videoable models.
