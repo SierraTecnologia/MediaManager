@@ -86,7 +86,7 @@ class FilesController extends Controller
     //  */
     // public function store(Request $request)
     // {
-    //     $validation = $this->validation->check(File::$rules);
+    //     $validation = $this->validation->check(app(File::class)->rules);
 
     //     if (!$validation['errors']) {
     //         $file = $this->repository->store($request->all());
