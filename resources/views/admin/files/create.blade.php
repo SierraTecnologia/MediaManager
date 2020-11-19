@@ -14,7 +14,7 @@
     </div>
 
     <div class="col-md-12">
-        {!! Form::open(['route' => 'admin.files.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']); !!}
+        {!! Form::open(['route' => 'admin.media-manager.files.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']); !!}
 
             {!! FormMaker::setColumns(2)->fromTable('files', config('siravel.forms.files')) !!}
 

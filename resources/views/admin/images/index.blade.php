@@ -21,7 +21,7 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary float-right" href="{!! route('admin.images.create') !!}">{!! trans('features.addNew') !!}</a>
+        <a class="btn btn-primary float-right" href="{!! route('admin.media-manager.images.create') !!}">{!! trans('features.addNew') !!}</a>
         <div class="raw-m-hide raw-m-hide float-right">
             {!! Form::open(['url' => 'admin/images/search']) !!}
             <input class="form-control header-input float-right raw-margin-right-24" name="term" placeholder="Search">
@@ -42,7 +42,7 @@
                 @foreach($results as $image)
                     <div class="col-md-3 panel raw-margin-top-24">
                         <div class="thumbnail">
-                            <a href="{!! route('admin.images.edit', [$image->id]) !!}">
+                            <a href="{!! route('admin.media-manager.images.edit', [$image->id]) !!}">
                                 <div class="img" style="background-image: url('{!! $image->url !!}')"></div>
                             </a>
                         </div>
@@ -61,7 +61,7 @@
                                         {!! method_field('DELETE') !!}
                                         <button class="delete-btn btn btn-xs btn-danger float-right" type="submit"><i class="fa fa-trash"></i></button>
                                     </form>
-                                    <a class="btn btn-xs btn-secondary float-right raw-margin-right-8" href="{!! route('admin.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-xs btn-secondary float-right raw-margin-right-8" href="{!! route('admin.media-manager.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
                                 </div>
                             </div>
                         </div>

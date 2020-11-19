@@ -43,7 +43,7 @@ class FilesController extends Controller
     // {
     //     $result = $this->repository->paginated();
 
-    //     return view('root.features.midia.files.index')
+    //     return view('media-manager::admin.files.index')
     //         ->with('files', $result)
     //         ->with('pagination', $result->render());
     // }
@@ -61,7 +61,7 @@ class FilesController extends Controller
 
     //     $result = $this->repository->search($input);
 
-    //     return view('root.features.midia.files.index')
+    //     return view('media-manager::admin.files.index')
     //         ->with('files', $result[0]->get())
     //         ->with('pagination', $result[2])
     //         ->with('term', $result[1]);
@@ -74,7 +74,7 @@ class FilesController extends Controller
     //  */
     // public function create()
     // {
-    //     return view('root.features.midia.files.create');
+    //     return view('media-manager::admin.files.create');
     // }
 
     // /**
@@ -86,7 +86,7 @@ class FilesController extends Controller
     //  */
     // public function store(Request $request)
     // {
-    //     $validation = $this->validation->check(File::$rules);
+    //     $validation = $this->validation->check(app(File::class)->rules);
 
     //     if (!$validation['errors']) {
     //         $file = $this->repository->store($request->all());
@@ -136,7 +136,7 @@ class FilesController extends Controller
     //         return redirect(route('root.files.index'));
     //     }
 
-    //     return view('root.features.midia.files.edit')->with('files', $files);
+    //     return view('media-manager::admin.files.edit')->with('files', $files);
     // }
 
     // /**

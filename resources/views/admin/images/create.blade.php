@@ -12,7 +12,7 @@
         {!! Form::open(['url' => 'admin/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
         {!! Form::close() !!}
 
-        {!! Form::open(['route' => 'admin.images.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
+        {!! Form::open(['route' => 'admin.media-manager.images.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
 
             {!! FormMaker::fromTable('files', Config::get('siravel.forms.images')) !!}
 

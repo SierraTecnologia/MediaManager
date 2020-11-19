@@ -14,7 +14,6 @@ use Intervention\Image\Facades\Image;
 use Log;
 use SplFileInfo;
 use Stalker;
-use Stalker\Facades\CryptoServiceFacade;
 use Stalker\Models\Imagen as ModelImage;
 use Stalker\Models\Media;
 
@@ -29,7 +28,7 @@ class MidiaService
 
     private function setModel(string $midiaId)
     {
-        $this->midiaId = CryptoServiceFacade::url_decode($midiaId);
+        $this->midiaId = app('Crypto')->urlDecode($midiaId);
         $this->midia = ModelImage::find($this->midiaId);
     }
 
@@ -116,8 +115,8 @@ class MidiaService
                 $this->getCacheName().'_asDownload',
                 3600,
                 function () use ($midiaId, $encRealFileName) {
-                    $fileName = CryptoServiceFacade::url_decode($midiaId);
-                    $realFileName = CryptoServiceFacade::url_decode($encRealFileName);
+                    $fileName = app('Crypto')->urlDecode($midiaId);
+                    $realFileName = app('Crypto')->urlDecode($encRealFileName);
                     $filePath = $this->getFilePath($fileName);
 
                     $fileTool = new SplFileInfo($filePath);
