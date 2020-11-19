@@ -72,7 +72,7 @@ class MediaManagerProvider extends ServiceProvider
                     'icon_color'  => 'blue',
                     'label_color' => 'success',
                     'section'       => 'painel',
-                    // 'access' => \App\Models\Role::$ADMIN
+                    // 'access' => \Porteiro\Models\Role::$ADMIN
                 ],
                 [
                     'text'        => 'Biblioteca',
@@ -81,7 +81,7 @@ class MediaManagerProvider extends ServiceProvider
                     'icon_color'  => 'blue',
                     'label_color' => 'success',
                     'section'       => 'painel',
-                    // 'access' => \App\Models\Role::$ADMIN
+                    // 'access' => \Porteiro\Models\Role::$ADMIN
                 ],
                 // ],
         ],
@@ -95,7 +95,7 @@ class MediaManagerProvider extends ServiceProvider
                     'icon_color'  => 'blue',
                     'label_color' => 'success',
                     'section'       => 'admin',
-                    // 'access' => \App\Models\Role::$ADMIN
+                    // 'access' => \Porteiro\Models\Role::$ADMIN
                 ],
         ]
         
