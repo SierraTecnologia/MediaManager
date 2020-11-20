@@ -1052,16 +1052,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.153",
+            "version": "v0.154",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "db62bb19f32f81c9551f223c72be0682eb58ebd8"
+                "reference": "7f44a314836c444b7894d648c1c49f83fb9d37ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/db62bb19f32f81c9551f223c72be0682eb58ebd8",
-                "reference": "db62bb19f32f81c9551f223c72be0682eb58ebd8",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/7f44a314836c444b7894d648c1c49f83fb9d37ca",
+                "reference": "7f44a314836c444b7894d648c1c49f83fb9d37ca",
                 "shasum": ""
             },
             "require": {
@@ -1085,7 +1085,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2020-11-01T00:25:23+00:00"
+            "time": "2020-11-19T19:01:11+00:00"
         },
         {
             "name": "google/auth",
@@ -3855,16 +3855,16 @@
         },
         {
             "name": "sierratecnologia/crypto",
-            "version": "0.4.2",
+            "version": "0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SierraTecnologia/Crypto.git",
-                "reference": "1a8ccb741294fcef1ad97354f19d5a944ab251f2"
+                "reference": "0e51730ef9326005c17176bab0745720b885de7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SierraTecnologia/Crypto/zipball/1a8ccb741294fcef1ad97354f19d5a944ab251f2",
-                "reference": "1a8ccb741294fcef1ad97354f19d5a944ab251f2",
+                "url": "https://api.github.com/repos/SierraTecnologia/Crypto/zipball/0e51730ef9326005c17176bab0745720b885de7c",
+                "reference": "0e51730ef9326005c17176bab0745720b885de7c",
                 "shasum": ""
             },
             "require": {
@@ -3924,20 +3924,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-28T10:42:43+00:00"
+            "time": "2020-11-19T08:51:19+00:00"
         },
         {
             "name": "sierratecnologia/muleta",
-            "version": "0.4.2",
+            "version": "0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SierraTecnologia/muleta.git",
-                "reference": "54f95f57dc178be2e282e284d6ea7be2d8dc87f6"
+                "reference": "89af7aed316c6f3ee4178a1585165130c645b052"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SierraTecnologia/muleta/zipball/54f95f57dc178be2e282e284d6ea7be2d8dc87f6",
-                "reference": "54f95f57dc178be2e282e284d6ea7be2d8dc87f6",
+                "url": "https://api.github.com/repos/SierraTecnologia/muleta/zipball/89af7aed316c6f3ee4178a1585165130c645b052",
+                "reference": "89af7aed316c6f3ee4178a1585165130c645b052",
                 "shasum": ""
             },
             "require": {
@@ -4005,7 +4005,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-28T10:43:59+00:00"
+            "time": "2020-11-19T08:55:49+00:00"
         },
         {
             "name": "spatie/image",
