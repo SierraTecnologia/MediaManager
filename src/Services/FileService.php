@@ -72,6 +72,7 @@ class FileService
      */
     public static function saveFile($fileName, $directory = '', $fileTypes = [])
     {
+
         if (is_object($fileName)) {
             $file = $fileName;
             $originalName = $file->getClientOriginalName();
@@ -83,6 +84,7 @@ class FileService
         if (is_null($file)) {
             return false;
         }
+
 
         if (File::size($file) > Config::get('cms.max-file-upload-size', 6291456)) {
             throw new Exception('This file is too large', 1);

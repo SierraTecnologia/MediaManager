@@ -36,16 +36,24 @@ class ImagesController extends Controller
     public function upload(Request $request)
     {
         // @todo
-        // $validation = app(ValidationService::class)->check([
-        //     'location' => ['required'],
-        // ]);
+        $validation = app(ValidationService::class)->check([
+            // 'file' => ['required'],   // @todo Voltar pra validar aqui
+        ]);
+
 
         if (!$validation['errors']) {
-            $file = $request->file('location');
+            $file = $request->file('file');
+
+            // Da bill aqui @todo
             $fileSaved = app(FileService::class)->saveFile($file, 'public/images', [], true);
+
             $fileSaved['name'] = Crypto::encrypt($fileSaved['name']);
-            $fileSaved['mime'] = $file->getClientMimeType();
-            $fileSaved['size'] = $file->getClientSize();
+            try {
+                $fileSaved['mime'] = $file->getClientMimeType();
+                $fileSaved['size'] = $file->getClientSize();
+            } catch (\Throwable $th) {
+                \Log::warning($th->getMessage());
+            }
             $response = app(RiCaResponseService::class)->apiResponse('success', $fileSaved);
         } else {
             $response = app(RiCaResponseService::class)->apiErrorResponse($validation['errors'], $validation['inputs']);
