@@ -72,7 +72,7 @@ class FilesController extends Controller
     //  *
     //  * @return Response
     //  */
-    // public function create()
+    // public function create(Request $request)
     // {
     //     return view('media-manager::admin.files.create');
     // }

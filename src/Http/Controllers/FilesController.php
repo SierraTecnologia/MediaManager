@@ -72,7 +72,7 @@ class FilesController extends BaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return theme('features.files.create');
     }
