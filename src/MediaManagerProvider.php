@@ -56,14 +56,15 @@ class MediaManagerProvider extends ServiceProvider
      */
     public static $menuItens = [
         [
-            'text' => 'Painel',
+            'text' => 'Fotografia',
             'icon' => 'fas fa-fw fa-search',
             'icon_color' => "blue",
             'label_color' => "success",
-            'section' => "painel",
+            'section' => "admin",
             'level'       => 3, // 0 (Public), 1, 2 (Admin) , 3 (Root)
         ],
-        'Painel' => [
+
+        'Fotografia' => [
             // 'MediaManager' => [
                 [
                     'text'        => 'Biblioteca',
@@ -71,13 +72,10 @@ class MediaManagerProvider extends ServiceProvider
                     'icon'        => 'fas fa-fw fa-gavel',
                     'icon_color'  => 'blue',
                     'label_color' => 'success',
-                    'section'       => 'painel',
+                    'section'       => 'admin',
                     // 'access' => \Porteiro\Models\Role::$ADMIN
                 ],
                 // ],
-        ],
-
-        'Admin' => [
             // 'MediaManager' => [
                 [
                     'text'        => 'Imagens',
