@@ -156,6 +156,15 @@ class Image extends Base
         return $this->morphTo();
     }
 
+
+    public function thumbnails()
+    {
+        return $this->morphMany(Thumbnail::class, 'thumbnailable')
+        ->orderBy('width')
+        ->orderBy('height');
+    }
+
+
     /**
      * Convert strings that may have been `fill()`ed but need to be objects to
      * work with Laravel casting

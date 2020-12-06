@@ -32,6 +32,14 @@ class Imagen extends ArchiveTrait
         'location' => 'mimes:jpeg,jpg,bmp,png,gif',
     ];
 
+    public function thumbnails()
+    {
+        return $this->morphMany(Thumbnail::class, 'thumbnailable')
+        ->orderBy('width')
+        ->orderBy('height');
+    }
+
+
     public function links()
     {
         return $this->sitios();

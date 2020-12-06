@@ -55,18 +55,20 @@ class CreateMediaManagerFilesGroupsImagesTables extends Migration
                 $table->unsignedInteger('height')->default(0);
                 $table->integer('thumbnail_id')->default(0)->nullable();
                 // $table->foreign('photo_id')->references('id')->on('phonees');
-            }
-        );
-        Schema::create(
-            'thumbnailables',
-            function (Blueprint $table) {
-                $table->increments('id');
-                $table->unsignedInteger('thumbnail_id')->nullable();
-                // $table->foreign('thumbnail_id')->references('id')->on('thumbnails');
                 $table->string('thumbnailable_id');
                 $table->string('thumbnailable_type');
             }
         );
+        // Schema::create(
+        //     'thumbnailables',
+        //     function (Blueprint $table) {
+        //         $table->increments('id');
+        //         $table->unsignedInteger('thumbnail_id')->nullable();
+        //         // $table->foreign('thumbnail_id')->references('id')->on('thumbnails');
+        //         $table->string('thumbnailable_id');
+        //         $table->string('thumbnailable_type');
+        //     }
+        // );
     }
 
     /**

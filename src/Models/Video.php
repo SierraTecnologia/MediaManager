@@ -30,6 +30,13 @@ class Video extends Base
         ],
     );
 
+    public function thumbnails()
+    {
+        return $this->morphMany(Thumbnail::class, 'thumbnailable')
+        ->orderBy('width')
+        ->orderBy('height');
+    }
+
     public function links()
     {
         return $this->sitios();

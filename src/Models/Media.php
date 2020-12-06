@@ -13,4 +13,13 @@ class Media extends \Spatie\MediaLibrary\MediaCollections\Models\Media
     // public $rules = [
     //     'location' => 'required',
     // ];
+
+
+    public function thumbnails()
+    {
+        return $this->morphMany(Thumbnail::class, 'thumbnailable')
+        ->orderBy('width')
+        ->orderBy('height');
+    }
+
 }
