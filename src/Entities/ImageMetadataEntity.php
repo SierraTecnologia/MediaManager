@@ -1,22 +1,22 @@
 <?php
 
-namespace MediaManager\ValueObjects;
+namespace MediaManager\Entities;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 use JsonSerializable;
 
 /**
- * Class ImageMetadata.
+ * Class ImageMetadataEntity.
  *
  * @package Core\ValueObjects
  */
-final class ImageMetadata implements Arrayable, JsonSerializable
+final class ImageMetadataEntity implements Arrayable, JsonSerializable
 {
     private $attributes;
 
     /**
-     * ImageMetadata constructor.
+     * ImageMetadataEntity constructor.
      *
      * @param array $attributes
      */

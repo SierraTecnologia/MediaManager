@@ -9,8 +9,35 @@ namespace MediaManager\Entities;
  */
 final class ThumbnailEntity extends AbstractEntity
 {
+
+    /**
+     * Identify ClassName
+     *
+     * @var          string
+     * @getter       true
+     * @setter       false
+     * @serializable true
+     */
     private $path;
+
+    /**
+     * Identify ClassName
+     *
+     * @var          string
+     * @getter       true
+     * @setter       false
+     * @serializable true
+     */
     private $width;
+
+    /**
+     * Identify ClassName
+     *
+     * @var          string
+     * @getter       true
+     * @setter       false
+     * @serializable true
+     */
     private $height;
 
     /**
