@@ -32,21 +32,21 @@ class FilesController extends Controller
         $this->responseService = $siravelResponseService;
     }
 
-    // /**
-    //  * Display a listing of the Files.
-    //  *
-    //  * @param Request $request
-    //  *
-    //  * @return Response
-    //  */
-    // public function index(Request $request)
-    // {
-    //     $result = $this->repository->paginated();
+    /**
+     * Display a listing of the Files.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $result = $this->repository->paginated();
 
-    //     return view('media-manager::admin.files.index')
-    //         ->with('files', $result)
-    //         ->with('pagination', $result->render());
-    // }
+        return view('media-manager::admin.files.index')
+            ->with('files', $result)
+            ->with('pagination', $result->render());
+    }
 
     // /**
     //  * Search.
