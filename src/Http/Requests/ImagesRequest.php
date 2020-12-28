@@ -30,6 +30,6 @@ class ImagesRequest extends FormRequest
      */
     public function rules()
     {
-        return Image::$rules;
+        return app(Image::class)->rules;
     }
 }
