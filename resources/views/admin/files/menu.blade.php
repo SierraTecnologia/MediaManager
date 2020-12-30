@@ -1,6 +1,6 @@
 <div class="row">
     @if (isset($createBtn))
-        <a class="btn btn-primary float-right" href="{!! route('admin.files.create') !!}">Add New</a>
+        <a class="btn btn-primary float-right" href="{!! route('admin.files.create') !!}">{{ __('pedreiro::media.add_new_folder') }}</a>
     @endif
     <div class="raw-m-hide float-right raw-m-hide">
         {!! Form::open(['url' => url('admin/'.'files/search')]) !!}
