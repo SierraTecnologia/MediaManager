@@ -26,6 +26,9 @@ class CreateMediaManagerFilesGroupsVideosTables extends Migration
                 $table->string('type', 255)->nullable();
                 $table->string('filename', 255)->nullable();
                 $table->string('size', 255)->nullable();
+                $table->string('tempo', 255)->nullable();
+                $table->string('language', 255)->nullable();
+                $table->string('actors', 255)->nullable();
                 $table->string('last_modified', 255)->nullable();
                 $table->timestamps();
                 $table->softDeletes();
@@ -37,7 +40,7 @@ class CreateMediaManagerFilesGroupsVideosTables extends Migration
                 $table->increments('id');
                 $table->unsignedInteger('video_id')->nullable();
                 // $table->foreign('video_id')->references('id')->on('videos');
-                $table->unsignedInteger('videoable_id');
+                $table->string('videoable_id');
                 $table->string('videoable_type');
                 $table->unsignedInteger('position')->nullable();
                 $table->timestamps();
