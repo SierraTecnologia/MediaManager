@@ -60,8 +60,9 @@ class MediaManagerProvider extends ServiceProvider
             'icon' => 'fas fa-fw fa-search',
             'icon_color' => "blue",
             'label_color' => "success",
-            'feature' => 'midias',
+            'feature' => 'midia',
             'section' => "admin",
+            'order' => 2400,
             'level'       => 2, // 0 (Public), 1, 2 (Admin) , 3 (Root)
         ],
 
@@ -73,8 +74,9 @@ class MediaManagerProvider extends ServiceProvider
                     'icon'        => 'fas fa-fw fa-gavel',
                     'icon_color'  => 'blue',
                     'label_color' => 'success',
-                    'feature' => 'midias',
+                    'feature' => 'midia',
                     'section'       => 'admin',
+                    'order' => 2400,
                     // 'access' => \Porteiro\Models\Role::$ADMIN
                 ],
                 // ],
@@ -85,8 +87,9 @@ class MediaManagerProvider extends ServiceProvider
                     'icon'        => 'fas fa-fw fa-gavel',
                     'icon_color'  => 'blue',
                     'label_color' => 'success',
-                    'feature' => 'midias',
+                    'feature' => 'midia',
                     'section'       => 'admin',
+                    'order' => 2400,
                     // 'access' => \Porteiro\Models\Role::$ADMIN
                 ],
                 [
@@ -95,8 +98,9 @@ class MediaManagerProvider extends ServiceProvider
                     'icon'        => 'fas fa-fw fa-gavel',
                     'icon_color'  => 'blue',
                     'label_color' => 'success',
-                    'feature' => 'midias',
+                    'feature' => 'midia',
                     'section'       => 'admin',
+                    'order' => 2400,
                     // 'access' => \Porteiro\Models\Role::$ADMIN
                 ],
         ]
