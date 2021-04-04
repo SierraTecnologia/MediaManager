@@ -76,7 +76,6 @@ class MediaManagerProvider extends ServiceProvider
             'order' => 2400,
             'level'       => 2, // 0 (Public), 1, 2 (Admin) , 3 (Root)
         ],
-
         'Fotografia' => [
             // 'MediaManager' => [
                 // ],
