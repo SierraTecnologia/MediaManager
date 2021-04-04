@@ -56,6 +56,17 @@ class MediaManagerProvider extends ServiceProvider
      */
     public static $menuItens = [
         [
+            'text'        => 'Midias',
+            'route'       => 'media-manager.medias',
+            'icon'        => 'fas fa-fw fa-gavel',
+            'icon_color'  => 'blue',
+            'label_color' => 'success',
+            'feature' => 'midia',
+            'section'       => 'painel',
+            'order' => 600,
+            // 'access' => \Porteiro\Models\Role::$ADMIN
+        ],
+        [
             'text' => 'Fotografia',
             'icon' => 'fas fa-fw fa-search',
             'icon_color' => "blue",
@@ -68,17 +79,6 @@ class MediaManagerProvider extends ServiceProvider
 
         'Fotografia' => [
             // 'MediaManager' => [
-                [
-                    'text'        => 'Biblioteca',
-                    'route'       => 'admin.media-manager.medias',
-                    'icon'        => 'fas fa-fw fa-gavel',
-                    'icon_color'  => 'blue',
-                    'label_color' => 'success',
-                    'feature' => 'midia',
-                    'section'       => 'admin',
-                    'order' => 2400,
-                    // 'access' => \Porteiro\Models\Role::$ADMIN
-                ],
                 // ],
             // 'MediaManager' => [
                 [
