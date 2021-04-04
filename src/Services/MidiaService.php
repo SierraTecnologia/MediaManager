@@ -63,7 +63,7 @@ class MidiaService
                 }
             );
         } catch (Exception $e) {
-            dd($e);
+            dd('MidiaServiceimport', $e);
             return Response::make('file not found');
         }
     }
@@ -94,7 +94,7 @@ class MidiaService
                 }
             );
         } catch (Exception $e) {
-            dd($e);
+            dd('MidiaServiceimport', $e);
             return Response::make('file not found');
         }
     }
