@@ -15,21 +15,21 @@ use App\Http\Requests\FileRequest;
 use MediaManager\Services\FileService;
 use Muleta\Services\ValidationService;
 use MediaManager\Repositories\FileRepository;
-use Muleta\Services\RiCaResponseService;
+use Muleta\Modules\Controllers\Api\ApiControllerTrait;
 
 class FilesController extends BaseController
 {
+    use ApiControllerTrait;
+    
     public function __construct(
         FileRepository $repository,
         FileService $fileService,
-        ValidationService $validationService,
-        RiCaResponseService $siravelResponseService
+        ValidationService $validationService
     ) {
         parent::__construct();
         $this->repository = $repository;
         $this->fileService = $fileService;
         $this->validation = $validationService;
-        $this->responseService = $siravelResponseService;
     }
 
     /**
@@ -120,9 +120,9 @@ class FilesController extends BaseController
             $fileSaved['name'] = Crypto::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
-            $response = $this->responseService->apiResponse('success', $fileSaved);
+            $response = $this->apiResponse('success', $fileSaved);
         } else {
-            $response = $this->responseService->apiErrorResponse($validation['errors'], $validation['inputs']);
+            $response = $this->apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
         return $response;
@@ -139,9 +139,9 @@ class FilesController extends BaseController
     {
         try {
             Storage::delete($id);
-            $response = $this->responseService->apiResponse('success', 'success!');
+            $response = $this->apiResponse('success', 'success!');
         } catch (Exception $e) {
-            $response = $this->responseService->apiResponse('error', $e->getMessage());
+            $response = $this->apiResponse('error', $e->getMessage());
         }
 
         return $response;
@@ -230,11 +230,11 @@ class FilesController extends BaseController
     public function apiList(Request $request)
     {
         if (config('siravel.api-key') != $request->header('siravel')) {
-            return $this->responseService->apiResponse('error', []);
+            return $this->apiResponse('error', []);
         }
 
         $files = $this->repository->apiPrepared();
 
-        return $this->responseService->apiResponse('success', $files);
+        return $this->apiResponse('success', $files);
     }
 }

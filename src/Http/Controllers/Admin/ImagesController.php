@@ -12,10 +12,12 @@ use MediaManager\Models\Image;
 use MediaManager\Repositories\ImageRepository;
 use Siravel;
 use Storage;
-use Muleta\Services\RiCaResponseService;
+use Muleta\Modules\Controllers\Api\ApiControllerTrait;
 
 class ImagesController extends Controller
 {
+    use ApiControllerTrait;
+    
     const VIEWS = "media-manager::admin.images";
     
     public function __construct(ImageRepository $repository)
@@ -54,9 +56,9 @@ class ImagesController extends Controller
             } catch (\Throwable $th) {
                 \Log::warning($th->getMessage());
             }
-            $response = app(RiCaResponseService::class)->apiResponse('success', $fileSaved);
+            $response = $this->apiResponse('success', $fileSaved);
         } else {
-            $response = app(RiCaResponseService::class)->apiErrorResponse($validation['errors'], $validation['inputs']);
+            $response = $this->apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
         return $response;
@@ -104,12 +106,12 @@ class ImagesController extends Controller
     public function apiList(Request $request)
     {
         if (config('siravel.api-key') != $request->header('siravel')) {
-            return app(RiCaResponseService::class)->apiResponse('error', []);
+            return $this->apiResponse('error', []);
         }
 
         $images =  $this->repository->apiPrepared();
 
-        return app(RiCaResponseService::class)->apiResponse('success', $images);
+        return $this->apiResponse('success', $images);
     }
 
     /**
@@ -123,7 +125,7 @@ class ImagesController extends Controller
     {
         $image = $this->repository->apiStore($request->all());
 
-        return app(RiCaResponseService::class)->apiResponse('success', $image);
+        return $this->apiResponse('success', $image);
     }
 
 
