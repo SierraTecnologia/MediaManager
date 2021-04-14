@@ -13,14 +13,18 @@ use MediaManager\Services\FileService;
 
 class ImageRepository extends RepositoryAbstract
 {
-    protected $model;
 
     public $table;
 
-    public function __construct(Image $model)
+    // public function __construct(Image $model)
+    // {
+    //     $this->model = $model;
+    //     $this->table = \Illuminate\Support\Facades\Config::get('siravel.db-prefix').'images';
+    // }
+    public function model()
     {
-        $this->model = $model;
         $this->table = \Illuminate\Support\Facades\Config::get('siravel.db-prefix').'images';
+        return Image::class;
     }
 
     public function published()
