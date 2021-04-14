@@ -54,7 +54,7 @@ class FileService
             }
         }
 
-        Storage::disk(Config::get('cms.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, file_get_contents($fileName));
+        Storage::disk(Config::get('siravel.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, file_get_contents($fileName));
 
         return [
             'original' => basename($fileName),
@@ -86,7 +86,7 @@ class FileService
         }
 
 
-        if (File::size($file) > Config::get('cms.max-file-upload-size', 6291456)) {
+        if (File::size($file) > Config::get('siravel.max-file-upload-size', 6291456)) {
             throw new Exception('This file is too large', 1);
         }
 
@@ -104,7 +104,7 @@ class FileService
             }
         }
 
-        Storage::disk(Config::get('cms.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, File::get($file));
+        Storage::disk(Config::get('siravel.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, File::get($file));
 
         return [
             'original' => $originalName ?: $file->getFilename().'.'.$extension,

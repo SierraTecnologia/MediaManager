@@ -6,11 +6,11 @@ use Auth;
 use Config;
 use CryptoService;
 use MediaManager\Models\File;
-use Muleta\Repositories\BaseRepository;
+use Muleta\Modules\Eloquents\Displays\RepositoryAbstract;
 use MediaManager\Services\FileService;
 
 
-class FileRepository extends BaseRepository
+class FileRepository extends RepositoryAbstract
 {
     public $model;
 
@@ -19,7 +19,7 @@ class FileRepository extends BaseRepository
     public function __construct(File $model)
     {
         $this->model = $model;
-        $this->table = \Illuminate\Support\Facades\Config::get('cms.db-prefix').'files';
+        $this->table = \Illuminate\Support\Facades\Config::get('siravel.db-prefix').'files';
     }
 
     /**
