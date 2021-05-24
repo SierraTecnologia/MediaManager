@@ -152,4 +152,20 @@ class FileService
 
         return '/public-preview/'.CryptoServiceForFiles::encrypt($fileName);
     }
+
+
+    public static function getMime(string $fileName): string
+    {
+        if (File::exists($fileName)) {
+            if (Str::endsWith($fileName, '.js')) {
+                return 'text/javascript';
+            } elseif (Str::endsWith($fileName, '.css')) {
+                return 'text/css';
+            } else {
+                return File::mimeType($fileName);
+            }
+        }
+
+        throw new \Exception('Arquivo não encontrado: '.$fileName);
+    }
 }
