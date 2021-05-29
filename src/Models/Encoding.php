@@ -4,7 +4,7 @@ namespace MediaManager\Models;
 
 use URL;
 use Config;
-use Bkwld\Library\Utils\File;
+use Muleta\Library\Utils\File;
 use HtmlObject\Element as HtmlElement;
 use MediaManager\Models\Model as Base;
 
