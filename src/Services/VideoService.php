@@ -17,12 +17,12 @@ class VideoService
     //     $this->repo = $personRepository;
     // }
 
-    public static getModel()
+    public static function getModel()
     {
-        if (class_exists(Trainner\Models\Video::class())) {
-            return Trainner\Models\Video::class();
+        if (class_exists(\Trainner\Models\Video::class)) {
+            return \Trainner\Models\Video::class;
         }
-        return MediaManager\Models\Video::class();
+        return \MediaManager\Models\Video::class;
     }
 
     /**
@@ -60,7 +60,7 @@ class VideoService
                 'last_modified' => $data['last_modified'],
             ]
      */
-    public static function create($data): Video
+    public static function create($data)
     {
         if (!isset($data['relative_path'])) {
             $data['relative_path'] = $data['path'];
@@ -78,21 +78,23 @@ class VideoService
             }
         }
 
-        if ($video = {self::getModel()}::where('path', $data['path'])->first()) {
+        $modelClass = self::getModel();
+
+        if ($video = $modelClass::where('path', $data['path'])->first()) {
             return $video;
         }
 
-        if ($video = {self::getModel()}::where('path', $data['path'].'.mp4')->first()) {
+        if ($video = $modelClass::where('path', $data['path'].'.mp4')->first()) {
             return $video;
         }
 
-        if ($video = {self::getModel()}::where('url', $data['path'])->first()) {
+        if ($video = $modelClass::where('url', $data['path'])->first()) {
             return $video;
         }
-        if ($video = {self::getModel()}::where('url', $data['path'].'.mp4')->first()) {
+        if ($video = $modelClass::where('url', $data['path'].'.mp4')->first()) {
             return $video;
         }
 
-        return {self::getModel()}::create($data);
+        return $modelClass::create($data);
     }
 }
