@@ -6,28 +6,32 @@ use Cms;
 use Config;
 use CryptoService;
 use Informate\Models\Tag;
-use Muleta\Repositories\BaseRepository;
+use Muleta\Modules\Eloquents\Displays\RepositoryAbstract;
 use MediaManager\Models\Imagen as Image;
 use MediaManager\Services\FileService;
 
 
-class ImageRepository extends BaseRepository
+class ImageRepository extends RepositoryAbstract
 {
-    public $model;
 
     public $table;
 
-    public function __construct(Image $model)
+    // public function __construct(Image $model)
+    // {
+    //     $this->model = $model;
+    //     $this->table = \Illuminate\Support\Facades\Config::get('siravel.db-prefix').'images';
+    // }
+    public function model()
     {
-        $this->model = $model;
-        $this->table = \Illuminate\Support\Facades\Config::get('cms.db-prefix').'images';
+        $this->table = \Illuminate\Support\Facades\Config::get('siravel.db-prefix').'images';
+        return Image::class;
     }
 
     public function published()
     {
         return $this->model->where('is_published', 1)
             ->orderBy('created_at', 'desc')
-            ->paginate(Config::get('cms.pagination', 24));
+            ->paginate(Config::get('siravel.pagination', 24));
     }
 
     /**
@@ -83,7 +87,7 @@ class ImageRepository extends BaseRepository
 
         $input['is_published'] = 1;
         $input['location'] = $savedFile['name'];
-        $input['storage_location'] = \Illuminate\Support\Facades\Config::get('cms.storage-location');
+        $input['storage_location'] = \Illuminate\Support\Facades\Config::get('siravel.storage-location');
         $input['original_name'] = $savedFile['original'];
 
         $image = $this->model->create($input);
@@ -116,7 +120,7 @@ class ImageRepository extends BaseRepository
         }
 
         $input['location'] = CryptoService::decrypt($savedFile['name']);
-        $input['storage_location'] = \Illuminate\Support\Facades\Config::get('cms.storage-location');
+        $input['storage_location'] = \Illuminate\Support\Facades\Config::get('siravel.storage-location');
         $input['original_name'] = $savedFile['original'];
         $input['tags'] = explode(',', $input['tags']);
         $image = $this->model->create($input);

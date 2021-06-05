@@ -48,12 +48,9 @@ class Thumbnail extends Base
         return parent::newQuery();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function photos()
+    public function thumbnailable()
     {
-        return $this->belongsToMany(Photo::class, 'thumbnails');
+        return $this->morphTo();
     }
 
     /**

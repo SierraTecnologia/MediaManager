@@ -10,7 +10,7 @@ use Finder\Models\Digital\Midia\File;
 use Illuminate\Http\Request;
 use MediaManager\Repositories\FileRepository;
 use MediaManager\Services\FileService;
-use Muleta\Services\RiCaResponseService;
+use Muleta\Modules\Controllers\Api\ApiControllerTrait;
 use Muleta\Services\ValidationService;
 use Redirect;
 use Response;
@@ -19,34 +19,34 @@ use Storage;
 
 class FilesController extends Controller
 {
+    use ApiControllerTrait;
+    
     public function __construct(
         FileRepository $repository,
         FileService $fileService,
-        ValidationService $validationService,
-        RiCaResponseService $siravelResponseService
+        ValidationService $validationService
     ) {
         parent::__construct();
         $this->repository = $repository;
         $this->fileService = $fileService;
         $this->validation = $validationService;
-        $this->responseService = $siravelResponseService;
     }
 
-    // /**
-    //  * Display a listing of the Files.
-    //  *
-    //  * @param Request $request
-    //  *
-    //  * @return Response
-    //  */
-    // public function index(Request $request)
-    // {
-    //     $result = $this->repository->paginated();
+    /**
+     * Display a listing of the Files.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $result = $this->repository->paginated();
 
-    //     return view('media-manager::admin.files.index')
-    //         ->with('files', $result)
-    //         ->with('pagination', $result->render());
-    // }
+        return view('media-manager::admin.files.index')
+            ->with('files', $result)
+            ->with('pagination', $result->render());
+    }
 
     // /**
     //  * Search.
@@ -72,7 +72,7 @@ class FilesController extends Controller
     //  *
     //  * @return Response
     //  */
-    // public function create()
+    // public function create(Request $request)
     // {
     //     return view('media-manager::admin.files.create');
     // }
@@ -111,9 +111,9 @@ class FilesController extends Controller
     // {
     //     try {
     //         Storage::delete($id);
-    //         $response = $this->responseService->apiResponse('success', 'success!');
+    //         $response = $this->apiResponse('success', 'success!');
     //     } catch (Exception $e) {
-    //         $response = $this->responseService->apiResponse('error', $e->getMessage());
+    //         $response = $this->apiResponse('error', $e->getMessage());
     //     }
 
     //     return $response;
@@ -215,9 +215,9 @@ class FilesController extends Controller
             $fileSaved['name'] = Crypto::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
-            $response = $this->responseService->apiResponse('success', $fileSaved);
+            $response = $this->apiResponse('success', $fileSaved);
         } else {
-            $response = $this->responseService->apiErrorResponse($validation['errors'], $validation['inputs']);
+            $response = $this->apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
         return $response;
@@ -231,11 +231,11 @@ class FilesController extends Controller
     public function apiList(Request $request)
     {
         if (config('siravel.api-key') != $request->header('siravel')) {
-            return $this->responseService->apiResponse('error', []);
+            return $this->apiResponse('error', []);
         }
 
         $files = $this->repository->apiPrepared();
 
-        return $this->responseService->apiResponse('success', $files);
+        return $this->apiResponse('success', $files);
     }
 }

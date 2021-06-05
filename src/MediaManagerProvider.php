@@ -56,37 +56,29 @@ class MediaManagerProvider extends ServiceProvider
      */
     public static $menuItens = [
         [
-            'text' => 'Painel',
+            'text'        => 'Midias',
+            'route'       => 'media-manager.medias',
+            'icon'        => 'fas fa-fw fa-gavel',
+            'icon_color'  => 'blue',
+            'label_color' => 'success',
+            'feature' => 'midia',
+            'section'       => 'painel',
+            'order' => 600,
+            // 'access' => \Porteiro\Models\Role::$ADMIN
+        ],
+        [
+            'text' => 'Fotografia',
             'icon' => 'fas fa-fw fa-search',
             'icon_color' => "blue",
             'label_color' => "success",
-            'section' => "painel",
-            'level'       => 3, // 0 (Public), 1, 2 (Admin) , 3 (Root)
+            'feature' => 'midia',
+            'section' => "admin",
+            'order' => 2400,
+            'level'       => 2, // 0 (Public), 1, 2 (Admin) , 3 (Root)
         ],
-        'Painel' => [
+        'Fotografia' => [
             // 'MediaManager' => [
-                [
-                    'text'        => 'Albums',
-                    'route'       => 'media-manager.medias', // @todo
-                    'icon'        => 'fas fa-fw fa-gavel',
-                    'icon_color'  => 'blue',
-                    'label_color' => 'success',
-                    'section'       => 'painel',
-                    // 'access' => \Porteiro\Models\Role::$ADMIN
-                ],
-                [
-                    'text'        => 'Biblioteca',
-                    'route'       => 'media-manager.medias',
-                    'icon'        => 'fas fa-fw fa-gavel',
-                    'icon_color'  => 'blue',
-                    'label_color' => 'success',
-                    'section'       => 'painel',
-                    // 'access' => \Porteiro\Models\Role::$ADMIN
-                ],
                 // ],
-        ],
-
-        'Admin' => [
             // 'MediaManager' => [
                 [
                     'text'        => 'Imagens',
@@ -94,7 +86,20 @@ class MediaManagerProvider extends ServiceProvider
                     'icon'        => 'fas fa-fw fa-gavel',
                     'icon_color'  => 'blue',
                     'label_color' => 'success',
+                    'feature' => 'midia',
                     'section'       => 'admin',
+                    'order' => 2400,
+                    // 'access' => \Porteiro\Models\Role::$ADMIN
+                ],
+                [
+                    'text'        => 'Files',
+                    'route'       => 'admin.media-manager.files.index', // @todo
+                    'icon'        => 'fas fa-fw fa-gavel',
+                    'icon_color'  => 'blue',
+                    'label_color' => 'success',
+                    'feature' => 'midia',
+                    'section'       => 'admin',
+                    'order' => 2400,
                     // 'access' => \Porteiro\Models\Role::$ADMIN
                 ],
         ]

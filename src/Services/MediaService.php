@@ -54,6 +54,11 @@ class MediaService
         return $allFiles;
     }
 
+    public function processFilePath($path)
+    {
+
+    }
+
     public function files($folder = '', $details = [])
     {
         // Check permission

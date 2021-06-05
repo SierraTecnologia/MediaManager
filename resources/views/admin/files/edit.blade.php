@@ -18,7 +18,7 @@
             {!! FormMaker::setColumns(2)->fromObject($files, config('siravel.forms.file-edit')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url('admin/'.'files') !!}" class="btn btn-secondary raw-left">Cancel</a>
+                <a href="{!! url('admin/'.'files') !!}" class="btn btn-secondary raw-left">{{ __('pedreiro::generic.cancel') }}</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

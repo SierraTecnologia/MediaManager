@@ -2,7 +2,8 @@
 
 namespace MediaManager\Models;
 
-use Illuminate\Database\Eloquent\Model as Base;
+use Pedreiro\Models\Base as Base;
+// use Illuminate\Database\Eloquent\Model as Base;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**

@@ -54,7 +54,7 @@ class FileService
             }
         }
 
-        Storage::disk(Config::get('cms.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, file_get_contents($fileName));
+        Storage::disk(Config::get('siravel.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, file_get_contents($fileName));
 
         return [
             'original' => basename($fileName),
@@ -72,6 +72,7 @@ class FileService
      */
     public static function saveFile($fileName, $directory = '', $fileTypes = [])
     {
+
         if (is_object($fileName)) {
             $file = $fileName;
             $originalName = $file->getClientOriginalName();
@@ -84,7 +85,8 @@ class FileService
             return false;
         }
 
-        if (File::size($file) > Config::get('cms.max-file-upload-size', 6291456)) {
+
+        if (File::size($file) > Config::get('siravel.max-file-upload-size', 6291456)) {
             throw new Exception('This file is too large', 1);
         }
 
@@ -102,7 +104,7 @@ class FileService
             }
         }
 
-        Storage::disk(Config::get('cms.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, File::get($file));
+        Storage::disk(Config::get('siravel.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, File::get($file));
 
         return [
             'original' => $originalName ?: $file->getFilename().'.'.$extension,
@@ -149,5 +151,21 @@ class FileService
         }
 
         return '/public-preview/'.CryptoServiceForFiles::encrypt($fileName);
+    }
+
+
+    public static function getMime(string $fileName): string
+    {
+        if (File::exists($fileName)) {
+            if (Str::endsWith($fileName, '.js')) {
+                return 'text/javascript';
+            } elseif (Str::endsWith($fileName, '.css')) {
+                return 'text/css';
+            } else {
+                return File::mimeType($fileName);
+            }
+        }
+
+        throw new \Exception('Arquivo não encontrado: '.$fileName);
     }
 }
