@@ -18,7 +18,7 @@ foreach ($composerAutoload as $autoload) {
     }
 }
 
-$loadLaravel = new \Support\Helps\LoadLaravel(
+$loadLaravel = new \Muleta\Helps\LoadLaravel(
     [
         __DIR__.'/../vendor/sierratecnologia/informate/src/Migrations/',
         __DIR__.'/../vendor/sierratecnologia/population/src/Migrations/',
