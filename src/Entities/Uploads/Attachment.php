@@ -3,7 +3,7 @@
 namespace MediaManager\Entities\Uploads;
 
 use Population\Models\Components\Book\Page;
-use Support\Models\Ownable;
+use Population\Models\Ownable;
 
 class Attachment extends Ownable
 {
