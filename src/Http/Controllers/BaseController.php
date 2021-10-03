@@ -39,6 +39,9 @@ class BaseController extends Controller
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function assets(Request $request)
     {
         try {

@@ -108,8 +108,10 @@ class MediaManagerProvider extends ServiceProvider
 
     /**
      * Alias the services in the boot.
+     *
+     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         
         // Register configs, migrations, etc
@@ -263,7 +265,7 @@ class MediaManagerProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'migrations');
     }
 
-    private function loadViews()
+    private function loadViews(): void
     {
         // View namespace
         $viewsPath = $this->getResourcesPath('views');
@@ -276,7 +278,7 @@ class MediaManagerProvider extends ServiceProvider
         );
     }
     
-    private function loadTranslations()
+    private function loadTranslations(): void
     {
         // Publish lanaguage files
         $this->publishes(
@@ -292,9 +294,9 @@ class MediaManagerProvider extends ServiceProvider
 
 
     /**
-     *
+     * @return void
      */
-    private function loadLogger()
+    private function loadLogger(): void
     {
         Config::set(
             'logging.channels.sitec-media-manager',

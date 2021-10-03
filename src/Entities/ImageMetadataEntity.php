@@ -86,9 +86,9 @@ final class ImageMetadataEntity implements Arrayable, JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return float|null
      */
-    public function getFocalLength(): ?string
+    public function getFocalLength(): ?float
     {
         $raw = $this->attributes['exif.FocalLength'] ?? null;
 
@@ -108,9 +108,9 @@ final class ImageMetadataEntity implements Arrayable, JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return null|numeric
      */
-    public function getFocalLengthIn35mm(): ?string
+    public function getFocalLengthIn35mm()
     {
         $value = $this->attributes['exif.FocalLengthIn35mmFilm'] ?? null;
 

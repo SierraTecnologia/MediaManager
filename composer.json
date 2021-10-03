@@ -67,5 +67,8 @@
                 "MediaManager\\MediaManagerProvider"
             ]
         }
+    },
+    "require-dev": {
+        "psalm/plugin-laravel": "^1.5"
     }
 }
