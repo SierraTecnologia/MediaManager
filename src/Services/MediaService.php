@@ -40,7 +40,7 @@ class MediaService
         $this->filesystem = \Illuminate\Support\Facades\Config::get('rica.storage.disk', env('FILESYSTEM_DRIVER', 'public'));
     }
 
-    public function allFiles($folder = '')
+    public function allFiles($folder = ''): array
     {
         $allFiles = [];
         $tempFiles = $this->files($folder);
@@ -54,12 +54,17 @@ class MediaService
         return $allFiles;
     }
 
-    public function processFilePath($path)
+    public function processFilePath($path): void
     {
 
     }
 
-    public function files($folder = '', $details = [])
+    /**
+     * @return (array|mixed|string)[][]
+     *
+     * @psalm-return array<int, array{name: mixed, filename?: mixed, type: 'file'|'folder'|mixed, path: mixed, relative_path: mixed, size?: mixed, last_modified: ''|mixed, thumbnails?: list<mixed>, items?: ''}>
+     */
+    public function files($folder = '', $details = []): array
     {
         // Check permission
         // $this->authorize('browse_media');
@@ -126,7 +131,12 @@ class MediaService
         return $files;
     }
 
-    public function new_folder($new_folder)
+    /**
+     * @return (array|bool|null|string)[]
+     *
+     * @psalm-return array{success: bool, error: array|null|string}
+     */
+    public function new_folder($new_folder): array
     {
         // Check permission
         // $this->authorize('browse_media');
@@ -146,7 +156,12 @@ class MediaService
         return compact('success', 'error');
     }
 
-    public function delete($path, $files)
+    /**
+     * @return (array|bool|null|string)[]
+     *
+     * @psalm-return array{success: bool, error: array|null|string}
+     */
+    public function delete($path, $files): array
     {
         // Check permission
         // $this->authorize('browse_media');
@@ -174,7 +189,12 @@ class MediaService
         return compact('success', 'error');
     }
 
-    public function move($path, $destination, $files = [])
+    /**
+     * @return (bool|string)[]
+     *
+     * @psalm-return array{success: bool, error: string}
+     */
+    public function move($path, $destination, $files = []): array
     {
         // Check permission
         // $this->authorize('browse_media');
@@ -211,7 +231,12 @@ class MediaService
         return compact('success', 'error');
     }
 
-    public function rename($folder_location, $filename, $new_filename)
+    /**
+     * @return (array|bool|null|string)[]
+     *
+     * @psalm-return array{success: bool, error: array|false|null|string}
+     */
+    public function rename($folder_location, $filename, $new_filename): array
     {
         $success = false;
         $error = false;
@@ -235,7 +260,12 @@ class MediaService
         return compact('success', 'error');
     }
 
-    public function upload($file, $details, $upload_path, $filename = false)
+    /**
+     * @return (array|bool|null|string)[]
+     *
+     * @psalm-return array{success: bool, message: array|null|string, path: null|string}
+     */
+    public function upload($file, $details, $upload_path, $filename = false): array
     {
         // Check permission
         // $this->authorize('browse_media');
@@ -357,7 +387,12 @@ class MediaService
         return compact('success', 'message', 'path');
     }
 
-    public function crop($createMode, $x, $y, $height, $width, $upload_path, $originImageName)
+    /**
+     * @return (array|bool|null|string)[]
+     *
+     * @psalm-return array{success: bool, message: array|null|string}
+     */
+    public function crop($createMode, $x, $y, $height, $width, $upload_path, $originImageName): array
     {
 
         $realPath = Storage::disk($this->filesystem)->getDriver()->getAdapter()->getPathPrefix();
@@ -387,7 +422,7 @@ class MediaService
         return compact('success', 'message');
     }
 
-    private function addWatermarkToImage(\Intervention\Image\Image $image, $options)
+    private function addWatermarkToImage(\Intervention\Image\Image $image, $options): \Intervention\Image\Image
     {
         $watermark = Image::make(Storage::disk($this->filesystem)->path($options->source));
         // Resize watermark
@@ -409,9 +444,9 @@ class MediaService
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
-    public function updateMediaEloquent()
+    public function updateMediaEloquent(): void
     {
         $files = $this->allFiles();
 

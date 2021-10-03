@@ -56,9 +56,9 @@ class UrlWindow extends LaravelUrlWindow
     /**
      * Get the starting URLs of a pagination slider.
      *
-     * @return array
+     * @return false
      */
-    public function getStart()
+    public function getStart(): bool
     {
         return false;
     }
@@ -66,9 +66,9 @@ class UrlWindow extends LaravelUrlWindow
     /**
      * Get the ending URLs of a pagination slider.
      *
-     * @return array
+     * @return false
      */
-    public function getFinish()
+    public function getFinish(): bool
     {
         return false;
     }

@@ -32,7 +32,7 @@ abstract class EncodingProvider
     /**
      * Inject dependencies
      *
-     * @param MediaManager\Models\Encoding $model
+     * @param Encoding|null $model
      */
     public function __construct(Encoding $model = null)
     {

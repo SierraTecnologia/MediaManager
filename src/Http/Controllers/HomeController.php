@@ -18,6 +18,9 @@ class HomeController extends BaseController
         $this->service = $service;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index(Request $request)
     {
 
@@ -28,6 +31,9 @@ class HomeController extends BaseController
         );
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function medias()
     {
 

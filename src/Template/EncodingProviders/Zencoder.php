@@ -11,7 +11,10 @@ use Facilitador\Exceptions\Exception;
 /**
  * Encode videos with Zencoder
  */
-class Zencoder extends EncodingProvider
+class Zencoder extends /**
+ * @param Encoding|null $model
+ */
+EncodingProvider
 {
     /**
      * Default outputs configuration

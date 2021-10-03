@@ -40,28 +40,32 @@ class Imagen extends ArchiveTrait
     }
 
 
-    public function links()
+    public function links(): \Illuminate\Database\Eloquent\Relations\MorphToMany
     {
         return $this->sitios();
     }
 
-    public function sitios()
+    public function sitios(): \Illuminate\Database\Eloquent\Relations\MorphToMany
     {
         return $this->morphToMany('Telefonica\Models\Digital\Sitio', 'sitioable');
     }
 
     /**
      * Get all of the users that are assigned this tag.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function users()
+    public function users(): \Illuminate\Database\Eloquent\Relations\MorphToMany
     {
         return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('sitec.core.models.user', \App\Models\User::class), 'imagenable');
     }
 
     /**
      * Get all of the persons that are assigned this tag.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function persons()
+    public function persons(): \Illuminate\Database\Eloquent\Relations\MorphToMany
     {
         return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('sitec.core.models.person', \Telefonica\Models\Actors\Person::class), 'imagenable');
     }

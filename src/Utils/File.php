@@ -216,6 +216,8 @@ class File
      * http://davidwalsh.name/php-force-download
      *
      * @param string $path The absolute path to the file
+     *
+     * @return never
      */
     static public function download($path)
     {
@@ -260,6 +262,8 @@ class File
      * Output an image directly to the browser
      *
      * @param $string src The server path to an image
+     *
+     * @return never
      */
     static public function image($src)
     {

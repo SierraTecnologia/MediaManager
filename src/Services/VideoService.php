@@ -17,7 +17,12 @@ class VideoService
     //     $this->repo = $personRepository;
     // }
 
-    public static function getModel()
+    /**
+     * @return string
+     *
+     * @psalm-return \MediaManager\Models\Video::class|\Trainner\Models\Video::class
+     */
+    public static function getModel(): string
     {
         if (class_exists(\Trainner\Models\Video::class)) {
             return \Trainner\Models\Video::class;
@@ -27,8 +32,10 @@ class VideoService
 
     /**
      * @todo Terminar de Fazer
+     *
+     * @return void
      */
-    public static function import($data)
+    public static function import($data): void
     {   
         // $registerData = [];
         // if (isset($data['Nome Completo'])) {

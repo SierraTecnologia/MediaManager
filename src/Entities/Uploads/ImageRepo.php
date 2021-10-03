@@ -199,11 +199,14 @@ class ImageRepo
     /**
      * Load thumbnails onto an image object.
      *
-     * @param  Image $image
+     * @param Image $image
+     *
      * @throws \SiUtils\Exceptions\ImageUploadException
      * @throws \Exception
+     *
+     * @return void
      */
-    protected function loadThumbs(Image $image)
+    protected function loadThumbs(Image $image): void
     {
         $image->thumbs = [
             'gallery' => $this->getThumbnail($image, 150, 150),
@@ -216,15 +219,17 @@ class ImageRepo
      * If $keepRatio is true only the width will be used.
      * Checks the cache then storage to avoid creating / accessing the filesystem on every check.
      *
-     * @param  Image $image
-     * @param  int   $width
-     * @param  int   $height
-     * @param  bool  $keepRatio
-     * @return string
+     * @param Image $image
+     * @param int   $width
+     * @param int   $height
+     * @param bool  $keepRatio
+     *
+     * @return null|string
+     *
      * @throws \SiUtils\Exceptions\ImageUploadException
      * @throws \Exception
      */
-    public function getThumbnail(Image $image, $width = 220, $height = 220, $keepRatio = false)
+    public function getThumbnail(Image $image, $width = 220, $height = 220, $keepRatio = false): ?string
     {
         try {
             return $this->imageService->getThumbnail($image, $width, $height, $keepRatio);

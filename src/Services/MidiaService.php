@@ -26,13 +26,13 @@ class MidiaService
         $this->mimeTypes = include base_path('config'.DIRECTORY_SEPARATOR.'mime.php');
     }
 
-    private function setModel(string $midiaId)
+    private function setModel(string $midiaId): void
     {
         $this->midiaId = app('Crypto')->urlDecode($midiaId);
         $this->midia = ModelImage::find($this->midiaId);
     }
 
-    private function getCacheName()
+    private function getCacheName(): string
     {
         return md5($this->midiaId);
     }
@@ -148,9 +148,9 @@ class MidiaService
      *
      * @param string $ext
      *
-     * @return Image
+     * @return string
      */
-    public function generateImage($ext)
+    public function generateImage($ext): string
     {
         if ($ext == 'File Not Found') {
             return __DIR__.'/../Assets/src/images/blank-file-not-found.jpg';

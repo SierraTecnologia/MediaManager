@@ -68,7 +68,9 @@ class FileService
      * @param string $fileName File input name
      * @param string $location Storage location
      *
-     * @return array
+     * @return (mixed|string)[]|false
+     *
+     * @psalm-return array{original: mixed|string, name: string}|false
      */
     public static function saveFile($fileName, $directory = '', $fileTypes = [])
     {
@@ -142,7 +144,7 @@ class FileService
      *
      * @param string $fileName File name
      *
-     * @return string
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
      */
     public static function filePreview($fileName)
     {
@@ -154,7 +156,10 @@ class FileService
     }
 
 
-    public static function getMime(string $fileName): string
+    /**
+     * @return false|string
+     */
+    public static function getMime(string $fileName)
     {
         if (File::exists($fileName)) {
             if (Str::endsWith($fileName, '.js')) {

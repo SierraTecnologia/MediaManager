@@ -256,10 +256,13 @@ class ImageService extends UploadService
     /**
      * Destroy an image along with its revisions, thumbnails and remaining folders.
      *
-     * @param  Image $image
+     * @param Image $image
+     *
      * @throws Exception
+     *
+     * @return void
      */
-    public function destroy(Image $image)
+    public function destroy(Image $image): void
     {
         $this->destroyImagesFromPath($image->path);
         $image->delete();
