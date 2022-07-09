@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Request;
 use Mpociot\Teamwork\Traits\UsedByTeams;
 class Playlist extends Model// implements AuditableContract //, Auditable;
 {
-    use UsedByTeams;
+    // use UsedByTeams; @todo no futuro faezr por time, agora nao 
 
     public const RULES = [
         'name'=>'required',

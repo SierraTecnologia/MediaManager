@@ -91,6 +91,7 @@ class File extends Model
 
     protected $indexFields = [
         'name',
+        'unique_hash',
         'description',
         'url',
         'path',
@@ -98,6 +99,7 @@ class File extends Model
         'filename',
         'size',
         'last_modified',
+        'mime',
     ];
         
     // // /**
@@ -122,5 +124,10 @@ class File extends Model
         // Crypto::urlEncode($this->path);
         // Crypto::urlEncode($this->type);
         // // Crypto::urlDecode($this->);
+    }
+
+    public function fileable()
+    {
+        return $this->morphTo();
     }
 }

@@ -23,13 +23,15 @@ class CreateMediaManagerFilesGroupsVideosTables extends Migration
                 $table->string('path', 255)->nullable();
                 $table->string('relative_path', 255)->nullable();
                 $table->string('filesystem', 255)->default(\Illuminate\Support\Facades\Config::get('rica.storage.disk', env('FILESYSTEM_DRIVER', 'local')));
-                $table->string('type', 255)->nullable();
+                $table->string('mime', 255)->nullable();
                 $table->string('filename', 255)->nullable();
                 $table->string('size', 255)->nullable();
                 $table->string('tempo', 255)->nullable();
                 $table->string('language', 255)->nullable();
                 $table->string('actors', 255)->nullable();
                 $table->string('last_modified', 255)->nullable();
+
+                $table->string('unique_hash', 255)->nullable();
                 $table->timestamps();
                 $table->softDeletes();
             }

@@ -17,9 +17,10 @@ class Video extends Base
     protected $fillable = [
         'name',
         'description',
+        'unique_hash',
         'url',
         'path',
-        'type',
+        'mime',
         'filename',
         'size',
         'last_modified',
@@ -38,7 +39,9 @@ class Video extends Base
     public static function boot() {
         parent::boot();
         static::creating(function (Video $video) {
-            $video->name = \str_replace('.mp4', '', $video->name);
+            dd($video);
+            $video->name = \str_replace('.mp4', '', $video->name); // Porque ? @todo
+
         });
     }
         
@@ -86,22 +89,12 @@ class Video extends Base
     //     'time',
     // ];
 
-    protected $mappingProperties = array(
-        /**
-         * User Info
-         */
-        'name' => [
-            'type' => 'string',
-            "analyzer" => "standard",
-        ],
-    );
-
-    public function thumbnails()
-    {
-        return $this->morphMany(Thumbnail::class, 'thumbnailable')
-        ->orderBy('width')
-        ->orderBy('height');
-    }
+    // public function thumbnails()
+    // {
+    //     return $this->morphMany(Thumbnail::class, 'thumbnailable')
+    //     ->orderBy('width')
+    //     ->orderBy('height');
+    // }
 
     public function links()
     {
@@ -129,6 +122,12 @@ class Video extends Base
         return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('sitec.core.models.person', \Telefonica\Models\Actors\Person::class), 'videoable');
     }
         
+
+
+    public function videoable()
+    {
+        return $this->morphTo();
+    }
     // // /**
     // //  * Get all of the owning videoable models.
     // //  */
