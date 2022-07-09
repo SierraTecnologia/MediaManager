@@ -7,7 +7,6 @@
 | Images
 |--------------------------------------------------------------------------
 */
-
 Route::resource('images', 'ImagesController', ['except' => ['show']]);
 Route::post('images/search', 'ImagesController@search');
 Route::post('images/upload', 'ImagesController@upload');
