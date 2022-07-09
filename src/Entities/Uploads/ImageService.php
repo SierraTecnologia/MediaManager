@@ -2,7 +2,7 @@
 
 namespace MediaManager\Entities\Uploads;
 
-use App\Models\User;
+use MediaManager\Models\User;
 use SiUtils\Exceptions\HttpFetchException;
 use SiUtils\Exceptions\ImageUploadException;
 use DB;
@@ -306,7 +306,7 @@ class ImageService extends UploadService
     /**
      * Save an avatar image from an external service.
      *
-     * @param  \App\Models\User $user
+     * @param  \MediaManager\Models\User $user
      * @param  int              $size
      * @return Image
      * @throws Exception

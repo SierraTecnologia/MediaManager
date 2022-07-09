@@ -13,7 +13,7 @@ use function SiUtils\url_storage;
 /**
  * Class ThumbnailPlainResource.
  *
- * @package App\Http\Resources
+ * @package MediaManager\Http\Resources
  */
 class ThumbnailPlainResource extends Resource
 {

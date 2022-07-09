@@ -11,7 +11,7 @@ use Exception;
 use Crypto;
 use Finder\Models\Digital\Midia\File;
 use Illuminate\Http\Request;
-use App\Http\Requests\FileRequest;
+use MediaManager\Http\Requests\FileRequest;
 use MediaManager\Services\FileService;
 use Muleta\Services\ValidationService;
 use MediaManager\Repositories\FileRepository;

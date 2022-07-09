@@ -57,7 +57,7 @@ class Imagen extends ArchiveTrait
      */
     public function users(): \Illuminate\Database\Eloquent\Relations\MorphToMany
     {
-        return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('sitec.core.models.user', \App\Models\User::class), 'imagenable');
+        return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('sitec.core.models.user', \MediaManager\Models\User::class), 'imagenable');
     }
 
     /**

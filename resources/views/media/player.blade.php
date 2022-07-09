@@ -14,7 +14,7 @@
             movieList: {
                 type: Array,
                 default: function() {
-                    return {!! \App\Models\Computer::getVideosViaParamsToken() !!};
+                    return {!! \MediaManager\Models\Computer::getVideosViaParamsToken() !!};
                 }
             },
         },
