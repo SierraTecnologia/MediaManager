@@ -5,6 +5,7 @@
  */
 $loadingRoutes = [
     'public',
+    'endotera',
 ];
 
 Route::group(

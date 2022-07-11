@@ -92,6 +92,7 @@ class File extends Model
     protected $indexFields = [
         'name',
         'unique_hash',
+        'filesystem',
         'description',
         'url',
         'path',

@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public static $title = 'Dashboard';
-    public static $description = 'Dashboard';
-    public static $icon = 'fas fa-fw fa-tachometer-alt';
+    public $title = 'Dashboard';
+    public $description = 'Dashboard';
+    public $icon = 'fas fa-fw fa-tachometer-alt';
 
     public function __construct(MediaService $mediaService)
     {
@@ -29,7 +29,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $playlistCounts = Playlist::orderBy('id', 'DESC')->count();
         $groups = Group::orderBy('id', 'DESC')->count();

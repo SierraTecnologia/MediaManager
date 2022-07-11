@@ -9,16 +9,16 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    public static $title = 'Grupos';
-    public static $description = 'Grupos';
-    public static $icon = 'fas fa-fw fa-users text-yellow';
+    public $title = 'Grupos';
+    public $description = 'Grupos';
+    public $icon = 'fas fa-fw fa-users text-yellow';
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $groups = Group::orderBy('name', 'ASC')->simplePaginate(50);
 
@@ -30,7 +30,7 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return $this->populateView('admin.groups.create');
     }
@@ -54,7 +54,7 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $group = Group::findOrFail($id);
 
@@ -72,7 +72,7 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $group = Group::findOrFail($id);
 
@@ -100,7 +100,7 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $group = Group::findOrFail($id);
         $group->delete();

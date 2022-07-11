@@ -15,9 +15,9 @@ class PlaylistController extends Controller
      */
     public $mediaService;
     
-    public static $title = 'Playlists';
-    public static $description = 'Playlists';
-    public static $icon = 'fas fa-fw oi oi-media-play text-green';
+    public $title = 'Playlists';
+    public $description = 'Playlists';
+    public $icon = 'fas fa-fw oi oi-media-play text-green';
 
     public function __construct(MediaService $mediaService)
     {
@@ -30,7 +30,7 @@ class PlaylistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $playlists = Playlist::orderBy('name', 'ASC')->simplePaginate(50);
 
@@ -42,7 +42,7 @@ class PlaylistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return $this->populateView('admin.playlists.create');
     }
@@ -66,7 +66,7 @@ class PlaylistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $playlist = Playlist::findOrFail($id);
 
@@ -100,7 +100,7 @@ class PlaylistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $playlist = Playlist::findOrFail($id);
 
@@ -128,7 +128,7 @@ class PlaylistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $playlist = Playlist::findOrFail($id);
         $playlist->delete();

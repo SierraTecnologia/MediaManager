@@ -21,6 +21,7 @@ class CreateFilesTable extends Migration
                     $table->string('description')->nullable();
                     $table->string('url', 255)->nullable();
                     $table->string('path', 255)->nullable();
+                    $table->string('filesystem', 255)->default(\Illuminate\Support\Facades\Config::get('rica.storage.disk', env('FILESYSTEM_DRIVER', 'local')));
                     $table->string('type', 255)->nullable();
                     $table->string('filename', 255)->nullable();
                     $table->string('unique_hash', 255)->nullable();

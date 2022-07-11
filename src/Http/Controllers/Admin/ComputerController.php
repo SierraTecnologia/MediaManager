@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class ComputerController extends Controller
 {
-    public static $title = 'Dispositivos';
-    public static $description = 'Dispositivos';
-    public static $icon = 'fas fa-fw fa-desktop text-green';
+    public $title = 'Dispositivos';
+    public $description = 'Dispositivos';
+    public $icon = 'fas fa-fw fa-desktop text-green';
     public $subTitle = 'Dispositivos';
 
     public function title()
@@ -23,7 +23,7 @@ class ComputerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $computers = Computer::isBlock()->where('is_active', true)->orderBy('name', 'ASC')->simplePaginate(50);
 
@@ -43,7 +43,7 @@ class ComputerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return $this->populateView('admin.computers.create');
     }
@@ -67,7 +67,7 @@ class ComputerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $computer = Computer::findOrFail($id);
         return $this->populateView('admin.computers.show', compact('computer'));
@@ -79,7 +79,7 @@ class ComputerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $computer = Computer::findOrFail($id);
 
@@ -123,7 +123,7 @@ class ComputerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $computer = Computer::findOrFail($id);
         $computer->is_active = false;
