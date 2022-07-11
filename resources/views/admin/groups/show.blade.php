@@ -75,7 +75,7 @@
                         <button class="btn btn-primary" type="submit">Adicionar Dispositivo</button>
                     <?= Former::close() ?>
                 @endif
-                @include('admin.computers.table', [
+                @include('media-manager:admin.computers.table', [
                     'contexto' => \MediaManager\Models\Group::class,
                     'contextoId' => $group->id,
                     'computers' => $group->computers()->paginate()]

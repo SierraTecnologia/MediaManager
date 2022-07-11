@@ -30,7 +30,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('admin.playlists.update', $playlist->id) }}">
+      <form method="post" action="{{ route('media-manager.admin.playlists.update', $playlist->id) }}">
         @method('PATCH')
         @csrf
         <div class="form-group">

@@ -28,7 +28,7 @@ if($user && $user->role_id == \App\Models\Role::$GOOD) {
         $('#users-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('admin.playlists.index') !!}',
+            ajax: '{!! route('media-manager.admin.playlists.index') !!}',
             columns: [
                 { data: 'id', name: 'orders.id' },
                 { data: 'collaborator.name', name: 'collaborator.name' },
@@ -53,7 +53,7 @@ if($user && $user->role_id == \App\Models\Role::$GOOD) {
         $('#users-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('admin.playlists.index') !!}',
+            ajax: '{!! route('media-manager.admin.playlists.index') !!}',
             columns: [
                 { data: 'id', name: 'orders.id' },
                 { data: 'collaborator.name', name: 'collaborator.name' },

@@ -18,20 +18,20 @@
 */
 Route::get('/vlc', 'MediaController@vlc');
 
-/*
-|--------------------------------------------------------------------------
-| Assets
-|--------------------------------------------------------------------------
-*/
+// /*
+// |--------------------------------------------------------------------------
+// | Assets
+// |--------------------------------------------------------------------------
+// */
 
-Route::get('public-preview/{encFileName}', 'AssetController@asPreview')->name('asset.preview');
-Route::get('public-asset/{encFileName}', 'AssetController@asPublic')->name('asset.public');
-Route::get('public-download/{encFileName}/{encRealFileName}', 'AssetController@asDownload')->name('asset.download');
-Route::get('asset/{path}/{contentType}', 'AssetController@asset')->name('asset.show');
+// Route::get('public-preview/{encFileName}', 'AssetController@asPreview')->name('asset.preview');
+// Route::get('public-asset/{encFileName}', 'AssetController@asPublic')->name('asset.public');
+// Route::get('public-download/{encFileName}/{encRealFileName}', 'AssetController@asDownload')->name('asset.download');
+// Route::get('asset/{path}/{contentType}', 'AssetController@asset')->name('asset.show');
 
 
-Route::get('assets', ['uses' => 'BaseController@assets', 'as' => 'assets']);
-Route::get('facilitador-assets/{path?}', ['uses' => 'SitecFeatureController@assets', 'as' => 'facilitador_assets']);
+// Route::get('assets', ['uses' => 'BaseController@assets', 'as' => 'assets']);
+// Route::get('facilitador-assets/{path?}', ['uses' => 'SitecFeatureController@assets', 'as' => 'facilitador_assets']);
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -83,36 +83,36 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'admin.', 'n
     ]);
 });
 
+// @todo
+// /*
+// |--------------------------------------------------------------------------
+// | Root Routes
+// |--------------------------------------------------------------------------
+// */
+// Route::group(['middleware' => 'root', 'prefix' => 'root', 'as' => 'root.', 'namespace' => 'Root'], function () {
+//     Route::resource('users', 'UserController');
+//     Route::resource('roles', 'RoleController');
+//     // Route::resource('permissions', 'PermissionController');
+// });
 
-/*
-|--------------------------------------------------------------------------
-| Root Routes
-|--------------------------------------------------------------------------
-*/
-Route::group(['middleware' => 'root', 'prefix' => 'root', 'as' => 'root.', 'namespace' => 'Root'], function () {
-    Route::resource('users', 'UserController');
-    Route::resource('roles', 'RoleController');
-    // Route::resource('permissions', 'PermissionController');
-});
 
+// /**
+//  * Teamwork routes
+//  */
+// Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function()
+// {
+//     Route::get('/', [App\Http\Controllers\Teamwork\TeamController::class, 'index'])->name('teams.index');
+//     Route::get('create', [App\Http\Controllers\Teamwork\TeamController::class, 'create'])->name('teams.create');
+//     Route::post('teams', [App\Http\Controllers\Teamwork\TeamController::class, 'store'])->name('teams.store');
+//     Route::get('edit/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'edit'])->name('teams.edit');
+//     Route::put('edit/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'update'])->name('teams.update');
+//     Route::delete('destroy/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'destroy'])->name('teams.destroy');
+//     Route::get('switch/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'switchTeam'])->name('teams.switch');
 
-/**
- * Teamwork routes
- */
-Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function()
-{
-    Route::get('/', [App\Http\Controllers\Teamwork\TeamController::class, 'index'])->name('teams.index');
-    Route::get('create', [App\Http\Controllers\Teamwork\TeamController::class, 'create'])->name('teams.create');
-    Route::post('teams', [App\Http\Controllers\Teamwork\TeamController::class, 'store'])->name('teams.store');
-    Route::get('edit/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'edit'])->name('teams.edit');
-    Route::put('edit/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'update'])->name('teams.update');
-    Route::delete('destroy/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'destroy'])->name('teams.destroy');
-    Route::get('switch/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'switchTeam'])->name('teams.switch');
+//     Route::get('members/{id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'show'])->name('teams.members.show');
+//     Route::get('members/resend/{invite_id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'resendInvite'])->name('teams.members.resend_invite');
+//     Route::post('members/{id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'invite'])->name('teams.members.invite');
+//     Route::delete('members/{id}/{user_id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'destroy'])->name('teams.members.destroy');
 
-    Route::get('members/{id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'show'])->name('teams.members.show');
-    Route::get('members/resend/{invite_id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'resendInvite'])->name('teams.members.resend_invite');
-    Route::post('members/{id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'invite'])->name('teams.members.invite');
-    Route::delete('members/{id}/{user_id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'destroy'])->name('teams.members.destroy');
-
-    Route::get('accept/{token}', [App\Http\Controllers\Teamwork\AuthController::class, 'acceptInvite'])->name('teams.accept_invite');
-});
+//     Route::get('accept/{token}', [App\Http\Controllers\Teamwork\AuthController::class, 'acceptInvite'])->name('teams.accept_invite');
+// });

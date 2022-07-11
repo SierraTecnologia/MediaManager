@@ -23,7 +23,7 @@
     </div><br />
   @endif
 
-  @include('admin.collaborators.table', ['collaborators' => $collaborators])
+  @include('media-manager:admin.collaborators.table', ['collaborators' => $collaborators])
   
 <div>
 @endsection

@@ -21,10 +21,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.playlists.index') }}"> Voltar</a>
-                <a class="btn btn-primary" href="{{ route('admin.playlists.edit', $playlist->id) }}"> Editar</a>
+                <a class="btn btn-primary" href="{{ route('media-manager.admin.playlists.index') }}"> Voltar</a>
+                <a class="btn btn-primary" href="{{ route('media-manager.admin.playlists.edit', $playlist->id) }}"> Editar</a>
                 @if ($playlist->groups->count()==0)
-                    <form action="{{ route('admin.playlists.destroy', $playlist->id)}}" method="post">
+                    <form action="{{ route('media-manager.admin.playlists.destroy', $playlist->id)}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Deletar</button>
@@ -49,7 +49,7 @@
                     <?= Former::select('video')->options($videos)->label(false) ?>
                     <button class="btn btn-primary" type="submit">Adicionar Video</button>
                 <?= Former::close() ?>
-                @include('admin.medias.table', [
+                @include('media-manager:admin.medias.table', [
                     'medias' => $playlist->medias()->paginate(),
                     'playlist' => $playlist
                 ])</h3>

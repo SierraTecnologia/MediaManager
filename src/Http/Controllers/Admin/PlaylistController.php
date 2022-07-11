@@ -34,7 +34,7 @@ class PlaylistController extends Controller
     {
         $playlists = Playlist::orderBy('name', 'ASC')->simplePaginate(50);
 
-        return $this->populateView('admin.playlists.index', compact('playlists'));
+        return $this->populateView('media-manager:admin.playlists.index', compact('playlists'));
     }
 
     /**

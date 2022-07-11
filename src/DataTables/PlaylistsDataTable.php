@@ -17,7 +17,7 @@ class PlaylistsDataTable extends DataTable
         return $this->applyScopes($query);
 
         //     return Datatables::of($query)->addColumn('action', function ($playlist) {
-        //         return '<a href="'.route('admin.playlists.show',$playlist->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye"></i> Show</a>';
+        //         return '<a href="'.route('media-manager.admin.playlists.show',$playlist->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye"></i> Show</a>';
         //     })->setRowId('id')->editColumn('created_at', function ($user) {
         //         return $user->updated_at->format('h:m:s d/m/Y');
         //     })

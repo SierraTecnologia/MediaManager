@@ -11,7 +11,7 @@
       </div><br />
     @endif
 
-    {{ Form::open(array('method' => 'get', 'route' => array('admin.playlists.index'))) }}
+    {{ Form::open(array('method' => 'get', 'route' => array('media-manager.admin.playlists.index'))) }}
     <div class="input-group input-group-sm">
         {!! Form::text('query', null, ['class' => 'form-control']) !!}
         <span class="input-group-btn">
@@ -20,7 +20,7 @@
     </div>
     {{ Form::close() }}
 
-    @include('admin.playlists.table', ['playlists' => $playlists])
-    {{-- @include('admin.playlists.table-ajax') --}}
+    @include('media-manager:admin.playlists.table', ['playlists' => $playlists])
+    {{-- @include('media-manager:admin.playlists.table-ajax') --}}
 
   <div>
