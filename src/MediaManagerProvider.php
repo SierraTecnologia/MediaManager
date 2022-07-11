@@ -55,17 +55,139 @@ class MediaManagerProvider extends ServiceProvider
      * Rotas do Menu
      */
     public static $menuItens = [
+
         [
-            'text'        => 'Midias',
-            'route'       => 'media-manager.medias',
-            'icon'        => 'fas fa-fw fa-gavel',
-            'icon_color'  => 'blue',
-            'label_color' => 'success',
+            'text' => 'Endotera',
+            'icon' => 'fas fa-fw fa-search',
+            'icon_color' => "blue",
+            'label_color' => "success",
             'feature' => 'midia',
-            'section'       => 'painel',
-            'order' => 600,
-            // 'access' => \Porteiro\Models\Role::$ADMIN
+            'section' => "admin",
+            'order' => 2400,
+            'level'       => 2, // 0 (Public), 1, 2 (Admin) , 3 (Root)
         ],
+        'Endotera' => [
+            // 'MediaManager' => [
+                // ],
+            // 'MediaManager' => [
+
+                [
+                    'text'        => 'Playlists',
+                    'route'       => 'admin.playlists.index',
+                    'icon'        => 'fas fa-fw oi oi-media-play',
+                    'icon_color'  => 'green',
+                    'label_color' => 'success',
+                    'level' => 1
+                ],
+                [
+                    'text'        => 'Videos',
+                    'route'       => 'admin.media.index',
+                    'icon'        => 'fas fa-fw fa-video',
+                    'icon_color'  => 'red',
+                    'label_color' => 'success',
+                    'level' => 1
+                ],
+                [
+                    'text'        => 'Midias',
+                    'route'       => 'media-manager.medias',
+                    'icon'        => 'fas fa-fw fa-gavel',
+                    'icon_color'  => 'blue',
+                    'label_color' => 'success',
+                    'feature' => 'midia',
+                    'section'       => 'painel',
+                    'order' => 600,
+                    // 'access' => \Porteiro\Models\Role::$ADMIN
+                ],
+                // [
+                //     'text'        => 'Imagens',
+                //     'route'       => 'admin.media-manager.images.index', // @todo
+                //     'icon'        => 'fas fa-fw fa-gavel',
+                //     'icon_color'  => 'blue',
+                //     'label_color' => 'success',
+                //     'feature' => 'midia',
+                //     'section'       => 'admin',
+                //     'order' => 2400,
+                //     // 'access' => \Porteiro\Models\Role::$ADMIN
+                // ],
+                // [
+                //     'text'        => 'Files',
+                //     'route'       => 'admin.media-manager.files.index', // @todo
+                //     'icon'        => 'fas fa-fw fa-gavel',
+                //     'icon_color'  => 'blue',
+                //     'label_color' => 'success',
+                //     'feature' => 'midia',
+                //     'section'       => 'admin',
+                //     'order' => 2400,
+                //     // 'access' => \Porteiro\Models\Role::$ADMIN
+                // ],
+            ],
+        // [
+        //     'text'        => 'Painel',
+        //     'url'         => 'admin',
+        //     'icon'        => 'fas fa-fw fa-tachometer-alt',
+        //     // 'icon_color'  => 'blue',
+        //     // 'label_color' => 'success',
+        // ],
+        // [
+        //     'header' => 'Dispositivos',
+        //     'level' => 1,
+        // ],
+        // [
+        //     'text'        => 'Ativos',
+        //     'route'       => 'admin.computers.index',
+        //     'icon'        => 'fas fa-fw fa-desktop',
+        //     'icon_color'  => 'green',
+        //     'label_color' => 'success',
+        //     'level' => 1,
+        // ],
+        // [
+        //     'text'        => 'Pendentes de Ativação',
+        //     'route'       => 'admin.pendentes.index',
+        //     'icon'        => 'fas fa-fw fa-desktop',
+        //     'icon_color'  => 'red',
+        //     'label_color' => 'danger',
+        //     'label'        => '0',
+        //     'level' => 2
+        // ],
+        // [
+        //     'text'        => 'Grupos de dispositivos',
+        //     'route'       => 'admin.groups.index',
+        //     'icon'        => 'fas fa-fw fa-users',
+        //     'icon_color'  => 'yellow',
+        //     'label_color' => 'success',
+        //     'level' => 1,
+        // ],
+        // [
+        //     'header' => 'Medias',
+        //     'level' => 2
+        // ],
+        // [
+        //     'text'        => 'Playlists',
+        //     'route'       => 'admin.playlists.index',
+        //     'icon'        => 'fas fa-fw oi oi-media-play',
+        //     'icon_color'  => 'green',
+        //     'label_color' => 'success',
+        //     'level' => 1
+        // ],
+        // [
+        //     'text'        => 'Videos',
+        //     'route'       => 'admin.media.index',
+        //     'icon'        => 'fas fa-fw fa-video',
+        //     'icon_color'  => 'red',
+        //     'label_color' => 'success',
+        //     'level' => 1
+        // ],
+        // [
+        //     'text'        => 'Midias',
+        //     'route'       => 'media-manager.medias',
+        //     'icon'        => 'fas fa-fw fa-gavel',
+        //     'icon_color'  => 'blue',
+        //     'label_color' => 'success',
+        //     'feature' => 'midia',
+        //     'section'       => 'painel',
+        //     'order' => 600,
+        //     // 'access' => \Porteiro\Models\Role::$ADMIN
+        // ],
         [
             'text' => 'Fotografia',
             'icon' => 'fas fa-fw fa-search',

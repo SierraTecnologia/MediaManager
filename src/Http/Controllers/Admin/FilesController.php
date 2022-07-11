@@ -2,7 +2,7 @@
 
 namespace MediaManager\Http\Controllers\Admin;
 
-use App\Http\Requests\FileRequest;
+use MediaManager\Http\Requests\FileRequest;
 use Config;
 use Crypto;
 use Exception;

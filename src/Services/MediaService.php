@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use League\Flysystem\Plugin\ListWith;
 use MediaManager\Events\MediaFileAdded;
-use App\Models\File;
+use MediaManager\Models\File;
 
 class MediaService
 {

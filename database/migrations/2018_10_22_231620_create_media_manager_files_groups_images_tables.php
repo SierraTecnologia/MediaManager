@@ -23,6 +23,7 @@ class CreateMediaManagerFilesGroupsImagesTables extends Migration
                 $table->string('alt_tag')->nullable();
                 $table->string('title_tag')->nullable();
                 $table->boolean('is_published')->default(0);
+                $table->string('unique_hash', 255)->nullable();
             
                 $table->unsignedInteger('file_id')->nullable();
                 // $table->foreign('file_id')->references('id')->on('files');

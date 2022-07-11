@@ -22,6 +22,6 @@ class MediaController extends Controller
         // Check permission
         // $this->authorize('browse_media');
 
-        return view('media.vlc'); //, compact($videos));
+        return view('media-manager::media.vlc'); //, compact($videos));
     }
 }

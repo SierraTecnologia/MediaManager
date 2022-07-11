@@ -13,7 +13,7 @@ use MediaManager\Models\Model as Base;
  * @property string path
  * @property int width
  * @property int height
- * @package  App\Models
+ * @package  MediaManager\Models
  */
 class Thumbnail extends Base
 {

@@ -13,6 +13,7 @@ use MediaManager\Repositories\ImageRepository;
 use Siravel;
 use Storage;
 use Muleta\Modules\Controllers\Api\ApiControllerTrait;
+use MediaManager\Http\Controllers\Controller;
 
 class ImagesController extends Controller
 {

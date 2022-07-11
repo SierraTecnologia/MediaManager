@@ -38,7 +38,7 @@ trait Encodable
     /**
      * Polymorphic relationship definition
      *
-     * @return Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function encodings()
     {

@@ -38,7 +38,7 @@ class Check extends Command
      */
     public function handle(): void
     {
-        $mediaService = new \App\Services\MediaService();
+        $mediaService = new \MediaManager\Services\MediaService();
         $files = $mediaService->allFiles();
 
         $indiceVideo = 0;

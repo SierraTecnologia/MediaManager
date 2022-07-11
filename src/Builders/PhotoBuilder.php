@@ -3,7 +3,7 @@
 namespace MediaManager\Builders;
 
 use MediaManager\Models\Photo;
-use App\Contants\Tables;
+use MediaManager\Contants\Tables;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 

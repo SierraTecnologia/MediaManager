@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Utils;
+namespace MediaManager\Utils;
 
 // Utilities for dealing with files
 class File
