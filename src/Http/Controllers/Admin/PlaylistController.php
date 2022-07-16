@@ -14,7 +14,7 @@ class PlaylistController extends Controller
      * @var string
      */
     public $mediaService;
-    
+
     public $title = 'Playlists';
     public $description = 'Playlists';
     public $icon = 'fas fa-fw oi oi-media-play text-green';
@@ -24,7 +24,7 @@ class PlaylistController extends Controller
         $this->mediaService = $mediaService;
         parent::__construct();
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -32,9 +32,13 @@ class PlaylistController extends Controller
      */
     public function index(Request $request)
     {
-        $playlists = Playlist::orderBy('name', 'ASC')->simplePaginate(50);
+        if (auth()->user()->isAdmin()) {
+            $playlists = Playlist::allTeams()->orderBy('name', 'ASC')->simplePaginate(50);
+        } else {
+            $playlists = Playlist::orderBy('name', 'ASC')->simplePaginate(50);
+        }
 
-        return $this->populateView('media-manager:admin.playlists.index', compact('playlists'));
+        return $this->populateView('admin.playlists.index', compact('playlists'));
     }
 
     /**
@@ -68,9 +72,9 @@ class PlaylistController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $playlist = Playlist::findOrFail($id);
+        $playlist = $this->getPlaylist($id);
 
-        $videos = Video::all();
+        $videos = Video::fromTeam($playlist->team_id)->get();
         foreach ($videos as $idVideo => $video) {
             if (!$this->videoExist($video)) {
                 $video->delete();
@@ -78,7 +82,7 @@ class PlaylistController extends Controller
             }
         }
 
-        $videos = Video::orderBy('name', 'ASC')->get();
+        $videos = Video::fromTeam($playlist->team_id)->orderBy('name', 'ASC')->get();
         foreach ($videos as $idVideo => $video) {
             if (!$this->videoExist($video)) {
                 $video->delete();
@@ -102,7 +106,7 @@ class PlaylistController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $playlist = Playlist::findOrFail($id);
+        $playlist = $this->getPlaylist($id);
 
         return $this->populateView('admin.playlists.edit', compact('playlist'));
     }
@@ -116,7 +120,8 @@ class PlaylistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $playlist = Playlist::findOrFail($id);
+        $playlist = $this->getPlaylist($id);
+
         $playlist->validateAndSetFromRequestAndSave($request);
 
         return redirect('/admin/playlists')->with('success', 'Playlist foi atualizado com sucesso');
@@ -130,7 +135,8 @@ class PlaylistController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $playlist = Playlist::findOrFail($id);
+        $playlist = $this->getPlaylist($id);
+
         $playlist->delete();
 
         return redirect('/admin/playlists')->with('success', 'Playlist foi deletado com sucesso');
@@ -144,9 +150,10 @@ class PlaylistController extends Controller
      */
     public function includeVideo(Request $request, $id)
     {
-        $playlist = Playlist::findOrFail($id);
+        $playlist = $this->getPlaylist($id);
+
         $playlist->updateOrderVideos();
-        if (!$video = Video::find($request->get('video'))) {
+        if (!$video = Video::fromTeam($playlist->team_id)->find($request->get('video'))) {
             return redirect('/admin/playlists/'.$id)->with('success', 'Por favor selecionar um arquivo da lista');
         }
         $playlist->videos()->save($video, ['position' => $playlist->videos()->count()]);
@@ -155,27 +162,41 @@ class PlaylistController extends Controller
 
     public function removeVideo(Request $request, $id)
     {
-        $playlist = Playlist::findOrFail($id);
-        $video = Video::findOrFail($request->get('video'));
+        $playlist = $this->getPlaylist($id);
+
+        $video = Video::fromTeam($playlist->team_id)->findOrFail($request->get('video'));
         $playlist->videos()->detach($video->id);
         $playlist->updateOrderVideos();
         return redirect('/admin/playlists/'.$id)->with('success', 'Video removido com sucesso');
     }
-    public function videoExist(Video $video)
-    {
-        return $this->mediaService->videoExist($video);
-    }
 
     public function videoUp(Request $request, $id, $position)
     {
-        $playlist = Playlist::findOrFail($id);
+        $playlist = $this->getPlaylist($id);
+
         $playlist->orderVideosUp($position);
         return redirect('/admin/playlists/'.$id)->with('success', 'Ordem atualizada com sucesso');
     }
     public function videoDown(Request $request, $id, $position)
     {
-        $playlist = Playlist::findOrFail($id);
+        $playlist = $this->getPlaylist($id);
+
         $playlist->orderVideosDown($position);
         return redirect('/admin/playlists/'.$id)->with('success', 'Ordem atualizada com sucesso');
+    }
+
+    private function getPlaylist($id): Playlist
+    {
+        if (!auth()->user()->isAdmin()) {
+            return Playlist::findOrFail($id);
+        }
+
+        $playlist = Playlist::allTeams()->findOrFail($id);
+        $this->mediaService->setDirectory($playlist->team_id);
+        return $playlist;
+    }
+    private function videoExist(Video $video)
+    {
+        return $this->mediaService->videoExist($video);
     }
 }

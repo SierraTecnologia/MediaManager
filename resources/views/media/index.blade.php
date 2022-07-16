@@ -1,4 +1,8 @@
+@extends('layouts.app')
 
+@section('page_title', __('generic.media'))
+
+@section('content')
     <div class="page-content container-fluid">
         <?php /*@include('facilitador::alerts')*/?>
         <div class="row">
@@ -25,9 +29,13 @@
         </div><!-- .col-md-12 -->
     </div><!-- .page-content container-fluid -->
 
-@include('media-manager::media.manager')
-<script>
-new Vue({
-    el: '#filemanager'
-});
-</script>
+@stop
+
+@section('javascript')
+    @include('media-manager::media.manager')
+    <script>
+    new Vue({
+        el: '#filemanager'
+    });
+    </script>
+@endsection
