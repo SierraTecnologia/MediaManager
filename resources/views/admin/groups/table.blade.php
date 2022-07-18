@@ -15,13 +15,13 @@
         @foreach($groups as $group)
         <tr>
             <td>{{$group->id}}</td>
-            <td><a href='{{ route('admin.groups.show',$group->id)}}'>{{$group->name}}</a></td>
+            <td><a href='{{ route('admin.media-manager.groups.show',$group->id)}}'>{{$group->name}}</a></td>
             <td>{{$group->playlist?$group->playlist->name:'Sem playlist'}}</td>
             <td>{{$group->computers()->count()}}</td>
             <!-- <td>
-                <a href="{{ route('admin.groups.show',$group->id)}}" class="btn btn-primary">Visualizar</a>
-                <a href="{{ route('admin.groups.edit',$group->id)}}" class="btn btn-primary">Editar</a>
-                <form action="{{ route('admin.groups.destroy', $group->id)}}" method="post">
+                <a href="{{ route('admin.media-manager.groups.show',$group->id)}}" class="btn btn-primary">Visualizar</a>
+                <a href="{{ route('admin.media-manager.groups.edit',$group->id)}}" class="btn btn-primary">Editar</a>
+                <form action="{{ route('admin.media-manager.groups.destroy', $group->id)}}" method="post">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit">Deletar</button>

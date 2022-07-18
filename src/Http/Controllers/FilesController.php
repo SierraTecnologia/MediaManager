@@ -96,7 +96,7 @@ class FilesController extends BaseController
 
         Siravel::notification('File saved successfully.', 'success');
 
-        return redirect(route('admin.files.index'));
+        return redirect(route('admin.media-manager.files.index'));
     }
 
     /**
@@ -161,7 +161,7 @@ class FilesController extends BaseController
         if (empty($files)) {
             Siravel::notification('File not found', 'warning');
 
-            return redirect(route('admin.files.index'));
+            return redirect(route('admin.media-manager.files.index'));
         }
 
         return theme('features.files.edit')->with('files', $files);
@@ -182,7 +182,7 @@ class FilesController extends BaseController
         if (empty($files)) {
             Siravel::notification('File not found', 'warning');
 
-            return redirect(route('admin.files.index'));
+            return redirect(route('admin.media-manager.files.index'));
         }
 
         $files = $this->repository->update($files, $request->all());
@@ -206,7 +206,7 @@ class FilesController extends BaseController
         if (empty($files)) {
             Siravel::notification('File not found', 'warning');
 
-            return redirect(route('admin.files.index'));
+            return redirect(route('admin.media-manager.files.index'));
         }
 
         if (is_file(storage_path($files->location))) {
@@ -219,7 +219,7 @@ class FilesController extends BaseController
 
         Siravel::notification('File deleted successfully.', 'success');
 
-        return redirect(route('admin.files.index'));
+        return redirect(route('admin.media-manager.files.index'));
     }
 
     /**

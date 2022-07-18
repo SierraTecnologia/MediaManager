@@ -202,7 +202,7 @@
     </thead>
     <tbody>
         @foreach($computers as $computer)
-        <?php /*<form accept-charset="utf-8" class="form-horizontal" url="{{route('admin.computers.active', $computer->id)}}" method="POST">*/ ?>
+        <?php /*<form accept-charset="utf-8" class="form-horizontal" url="{{route('admin.media-manager.computers.active', $computer->id)}}" method="POST">*/ ?>
         <tr>
             <td>{{$computer->id}}</td>
             <td>{{$computer->token}}</td>
@@ -210,18 +210,18 @@
             <td>{{$computer->acessos()->count()}}</td>
             <td>{{$computer->created_at->format('d/m/Y h:i:s')}}</td> */ ?>
             <td>
-                <a class="btn btn-primary" href="{{ route('admin.computers.active', $computer->id)}}">Ativar</a>
+                <a class="btn btn-primary" href="{{ route('admin.media-manager.computers.active', $computer->id)}}">Ativar</a>
             </td>
             <td>
                 <!--
                 <button class="btn btn-primary table-save table-saved" type="submit">Ativar</button>
-                <a href="{{ route('admin.computers.edit',$computer->id)}}" class="btn btn-primary">Editar</a>
-                <form action="{{ route('admin.computers.destroy', $computer->id)}}" method="post">
+                <a href="{{ route('admin.media-manager.computers.edit',$computer->id)}}" class="btn btn-primary">Editar</a>
+                <form action="{{ route('admin.media-manager.computers.destroy', $computer->id)}}" method="post">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit">Deletar</button>
                 </form>-->
-                <form action="{{ route('admin.computers.destroy', $computer->id)}}" method="post">
+                <form action="{{ route('admin.media-manager.computers.destroy', $computer->id)}}" method="post">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger table-delete" type="submit">Deletar</button>

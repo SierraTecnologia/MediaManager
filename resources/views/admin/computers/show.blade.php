@@ -24,16 +24,16 @@
 
             <div class="pull-right">
 
-                <a class="btn btn-primary" href="{{ route('admin.computers.index') }}"> Voltar</a>
+                <a class="btn btn-primary" href="{{ route('admin.media-manager.computers.index') }}"> Voltar</a>
 
             </div>
 
         </div>
         <div class="col-lg-1 margin-tb">
-                <a class="btn btn-primary" href="{{ route('admin.computers.edit', $computer->id) }}"> Editar</a>
+                <a class="btn btn-primary" href="{{ route('admin.media-manager.computers.edit', $computer->id) }}"> Editar</a>
         </div>
         <div class="col-lg-10 margin-tb">
-            <form action="{{ route('admin.computers.destroy', $computer->id)}}" method="post">
+            <form action="{{ route('admin.media-manager.computers.destroy', $computer->id)}}" method="post">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger" type="submit">Deletar</button>

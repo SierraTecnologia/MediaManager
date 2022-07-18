@@ -30,7 +30,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('admin.groups.store') }}">
+      <form method="post" action="{{ route('admin.media-manager.groups.store') }}">
           <div class="form-group">
               @csrf
               <label for="name">Nome:</label>

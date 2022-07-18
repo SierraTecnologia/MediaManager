@@ -91,15 +91,15 @@
         @foreach($computers as $computer)
         <tr>
             <td>{{$computer->id}}</td>
-            <td><a href="{{ route('admin.computers.edit',$computer->id)}}">{{!empty($computer->name)?$computer->name:$computer->token}}</a></td>
+            <td><a href="{{ route('admin.media-manager.computers.edit',$computer->id)}}">{{!empty($computer->name)?$computer->name:$computer->token}}</a></td>
             <td>{{($computer->group?$computer->group->name:'Sem grupo')}}</td>
             
             <?php /*<td>{{$computer->updated_at->format('d/m/Y h:i:s')}}</td><td>{{$computer->token}}</td><td>{{$computer->acessos()->count()}}</td>
             <td>{{$computer->created_at->format('d/m/Y h:i:s')}}</td>*/ ?>
             <td>
-                <!--<a href="{{ route('admin.computers.show',$computer->id)}}" class="btn btn-primary">Visualizar</a>
+                <!--<a href="{{ route('admin.media-manager.computers.show',$computer->id)}}" class="btn btn-primary">Visualizar</a>
                 
-                <a href="{{ route('admin.computers.edit',$computer->id)}}" class="btn btn-primary">Editar</a>-->
+                <a href="{{ route('admin.media-manager.computers.edit',$computer->id)}}" class="btn btn-primary">Editar</a>-->
                 
             <?php
             if (isset($contexto) && $contexto == \MediaManager\Models\Group::class) {
@@ -112,7 +112,7 @@
                 <?php
             } else {
                 ?> 
-                <form action="{{ route('admin.computers.destroy', $computer->id)}}" method="post">
+                <form action="{{ route('admin.media-manager.computers.destroy', $computer->id)}}" method="post">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger table-delete" type="submit">Deletar</button>

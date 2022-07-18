@@ -29,7 +29,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('admin.computers.update', $computer->id) }}">
+      <form method="post" action="{{ route('admin.media-manager.computers.update', $computer->id) }}">
         @method('PATCH')
         @csrf
         <div class="form-group">
