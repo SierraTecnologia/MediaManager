@@ -38,6 +38,12 @@ class Playlist extends Model// implements AuditableContract //, Auditable;
     public static $STATUS_NOT_PROCESSED = 4;
 
 
+    public function scopeAllTeams($query)
+    {
+        return $query;
+    }
+ 
+
     protected static function paramsForOldVersionZeroPointOne(Array $params)
     {
         // Será feita em versẽs futuras

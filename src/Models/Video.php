@@ -39,7 +39,7 @@ class Video extends Base
     public static function boot() {
         parent::boot();
         static::creating(function (Video $video) {
-            dd($video);
+            // dd($video); //@todo
             $video->name = \str_replace('.mp4', '', $video->name); // Porque ? @todo
 
         });

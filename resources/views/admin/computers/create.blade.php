@@ -16,7 +16,7 @@
 
 @section('content')
 <div class="card uper">
-  <div class="card-header">
+  <div class="box-header panel-heading card-header">
     Adicionar Dispositivo
   </div>
   <div class="card-body">

@@ -9,7 +9,7 @@ use Trainner\Traits\UsedByTeams;
 class Group extends Model
 {
 
-    use UsedByTeams;
+    // use UsedByTeams;
     public const RULES = [
         'name'=>'required',
         // 'group_qty' => 'required|integer'
