@@ -3,9 +3,12 @@
 namespace MediaManager\Models;
 
 use Crypto;
+use MediaManager\Models\Model as Base;
+use Muleta\Traits\Uuid;
 
 class File extends Model
 {
+    use Uuid;
 
     /**
      * The attributes that are mass assignable.

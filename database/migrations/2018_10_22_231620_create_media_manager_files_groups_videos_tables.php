@@ -16,7 +16,7 @@ class CreateMediaManagerFilesGroupsVideosTables extends Migration
             'videos',
             function (Blueprint $table) {
                 $table->engine = 'InnoDB';
-                $table->increments('id')->unsigned();
+                $table->uuid('id')->primary();
                 $table->string('name', 255)->nullable();
                 $table->string('description')->nullable();
                 $table->string('url', 255)->nullable();
@@ -32,6 +32,9 @@ class CreateMediaManagerFilesGroupsVideosTables extends Migration
                 $table->string('last_modified', 255)->nullable();
 
                 $table->string('unique_hash', 255)->nullable();
+
+                $table->uuid('file_id')->nullable();
+                $table->foreign('file_id')->references('id')->on('files');
                 $table->timestamps();
                 $table->softDeletes();
             }
@@ -39,8 +42,8 @@ class CreateMediaManagerFilesGroupsVideosTables extends Migration
         Schema::create(
             'videoables',
             function (Blueprint $table) {
-                $table->increments('id');
-                $table->unsignedInteger('video_id')->nullable();
+                $table->uuid('id')->primary();
+                $table->uuid('video_id');
                 // $table->foreign('video_id')->references('id')->on('videos');
                 $table->string('videoable_id');
                 $table->string('videoable_type');

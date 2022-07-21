@@ -3,10 +3,12 @@
 namespace MediaManager\Models;
 
 use MediaManager\Models\Model as Base;
+use Muleta\Traits\Uuid;
 
 class Video extends Base
 
 {
+    use Uuid;
 
 
     /**
@@ -22,6 +24,76 @@ class Video extends Base
         'path',
         'mime',
         'filename',
+        'size',
+        'last_modified',
+    ];
+
+
+    
+    public $formFields = [
+        // [
+        //     'name' => 'code',
+        //     'label' => 'code',
+        //     'type' => 'text'
+        // ],
+        [
+            'name' => 'name',
+            'label' => 'name',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'unique_hash',
+            'label' => 'unique_hash',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'url',
+            'label' => 'url',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'path',
+            'label' => 'path',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'mime',
+            'label' => 'mime',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'filename',
+            'label' => 'filename',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'size',
+            'label' => 'size',
+            'type' => 'text'
+        ],
+        // [
+        //     'name' => 'status',
+        //     'label' => 'Status',
+        //     'type' => 'checkbox'
+        // ],
+        // [
+        //     'name' => 'status',
+        //     'label' => 'Enter your content here',
+        //     'type' => 'textarea'
+        // ],
+        // ['name' => 'publish_on', 'label' => 'Publish Date', 'type' => 'date'],
+        // ['name' => 'skill_code', 'label' => 'Parent', 'type' => 'select', 'relationship' => 'parent'],
+        // ['name' => 'videos', 'label' => 'Videos', 'type' => 'select_multiple', 'relationship' => 'videos'],
+    ];
+
+    public $indexFields = [
+        'name',
+        'description',
+        'unique_hash',
+        // 'url',
+        // 'path',
+        'mime',
+        // 'filename',
         'size',
         'last_modified',
     ];
@@ -121,13 +193,21 @@ class Video extends Base
     {
         return $this->morphedByMany(\Illuminate\Support\Facades\Config::get('sitec.core.models.person', \Telefonica\Models\Actors\Person::class), 'videoable');
     }
+
+    /**
+     * Get all of the persons that are assigned this video.
+     */
+    public function skills()
+    {
+        return $this->morphToMany(\Illuminate\Support\Facades\Config::get('sitec.core.models.skill', \Telefonica\Models\Actors\Skill::class), 'skillable');
+    }
         
 
 
-    public function videoable()
-    {
-        return $this->morphTo();
-    }
+    // public function videoable()
+    // {
+    //     return $this->morphTo();
+    // }
     // // /**
     // //  * Get all of the owning videoable models.
     // //  */
