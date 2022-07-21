@@ -24,7 +24,7 @@
 
             <div class="pull-right">
 
-                <a class="btn btn-primary" href="{{ route('media-manager.admin.playlists.index') }}"> Voltar</a>
+                <a class="btn btn-primary" href="{{ route('admin.media-manager.playlists.index') }}"> Voltar</a>
 
             </div>
 
@@ -44,7 +44,7 @@
             </div>
             <!-- /.box-header card-header -->
             <div class="box-body card-body">
-                @include('media-manager:admin.playlists.table', ['playlists' => $video->orders()->paginate()])</h3>
+                @include('media-manager::admin.playlists.table', ['playlists' => $video->orders()->paginate()])</h3>
             </div>
             <!-- /.box-body card-body -->
         </div>
@@ -63,7 +63,7 @@
             </div>
             <!-- /.box-header card-header -->
             <div class="box-body card-body">
-                @include('media-manager:admin.groups.table', ['groups' => $video->groups()->paginate()])</h3>
+                @include('media-manager::admin.groups.table', ['groups' => $video->groups()->paginate()])</h3>
             </div>
             <!-- /.box-body card-body -->
         </div>
@@ -83,7 +83,7 @@
             </div>
             <!-- /.box-header card-header -->
             <div class="box-body card-body">
-                @include('media-manager:admin.groups.table', ['groups' => $video->groups()->paginate()])</h3>
+                @include('media-manager::admin.groups.table', ['groups' => $video->groups()->paginate()])</h3>
             </div>
             <!-- /.box-body card-body -->
         </div>

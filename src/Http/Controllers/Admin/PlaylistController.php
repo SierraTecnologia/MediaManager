@@ -38,7 +38,7 @@ class PlaylistController extends Controller
             $playlists = Playlist::orderBy('name', 'ASC')->simplePaginate(50);
         }
 
-        return $this->populateView('admin.playlists.index', compact('playlists'));
+        return $this->populateView('media-manager::admin.playlists.index', compact('playlists'));
     }
 
     /**
@@ -48,7 +48,7 @@ class PlaylistController extends Controller
      */
     public function create(Request $request)
     {
-        return $this->populateView('admin.playlists.create');
+        return $this->populateView('media-manager::admin.playlists.create');
     }
 
     /**
@@ -95,7 +95,7 @@ class PlaylistController extends Controller
         //     return !$this->videoExist($video);
         // });
 
-        return $this->populateView('admin.playlists.show', compact('playlist', 'videos'));
+        return $this->populateView('media-manager::admin.playlists.show', compact('playlist', 'videos'));
     }
 
     /**
@@ -108,7 +108,7 @@ class PlaylistController extends Controller
     {
         $playlist = $this->getPlaylist($id);
 
-        return $this->populateView('admin.playlists.edit', compact('playlist'));
+        return $this->populateView('media-manager::admin.playlists.edit', compact('playlist'));
     }
 
     /**

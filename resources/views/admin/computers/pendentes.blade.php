@@ -22,7 +22,7 @@
     </div><br />
   @endif
 
-  @include('media-manager:admin.computers.table-pendentes', ['computers' => $computers])
+  @include('media-manager::admin.computers.table-pendentes', ['computers' => $computers])
   
 <div>
 @endsection
