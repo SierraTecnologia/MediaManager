@@ -14,8 +14,7 @@ use Intervention\Image\Facades\Image;
 use Log;
 use SplFileInfo;
 use Stalker;
-use Stalker\Models\Imagen as ModelImage;
-use Stalker\Models\Media;
+use MediaManager\Models\Imagen as ModelImage;
 
 class MidiaService
 {
