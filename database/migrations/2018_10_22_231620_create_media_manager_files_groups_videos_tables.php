@@ -42,9 +42,8 @@ class CreateMediaManagerFilesGroupsVideosTables extends Migration
         Schema::create(
             'videoables',
             function (Blueprint $table) {
-                $table->uuid('id')->primary();
                 $table->uuid('video_id');
-                // $table->foreign('video_id')->references('id')->on('videos');
+                $table->foreign('video_id')->references('id')->on('videos');
                 $table->string('videoable_id');
                 $table->string('videoable_type');
                 $table->unsignedInteger('position')->nullable();

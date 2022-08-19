@@ -36,7 +36,7 @@ class VideoService
      * @return void
      */
     public static function import($data): void
-    {   
+    {
         // $registerData = [];
         // if (isset($data['Nome Completo'])) {
         //     $registerData['name'] = $data["Nome Completo"];
@@ -78,10 +78,10 @@ class VideoService
         }
         if (!isset($data['mimetipe'])) {
             try {
-                $data['type'] = FileService::getMime($data['path']); // mimetipe no MediaService
+                $data['mime'] = FileService::getMime($data['path']); // mimetipe no MediaService
             } catch (\Throwable $th) {
                 //@fixme APenasExceptionde Nao encontrado
-                $data['type'] = 'file';
+                $data['mime'] = 'file';
             }
         }
 
