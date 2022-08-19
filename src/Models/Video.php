@@ -111,9 +111,19 @@ class Video extends Base
     public static function boot() {
         parent::boot();
         static::creating(function (Video $video) {
-            // dd($video); //@todo
+            if ($video->unique_hash) {
+                if ($binary = Binary::where('hash', $video->unique_hash)->first()) {
+                    $binary = Binary::create([
+                        'hash' => $video->unique_hash,
+                        'type' => 'video'
+                    ]);
+                };
+                if ($video->extension) $binary->extension = $video->type;
+                if ($video->size) $binary->size = $video->size;
+                if ($video->mime) $binary->mime = $video->mime;
+                $binary->save();
+            }
             $video->name = \str_replace('.mp4', '', $video->name); // Porque ? @todo
-
         });
     }
         

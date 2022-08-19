@@ -32,6 +32,11 @@ class CreateFilesTable extends Migration
                     $table->text('details')->nullable();
                     $table->string('extension')->nullable(); //"json"
                     $table->string('mime')->nullable();
+
+
+
+                    $table->string('title' )->nullable();
+                    $table->string('hash' )->nullable();
                     $table->timestamps();
                     $table->softDeletes();
                 }

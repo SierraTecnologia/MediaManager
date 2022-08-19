@@ -83,6 +83,8 @@ class VideoService
                 //@fixme APenasExceptionde Nao encontrado
                 $data['mime'] = 'file';
             }
+        } else {
+            $data['mime'] = $data['mimetipe'];
         }
 
         $modelClass = self::getModel();
