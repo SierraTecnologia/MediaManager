@@ -18,7 +18,6 @@ class CreateBinariosTable extends Migration
                     $table->engine = 'InnoDB';
                     $table->string('hash', 64)->primary();
                     $table->string('type', 255)->nullable();
-                    $table->string('extension', 255)->nullable();
                     $table->string('size', 255)->nullable();
                     $table->string('tags')->nullable();
                     $table->text('details')->nullable();

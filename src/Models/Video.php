@@ -17,6 +17,7 @@ class Video extends Base
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'description',
         'unique_hash',
@@ -111,16 +112,17 @@ class Video extends Base
     public static function boot() {
         parent::boot();
         static::creating(function (Video $video) {
-            if ($video->unique_hash) {
-                if ($binary = Binary::where('hash', $video->unique_hash)->first()) {
+            if (!isset($video->id)) $video->id = \Ramsey\Uuid\Uuid::uuid4()->toString();
+            if(!empty($video->unique_hash)) {
+                if (!$binary = Binary::where('hash', $video->unique_hash)->first()) {
                     $binary = Binary::create([
                         'hash' => $video->unique_hash,
                         'type' => 'video'
                     ]);
                 };
-                if ($video->extension) $binary->extension = $video->type;
-                if ($video->size) $binary->size = $video->size;
-                if ($video->mime) $binary->mime = $video->mime;
+                if(!empty($video->extension)) $binary->extension = $video->type;
+                if(!empty($video->size)) $binary->size = $video->size;
+                if(!empty($video->mime)) $binary->mime = $video->mime;
                 $binary->save();
             }
             $video->name = \str_replace('.mp4', '', $video->name); // Porque ? @todo

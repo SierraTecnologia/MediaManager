@@ -144,15 +144,16 @@ class File extends Model
     public static function boot() {
         parent::boot();
         static::creating(function (File $file) {
-            if ($file->unique_hash) {
-                if ($binary = Binary::where('hash', $file->unique_hash)->first()) {
+            if (!empty($file->unique_hash)) {
+                if (!$binary = Binary::where('hash', $file->unique_hash)->first()) {
                     $binary = Binary::create([
-                        'hash' => $file->hash
+                        'hash' => $file->unique_hash
                     ]);
                 };
-                if ($file->extension) $binary->extension = $file->type;
-                if ($file->size) $binary->size = $file->size;
-                if ($file->mime) $binary->mime = $file->mime;
+                // dd($binary);
+                if (!empty($file->extension)) $binary->extension = $file->type;
+                if (!empty($file->size)) $binary->size = $file->size;
+                if (!empty($file->mime)) $binary->mime = $file->mime;
                 $binary->save();
             }
         });

@@ -88,6 +88,7 @@ class VideoService
         }
 
         $modelClass = self::getModel();
+        dd($modelClass );
 
         if ($video = $modelClass::where('path', $data['path'])->first()) {
             return $video;
@@ -104,6 +105,7 @@ class VideoService
             return $video;
         }
 
+        if (!isset($data['id'])) $data['id'] = \Ramsey\Uuid\Uuid::uuid4()->toString();
         return $modelClass::create($data);
     }
 }

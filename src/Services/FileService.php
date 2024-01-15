@@ -172,6 +172,8 @@ class FileService
             }
         }
 
-        throw new \Exception('Arquivo não encontrado: '.$fileName);
+        return null; // @todo
+        // throw new \Exception('Arquivo não encontrado: '.$fileName);
     }
+
 }

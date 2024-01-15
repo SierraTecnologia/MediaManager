@@ -3,12 +3,15 @@
 namespace MediaManager\Models;
 
 use Crypto;
-use MediaManager\Models\Model as Base;
-use Muleta\Traits\Uuid;
+use Illuminate\Database\Eloquent\Model as Base;
+use Muleta\Traits\UsesStringId;
 
-class Binary extends Model
+class Binary extends Base
 {
-    use Uuid;
+    use UsesStringId;
+
+    protected $primaryKey = 'hash';
+    protected $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
@@ -63,8 +66,8 @@ class Binary extends Model
     ];
         
 
-    public function binaryable()
-    {
-        return $this->morphTo();
-    }
+    // public function binaryable()
+    // {
+    //     return $this->morphTo();
+    // }
 }
