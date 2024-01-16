@@ -20,14 +20,14 @@ $position = 0;
             <td>{{$media->name}}</td>
             <td>
             @if ($position>0)
-                <span class="text-xl text-muted"><a href="{!! route('media-manager.admin.playlists.up', ['id' => $playlist->id, 'position' => $position]) !!}"><i class="fas fa-sort-up"></i></a></span>
+                <span class="text-xl text-muted"><a href="{!! route('admin.media-manager.playlists.up', ['id' => $playlist->id, 'position' => $position]) !!}"><i class="fas fa-sort-up"></i></a></span>
             @endif
             @if ($position < count($medias)-1)
-                <span class="text-xl text-muted"><a href="{!! route('media-manager.admin.playlists.down', ['id' => $playlist->id, 'position' => $position]) !!}"><i class="fas fa-sort-down"></i></a></span>
+                <span class="text-xl text-muted"><a href="{!! route('admin.media-manager.playlists.down', ['id' => $playlist->id, 'position' => $position]) !!}"><i class="fas fa-sort-down"></i></a></span>
             @endif
             </td>
             <td>
-                <form action="{{ route('media-manager.admin.playlists.removevideo', ['id' => $playlist->id, 'video' => $media->id])}}" method="post">
+                <form action="{{ route('admin.media-manager.playlists.removevideo', ['id' => $playlist->id, 'video' => $media->id])}}" method="post">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit">Remover da Playlist</button>

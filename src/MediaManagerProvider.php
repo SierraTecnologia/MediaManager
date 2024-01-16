@@ -73,18 +73,20 @@ class MediaManagerProvider extends ServiceProvider
 
                 [
                     'text'        => 'Playlists',
-                    'route'       => 'admin.playlists.index',
+                    'route'       => 'admin.media-manager.playlists.index',
                     'icon'        => 'fas fa-fw oi oi-media-play',
                     'icon_color'  => 'green',
+                    'section' => "admin",
                     'label_color' => 'success',
                     'level' => 1
                 ],
                 [
                     'text'        => 'Videos',
-                    'route'       => 'admin.media.index',
+                    'route'       => 'admin.media-manager.media.index',
                     'icon'        => 'fas fa-fw fa-video',
                     'icon_color'  => 'red',
                     'label_color' => 'success',
+                    'section' => "admin",
                     'level' => 1
                 ],
                 [

@@ -22,10 +22,10 @@
         {{ session()->get('success') }}  
       </div><br />
     @endif
-  <a class="btn btn-primary" href="{{ route('media-manager.admin.playlists.create') }}"> Criar nova Playlist</a>
+  <a class="btn btn-primary" href="{{ route('admin.media-manager.playlists.create') }}"> Criar nova Playlist</a>
 
-    @include('media-manager:admin.playlists.table', ['playlists' => $playlists])
-    {{-- @include('media-manager:admin.playlists.table-ajax') --}}
+    @include('media-manager::admin.playlists.table', ['playlists' => $playlists])
+    {{-- @include('media-manager::admin.playlists.table-ajax') --}}
 
   <div>
 @endsection

@@ -1,6 +1,6 @@
 <div class="row">
     @if (isset($createBtn))
-        <a class="btn btn-primary float-right" href="{!! route('admin.files.create') !!}">{!! trans('features.addNew') !!}</a>
+        <a class="btn btn-primary float-right" href="{!! route('admin.media-manager.files.create') !!}">{!! trans('features.addNew') !!}</a>
     @endif
     <div class="raw-m-hide float-right raw-m-hide">
         {!! Form::open(['url' => 'admin/files/search']) !!}

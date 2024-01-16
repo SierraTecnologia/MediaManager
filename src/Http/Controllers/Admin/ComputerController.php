@@ -99,7 +99,7 @@ class ComputerController extends Controller
         $computer->is_active = true;
         $computer->validateAndSetFromRequestAndSave($request);
 
-        return redirect(route('admin.computers.edit', $computer->id))->with('success', 'Dispositivo ativado com sucesso');
+        return redirect(route('admin.media-manager.computers.edit', $computer->id))->with('success', 'Dispositivo ativado com sucesso');
     }
 
     /**

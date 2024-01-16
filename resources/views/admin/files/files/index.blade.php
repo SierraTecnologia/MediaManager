@@ -21,7 +21,7 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary float-right" href="{!! route('admin.files.create') !!}">{!! trans('features.addNew') !!}</a>
+        <a class="btn btn-primary float-right" href="{!! route('admin.media-manager.files.create') !!}">{!! trans('features.addNew') !!}</a>
         <div class="raw-m-hide float-right raw-m-hide">
             {!! Form::open(['url' => 'admin/files/search']) !!}
             <input class="form-control header-input float-right raw-margin-right-24" name="term" placeholder="Search">
@@ -49,7 +49,7 @@
                     <tr>
                         <td>
                             <a href="{!! FileService::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
-                            <a href="{!! route('admin.files.edit', [$file->id]) !!}">{!! $file->name !!}</a>
+                            <a href="{!! route('admin.media-manager.files.edit', [$file->id]) !!}">{!! $file->name !!}</a>
                         </td>
                         <td class="raw-m-hide">@if ($file->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif</td>
                         <td class="text-right">
@@ -58,7 +58,7 @@
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger float-right" type="submit"><i class="fa fa-trash"></i> {!! trans('features.delete') !!}</button>
                             </form>
-                            <a class="btn btn-xs btn-secondary float-right raw-margin-right-8" href="{!! route('admin.files.edit', [$file->id]) !!}"><i class="fa fa-pencil"></i> {!! trans('features.edit') !!}</a>
+                            <a class="btn btn-xs btn-secondary float-right raw-margin-right-8" href="{!! route('admin.media-manager.files.edit', [$file->id]) !!}"><i class="fa fa-pencil"></i> {!! trans('features.edit') !!}</a>
                         </td>
                     </tr>
                 @endforeach

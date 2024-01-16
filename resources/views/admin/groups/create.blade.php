@@ -17,10 +17,10 @@
   }
 </style>
 <div class="card uper">
-  <div class="card-header">
+  <div class="box-header panel-heading card-header">
     Adicionar Grupo
   </div>
-  <div class="card-body">
+  <div class="box-body panel-body card-body">
     @if ($errors->any())
       <div class="alert alert-danger">
         <ul>
@@ -30,7 +30,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('admin.groups.store') }}">
+      <form method="post" action="{{ route('admin.media-manager.groups.store') }}">
           <div class="form-group">
               @csrf
               <label for="name">Nome:</label>

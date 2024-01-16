@@ -36,7 +36,7 @@ class VideoService
      * @return void
      */
     public static function import($data): void
-    {   
+    {
         // $registerData = [];
         // if (isset($data['Nome Completo'])) {
         //     $registerData['name'] = $data["Nome Completo"];
@@ -78,14 +78,17 @@ class VideoService
         }
         if (!isset($data['mimetipe'])) {
             try {
-                $data['type'] = FileService::getMime($data['path']); // mimetipe no MediaService
+                $data['mime'] = FileService::getMime($data['path']); // mimetipe no MediaService
             } catch (\Throwable $th) {
                 //@fixme APenasExceptionde Nao encontrado
-                $data['type'] = 'file';
+                $data['mime'] = 'file';
             }
+        } else {
+            $data['mime'] = $data['mimetipe'];
         }
 
         $modelClass = self::getModel();
+        dd($modelClass );
 
         if ($video = $modelClass::where('path', $data['path'])->first()) {
             return $video;
@@ -102,6 +105,7 @@ class VideoService
             return $video;
         }
 
+        if (!isset($data['id'])) $data['id'] = \Ramsey\Uuid\Uuid::uuid4()->toString();
         return $modelClass::create($data);
     }
 }

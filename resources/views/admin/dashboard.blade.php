@@ -3,7 +3,7 @@
 @section('title', 'Endotera')
 
 @section('content')
-    @include('media-manager:admin.numbers', [
+    @include('media-manager::admin.numbers', [
         'playlists' => $playlistCounts,
         'computers' => $computers,
         'groups' => $groups,
@@ -18,7 +18,7 @@
             </div>
             <!-- /.box-header card-header -->
             <div class="box-body card-body table-responsive p-0">
-                    @include('media-manager:admin.acessos.table', ['acessos' => $lastsAcessos])
+                    @include('media-manager::admin.acessos.table', ['acessos' => $lastsAcessos])
             </div>
             <!-- /.box-body card-body -->
             <div class="box-footer card-footer clearfix">

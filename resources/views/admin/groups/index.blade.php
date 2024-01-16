@@ -22,9 +22,9 @@
       {{ session()->get('success') }}  
     </div><br />
   @endif
-  <a class="btn btn-primary" href="{{ route('admin.groups.create') }}"> Criar novo Grupo</a>
+  <a class="btn btn-primary" href="{{ route('admin.media-manager.groups.create') }}"> Criar novo Grupo</a>
 
-  @include('media-manager:admin.groups.table', ['groups' => $groups])
+  @include('media-manager::admin.groups.table', ['groups' => $groups])
   
 <div>
 @endsection

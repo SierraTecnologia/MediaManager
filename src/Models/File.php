@@ -3,9 +3,12 @@
 namespace MediaManager\Models;
 
 use Crypto;
+use MediaManager\Models\Model as Base;
+use Muleta\Traits\Uuid;
 
 class File extends Model
 {
+    use Uuid;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +24,12 @@ class File extends Model
         'filename',
         'size',
         'last_modified',
+        'filename',
+        'title',
+        'extension',
+        'size',
+        'mime',
+        'hash',
     ];
 
     protected $mappingProperties = array(
@@ -130,5 +139,23 @@ class File extends Model
     public function fileable()
     {
         return $this->morphTo();
+    }
+
+    public static function boot() {
+        parent::boot();
+        static::creating(function (File $file) {
+            if (!empty($file->unique_hash)) {
+                if (!$binary = Binary::where('hash', $file->unique_hash)->first()) {
+                    $binary = Binary::create([
+                        'hash' => $file->unique_hash
+                    ]);
+                };
+                // dd($binary);
+                if (!empty($file->extension)) $binary->extension = $file->type;
+                if (!empty($file->size)) $binary->size = $file->size;
+                if (!empty($file->mime)) $binary->mime = $file->mime;
+                $binary->save();
+            }
+        });
     }
 }

@@ -16,7 +16,7 @@ class CreateFilesTable extends Migration
                 'files',
                 function (Blueprint $table) {
                     $table->engine = 'InnoDB';
-                    $table->increments('id')->unsigned();
+                    $table->uuid('id')->primary();
                     $table->string('name', 255)->nullable();
                     $table->string('description')->nullable();
                     $table->string('url', 255)->nullable();
@@ -32,6 +32,11 @@ class CreateFilesTable extends Migration
                     $table->text('details')->nullable();
                     $table->string('extension')->nullable(); //"json"
                     $table->string('mime')->nullable();
+
+
+
+                    $table->string('title' )->nullable();
+                    $table->string('hash' )->nullable();
                     $table->timestamps();
                     $table->softDeletes();
                 }
@@ -41,10 +46,10 @@ class CreateFilesTable extends Migration
             Schema::create(
                 'fileables',
                 function (Blueprint $table) {
-                    $table->increments('id');
-                    $table->unsignedInteger('file_id')->nullable();
-                    // $table->foreign('file_id')->references('id')->on('files');
-                    $table->unsignedInteger('fileable_id');
+                    $table->uuid('id')->primary();
+                    $table->uuid('file_id');
+                    $table->foreign('file_id')->references('id')->on('files');
+                    $table->uuid('fileable_id');
                     $table->string('fileable_type');
                     $table->unsignedInteger('order')->nullable();
                 }

@@ -24,17 +24,17 @@
 
             <div class="pull-right">
 
-                <a class="btn btn-primary" href="{{ route('admin.groups.index') }}"> Voltar</a>
+                <a class="btn btn-primary" href="{{ route('admin.media-manager.groups.index') }}"> Voltar</a>
 
             </div>
 
         </div>
         <div class="col-lg-1 margin-tb">
-                <a class="btn btn-primary" href="{{ route('admin.groups.edit', $group->id) }}"> Editar</a>
+                <a class="btn btn-primary" href="{{ route('admin.media-manager.groups.edit', $group->id) }}"> Editar</a>
         </div>
         <div class="col-lg-1 margin-tb">
                 @if ($group->computers->count()==0)
-                    <form action="{{ route('admin.groups.destroy', $group->id)}}" method="post">
+                    <form action="{{ route('admin.media-manager.groups.destroy', $group->id)}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Deletar</button>
@@ -75,7 +75,7 @@
                         <button class="btn btn-primary" type="submit">Adicionar Dispositivo</button>
                     <?= Former::close() ?>
                 @endif
-                @include('media-manager:admin.computers.table', [
+                @include('media-manager::admin.computers.table', [
                     'contexto' => \MediaManager\Models\Group::class,
                     'contextoId' => $group->id,
                     'computers' => $group->computers()->paginate()]

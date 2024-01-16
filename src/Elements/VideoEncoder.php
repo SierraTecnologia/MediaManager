@@ -1,8 +1,10 @@
 <?php
 
-namespace Pedreiro\Elements\Fields;
+namespace MediaManager\Elements;
 
 use Route;
+
+use Pedreiro\Elements\Fields\Upload;
 use Illuminate\Container\Container;
 
 /**

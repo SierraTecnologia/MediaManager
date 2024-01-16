@@ -22,13 +22,13 @@
         </div>
     </div>
 
-    @include('layouts.module-header', [ 'module' => 'files' ])
+    @include('pedreiro::layouts.module-header', [ 'module' => 'files' ])
 
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-12">
                 @if ($files->count() === 0)
-                    @include('layouts.module-search', [ 'module' => 'files' ])
+                    @include('pedreiro::layouts.module-search', [ 'module' => 'files' ])
                 @else
                     <table class="table table-striped">
                         <thead>
@@ -42,7 +42,7 @@
                             <tr>
                                 <td>
                                     <a href="{!! FileService::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
-                                    <a href="{!! route('admin.files.edit', [$file->id]) !!}">{!! $file->name !!}</a>
+                                    <a href="{!! route('admin.media-manager.files.edit', [$file->id]) !!}">{!! $file->name !!}</a>
                                 </td>
                                 <td class="m-hidden">
                                     @if ($file->is_published)
@@ -53,7 +53,7 @@
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-toolbar justify-content-between">
-                                        <a class="btn btn-sm btn-outline-primary ml-2" href="{!! route('admin.files.edit', [$file->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                        <a class="btn btn-sm btn-outline-primary ml-2" href="{!! route('admin.media-manager.files.edit', [$file->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
                                         <form method="post" action="{!! url('admin/'.'files/'.$file->id) !!}">
                                             {!! csrf_field() !!}
                                             {!! method_field('DELETE') !!}

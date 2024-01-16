@@ -17,10 +17,10 @@
   }
 </style>
 <div class="card uper">
-  <div class="card-header">
+  <div class="box-header panel-heading card-header">
     Grupos - Editar
   </div>
-  <div class="card-body">
+  <div class="box-body panel-body card-body">
     @if ($errors->any())
       <div class="alert alert-danger">
         <ul>
@@ -30,7 +30,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('admin.groups.update', $group->id) }}">
+      <form method="post" action="{{ route('admin.media-manager.groups.update', $group->id) }}">
         @method('PATCH')
         @csrf
         <div class="form-group">

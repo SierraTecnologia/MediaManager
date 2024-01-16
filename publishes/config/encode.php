@@ -54,11 +54,11 @@ return [
 
     ],
 
-    /**
+    /** @todo
      * A class that implements the Pedreiro\Template\Input\EncodingProviders\EncoderInterface
      * interface and contains the logic to push a video encode request to service
      * provider and handle the responses
      */
-    'provider' => '\Pedreiro\Template\Input\EncodingProviders\Zencoder',
+    'provider' => '\MediaManager\Template\EncodingProviders\Zencoder',
 
 ];
