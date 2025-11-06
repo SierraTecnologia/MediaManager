@@ -1,0 +1,15 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+    level: 5
+    paths:
+        - src
+    excludePaths:
+        - src/Console/Commands
+        - src/Template
+    ignoreErrors:
+        - '#Unsafe usage of new static#'
+        - '#Parameter \#1 \$callback of method Illuminate\\Support\\Collection#'
+    checkMissingIterableValueType: false
+    reportUnmatchedIgnoredErrors: false
