@@ -13,7 +13,7 @@ class CreateGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::hasTable('groups') || Schema::create('groups', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name', 64);
             $table->string('description')->nullable();

@@ -13,7 +13,7 @@ class CreateMedialibraryTransformationsTable extends Migration
     public function up()
     {
         try {
-            Schema::create('medialibrary_transformations', function (Blueprint $table) {
+            Schema::hasTable('medialibrary_transformations') || Schema::create('medialibrary_transformations', function (Blueprint $table) {
 
             // Primary keys
                 $table->increments('id');

@@ -14,7 +14,7 @@ class CreateComputersTable extends Migration
     public function up()
     {
         if (!Schema::hasTable('computers')) {
-            Schema::create('computers', function (Blueprint $table) {
+            Schema::hasTable('computers') || Schema::create('computers', function (Blueprint $table) {
                 $table->increments('id')->unsigned();
 
                 $table->string('name', 64)->nullable();

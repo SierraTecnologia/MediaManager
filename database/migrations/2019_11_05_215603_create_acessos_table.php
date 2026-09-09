@@ -13,7 +13,7 @@ class CreateAcessosTable extends Migration
      */
     public function up()
     {
-        Schema::create('acessos', function (Blueprint $table) {
+        Schema::hasTable('acessos') || Schema::create('acessos', function (Blueprint $table) {
             $table->increments('id')->unsigned();
 
             $table->integer('computer_id')->unsigned();

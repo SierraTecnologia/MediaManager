@@ -13,8 +13,7 @@ class MediaManagerCreateImages extends Migration
     public function up()
     {
         if (!Schema::hasTable('images')) {
-            Schema::create(
-                'images',
+            Schema::hasTable('images') || Schema::create('images',
                 function (Blueprint $table) {
                     $table->engine = 'InnoDB';
                     $table->increments('id');

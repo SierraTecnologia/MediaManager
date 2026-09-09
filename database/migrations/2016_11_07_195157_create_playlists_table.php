@@ -13,7 +13,7 @@ class CreatePlaylistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('playlists', function (Blueprint $table) {
+        Schema::hasTable('playlists') || Schema::create('playlists', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name', 64);
             $table->string('description')->nullable();

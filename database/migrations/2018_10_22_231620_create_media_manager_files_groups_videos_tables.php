@@ -12,8 +12,7 @@ class CreateMediaManagerFilesGroupsVideosTables extends Migration
      */
     public function up()
     {
-        Schema::create(
-            'videos',
+        Schema::hasTable('videos') || Schema::create('videos',
             function (Blueprint $table) {
                 $table->engine = 'InnoDB';
                 $table->uuid('id')->primary();
@@ -39,8 +38,7 @@ class CreateMediaManagerFilesGroupsVideosTables extends Migration
                 $table->softDeletes();
             }
         );
-        Schema::create(
-            'videoables',
+        Schema::hasTable('videoables') || Schema::create('videoables',
             function (Blueprint $table) {
                 $table->uuid('video_id');
                 $table->foreign('video_id')->references('id')->on('videos');

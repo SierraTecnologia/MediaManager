@@ -12,8 +12,7 @@ class CreateBinariosTable extends Migration
     public function up()
     {
         if (!Schema::hasTable('binaries')) {
-            Schema::create(
-                'binaries',
+            Schema::hasTable('binaries') || Schema::create('binaries',
                 function (Blueprint $table) {
                     $table->engine = 'InnoDB';
                     $table->string('hash', 64)->primary();

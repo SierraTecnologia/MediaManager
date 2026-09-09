@@ -13,7 +13,7 @@ class CreateMedialibraryCategoriesTable extends Migration
     public function up()
     {
         try {
-            Schema::create('medialibrary_categories', function (Blueprint $table) {
+            Schema::hasTable('medialibrary_categories') || Schema::create('medialibrary_categories', function (Blueprint $table) {
 
                 // Primary key
                 $table->increments('id');

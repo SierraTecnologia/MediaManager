@@ -12,8 +12,7 @@ class CreateMediaManagerFilesGroupsImagesTables extends Migration
      */
     public function up()
     {
-        Schema::create(
-            'imagens',
+        Schema::hasTable('imagens') || Schema::create('imagens',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('location')->nullable();
@@ -31,8 +30,7 @@ class CreateMediaManagerFilesGroupsImagesTables extends Migration
                 $table->softDeletes();
             }
         );
-        Schema::create(
-            'imagenables',
+        Schema::hasTable('imagenables') || Schema::create('imagenables',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->unsignedInteger('imagen_id')->nullable();
@@ -46,8 +44,7 @@ class CreateMediaManagerFilesGroupsImagesTables extends Migration
         
 
 
-        Schema::create(
-            'thumbnails',
+        Schema::hasTable('thumbnails') || Schema::create('thumbnails',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('path')->default('');

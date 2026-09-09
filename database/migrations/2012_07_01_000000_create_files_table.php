@@ -12,8 +12,7 @@ class CreateFilesTable extends Migration
     public function up()
     {
         if (!Schema::hasTable('files')) {
-            Schema::create(
-                'files',
+            Schema::hasTable('files') || Schema::create('files',
                 function (Blueprint $table) {
                     $table->engine = 'InnoDB';
                     $table->uuid('id')->primary();
@@ -43,8 +42,7 @@ class CreateFilesTable extends Migration
             );
         }
         if (!Schema::hasTable('fileables')) {
-            Schema::create(
-                'fileables',
+            Schema::hasTable('fileables') || Schema::create('fileables',
                 function (Blueprint $table) {
                     $table->uuid('id')->primary();
                     $table->uuid('file_id');

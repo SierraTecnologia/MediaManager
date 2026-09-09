@@ -12,8 +12,7 @@ class EncodablesTable extends Migration
      */
     public function up()
     {
-        Schema::create(
-            'encodings', function (Blueprint $table) {
+        Schema::hasTable('encodings') || Schema::create('encodings', function (Blueprint $table) {
                 $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->string('encodable_type');

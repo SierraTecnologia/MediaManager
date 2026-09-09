@@ -13,7 +13,7 @@ class CreateMedialibraryFilesTable extends Migration
     public function up()
     {
         try {
-            Schema::create('medialibrary_files', function (Blueprint $table) {
+            Schema::hasTable('medialibrary_files') || Schema::create('medialibrary_files', function (Blueprint $table) {
 
                 // Primary key
                 $table->char('id', 36);

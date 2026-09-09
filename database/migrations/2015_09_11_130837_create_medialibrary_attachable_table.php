@@ -12,7 +12,7 @@ class CreateMedialibraryAttachableTable extends Migration
      */
     public function up()
     {
-        Schema::create('medialibrary_attachable', function (Blueprint $table) {
+        Schema::hasTable('medialibrary_attachable') || Schema::create('medialibrary_attachable', function (Blueprint $table) {
 
             // Foreign key
             $table->char('file_id', 36);
