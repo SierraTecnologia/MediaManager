@@ -75,7 +75,7 @@
             <vlc-player width="auto" height="100%"></vlc-player>
     </div>
 
-    <script src="{{ mix('/js/app.js') }}"></script>
+    @vite('resources/js/app.ts')
 
 
     @include('media-manager::media.player')
