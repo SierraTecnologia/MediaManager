@@ -67,7 +67,7 @@ class Encoding extends Base
      *
      * @return void
      */
-    public function onCreating()
+    public function onCreating(): void
     {
         // Delete any other encoding jobs for the same parent and field
         self::where('encodable_type', '=', $this->encodable_type)
@@ -87,7 +87,7 @@ class Encoding extends Base
      *
      * @return void
      */
-    public function onCreated()
+    public function onCreated(): void
     {
         static::encoder($this)->encode($this->source(), $this->preset);
     }
@@ -95,7 +95,7 @@ class Encoding extends Base
     /**
      * Delete encoded files that are local to this filesystem
      */
-    public function onDeleted()
+    public function onDeleted(): void
     {
         // Get the directory of an output
         if (($sources = (array) $this->outputs)      // Convert sources to an array
@@ -137,7 +137,7 @@ class Encoding extends Base
      * @param  MediaManager\Models\Encoding
      * @return MediaManager\Template\EncodingProviders\EncodingProvider
      */
-    public static function encoder(Encoding $model = null)
+    public static function encoder(?Encoding $model = null)
     {
         $class = Config::get('sitec.encode.provider');
 

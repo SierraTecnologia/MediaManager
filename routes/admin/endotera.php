@@ -21,7 +21,7 @@ Route::group(
     'as'     => 'media.',
     'prefix' => 'media',
     ], function () {
-        Route::get('medias', 'HomeController@medias')->name('files');
+        Route::get('medias', 'HomeController@medias')->name('medias');
                 
         Route::get('/', ['uses' => 'MediaController@index',              'as' => 'index']);
         Route::post('files', ['uses' => 'MediaController@files',              'as' => 'files']);

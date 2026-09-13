@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class RenamedHiddenToIsHiddenMedialibraryFilesTable extends Migration
 {
@@ -12,9 +13,11 @@ class RenamedHiddenToIsHiddenMedialibraryFilesTable extends Migration
      */
     public function up()
     {
-        Schema::table('medialibrary_files', function (Blueprint $table) {
-            $table->renameColumn('hidden', 'is_hidden');
-        });
+        if (Schema::hasTable('medialibrary_files') && Schema::hasColumn('medialibrary_files', 'hidden')) {
+            Schema::table('medialibrary_files', function (Blueprint $table) {
+                $table->renameColumn('hidden', 'is_hidden');
+            });
+        }
     }
 
     /**
@@ -24,8 +27,10 @@ class RenamedHiddenToIsHiddenMedialibraryFilesTable extends Migration
      */
     public function down()
     {
-        Schema::table('medialibrary_files', function (Blueprint $table) {
-            $table->renameColumn('is_hidden', 'hidden');
-        });
+        if (Schema::hasTable('medialibrary_files') && Schema::hasColumn('medialibrary_files', 'is_hidden')) {
+            Schema::table('medialibrary_files', function (Blueprint $table) {
+                $table->renameColumn('is_hidden', 'hidden');
+            });
+        }
     }
 }

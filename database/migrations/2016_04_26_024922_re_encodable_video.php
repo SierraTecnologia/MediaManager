@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class ReEncodableVideo extends Migration
 {
@@ -12,16 +13,18 @@ class ReEncodableVideo extends Migration
      */
     public function up()
     {
-        Schema::table(
-            'encodings', function (Blueprint $table) {
-                $table->text('response')->after('message')->nullable();
-            }
-        );
-        Schema::table(
-            'encodings', function (Blueprint $table) {
-                $table->string('preset')->after('encodable_attribute')->default('');
-            }
-        );
+        if (Schema::hasTable('encodings')) {
+            Schema::table(
+                'encodings', function (Blueprint $table) {
+                    if (! Schema::hasColumn('encodings', 'response')) {
+                        $table->text('response')->after('message')->nullable();
+                    }
+                    if (! Schema::hasColumn('encodings', 'preset')) {
+                        $table->string('preset')->after('encodable_attribute')->default('');
+                    }
+                }
+            );
+        }
     }
 
     /**
@@ -31,15 +34,16 @@ class ReEncodableVideo extends Migration
      */
     public function down()
     {
-        Schema::table(
-            'encodings', function (Blueprint $table) {
-                $table->dropColumn('preset');
-            }
-        );
-        Schema::table(
-            'encodings', function (Blueprint $table) {
-                $table->dropColumn('response');
-            }
-        );
+        if (Schema::hasTable('encodings')) {
+            Schema::table(
+                'encodings', function (Blueprint $table) {
+                    foreach (['preset', 'response'] as $column) {
+                        if (Schema::hasColumn('encodings', $column)) {
+                            $table->dropColumn($column);
+                        }
+                    }
+                }
+            );
+        }
     }
 }

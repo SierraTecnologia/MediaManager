@@ -54,6 +54,15 @@
         "post-update-cmd": [],
         "post-create-project-cmd": []
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../**",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
@@ -64,5 +73,5 @@
         }
     },
     "require-dev": {},
-    "version": "2.0.0"
+    "version": "2.1.0"
 }
