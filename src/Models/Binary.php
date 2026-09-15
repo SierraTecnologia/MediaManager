@@ -10,6 +10,7 @@ class Binary extends Base
 {
     use UsesStringId;
 
+    protected $table = 'binaries';
     protected $primaryKey = 'hash';
     protected $keyType = 'string';
 

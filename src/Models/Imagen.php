@@ -10,11 +10,11 @@ use FileService;
 use Illuminate\Support\Facades\Cache;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Log;
-use Muleta\Traits\Models\ArchiveTrait;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig;
 use Storage;
 
-class Imagen extends ArchiveTrait
+class Imagen extends Model
 {
     public $table = 'imagens';
 

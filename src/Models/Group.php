@@ -1,10 +1,9 @@
 <?php
 
-namespace MediaMAnager\Models;
+namespace MediaManager\Models;
 
 use Carbon\Carbon;
 use Exception;
-use Trainner\Traits\UsedByTeams;
 
 class Group extends Model
 {
@@ -45,14 +44,14 @@ class Group extends Model
     
     public function playlist()
     {
-        return $this->belongsTo('MediaManager\Models\Playlist', 'playlist_id', 'id')->fromTeam($this->team_id);
+        return $this->belongsTo('MediaManager\Models\Playlist', 'playlist_id', 'id');
     }
     /**
      * Get the tokens record associated with the user.
      */
     public function computers()
     {
-        return $this->hasMany('Trainner\Models\Computer', 'group_id', 'id')->fromTeam($this->team_id);
+        return $this->hasMany('Trainner\Models\Computer', 'group_id', 'id');
     }
 
 

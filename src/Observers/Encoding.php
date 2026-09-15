@@ -19,7 +19,7 @@ class Encoding
      */
     public function onSaving($event, $payload)
     {
-        list($model) = $payload;
+        $model = is_array($payload) ? (reset($payload) ?: null) : $payload;
 
         if (!$this->isEncodable($model)) {
             return;
@@ -42,12 +42,14 @@ class Encoding
     /**
      * Delete all encodes on the model
      *
-     * @param  string                  $event
-     * @param  Facilitador\Models\Base $model
+     * @param  string $event
+     * @param  mixed  $payload
      * @return void
      */
-    public function onDeleted($event, $model)
+    public function onDeleted($event, $payload)
     {
+        $model = is_array($payload) ? (reset($payload) ?: null) : $payload;
+
         if (!$this->isEncodable($model)) {
             return;
         }
@@ -58,11 +60,19 @@ class Encoding
     /**
      * Check if a model should be encoded
      *
-     * @param  Facilitador\Models\Base $model
+     * @param  mixed $model
      * @return boolean
      */
     public function isEncodable($model)
     {
+        if (is_array($model)) {
+            $model = reset($model);
+        }
+
+        if (!is_object($model)) {
+            return false;
+        }
+
         if (!method_exists($model, 'getDirtyEncodableAttributes')) {
             return false;
         }

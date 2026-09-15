@@ -29,8 +29,6 @@ class MediaManagerProvider extends ServiceProvider
     public $packageName = 'media-manager';
     const pathVendor = 'sierratecnologia/media-manager';
 
-    use ConsoleTools;
-
     public static $aliasProviders = [
         'MediaManager' => \MediaManager\Facades\MediaManager::class,
         'FileService' => FileService::class,
