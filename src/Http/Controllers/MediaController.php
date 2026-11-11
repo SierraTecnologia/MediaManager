@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Muleta\Image\Image;
-use League\Flysystem\Plugin\ListWith;
 use MediaManager\Events\MediaFileAdded;
 
 class MediaController extends Controller

@@ -16,9 +16,9 @@ use SplFileInfo;
 use Crypto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use League\Flysystem\Plugin\ListWith;
 use MediaManager\Events\MediaFileAdded;
 use MediaManager\Models\File;
+use MediaManager\Models\Video;
 
 class MediaService
 {
@@ -38,6 +38,27 @@ class MediaService
     {
         $this->mimeTypes = include base_path('config'.DIRECTORY_SEPARATOR.'mime.php');
         $this->filesystem = \Illuminate\Support\Facades\Config::get('rica.storage.disk', env('FILESYSTEM_DRIVER', 'public'));
+    }
+
+    public function setDirectory($directory): self
+    {
+        $this->directory = $directory ? rtrim((string)$directory, '/') . '/' : '';
+        return $this;
+    }
+
+    public function getDirectory(): string
+    {
+        return $this->directory;
+    }
+
+    public function videoExist(Video $video): bool
+    {
+        $path = $video->path ?? $video->filename ?? '';
+        if (empty($path)) {
+            return false;
+        }
+        $fullPath = $this->directory ? rtrim($this->directory, '/').'/'.ltrim($path, '/') : $path;
+        return Storage::disk($this->filesystem)->exists($fullPath) || Storage::disk($this->filesystem)->exists($path);
     }
 
     public function allFiles($folder = ''): array
@@ -83,46 +104,64 @@ class MediaService
         $dir = $this->directory.$folder;
 
         $files = [];
-        $storage = Storage::disk($this->filesystem)->addPlugin(new ListWith());
-        $storageItems = $storage->listWith(['mimetype'], $dir);
+        $storage = Storage::disk($this->filesystem);
 
-        foreach ($storageItems as $item) {
-            if ($item['type'] == 'dir') {
-                $files[] = [
-                    'name'          => $item['basename'],
-                    'type'          => 'folder',
-                    'path'          => Storage::disk($this->filesystem)->url($item['path']),
-                    'relative_path' => $item['path'],
-                    'items'         => '',
-                    'last_modified' => '',
-                ];
-            } else {
-                if (empty(pathinfo($item['path'], PATHINFO_FILENAME)) && !\Illuminate\Support\Facades\Config::get('rica.hidden_files')) {
-                    continue;
-                }
-                // Its a thumbnail and thumbnails should be hidden
-                if (Str::endsWith($item['filename'], $thumbnail_names)) {
-                    $thumbnails[] = $item;
-                    continue;
-                }
-                $files[] = [
-                    'name'          => $item['basename'],
-                    'filename'      => $item['filename'],
-                    'type'          => $item['mimetype'] ?? 'file',
-                    'path'          => Storage::disk($this->filesystem)->url($item['path']),
-                    'relative_path' => $item['path'],
-                    'size'          => $item['size'],
-                    'last_modified' => $item['timestamp'],
-                    'thumbnails'    => [],
-                ];
+        foreach ($storage->directories($dir) as $path) {
+            $files[] = [
+                'name'          => basename($path),
+                'type'          => 'folder',
+                'path'          => $storage->url($path),
+                'relative_path' => $path,
+                'items'         => '',
+                'last_modified' => '',
+            ];
+        }
+
+        foreach ($storage->files($dir) as $path) {
+            $filename = basename($path);
+            if (empty(pathinfo($path, PATHINFO_FILENAME)) && !\Illuminate\Support\Facades\Config::get('rica.hidden_files')) {
+                continue;
             }
+
+            $item = ['filename' => $filename, 'path' => $path];
+            if (Str::endsWith($filename, $thumbnail_names)) {
+                $thumbnails[] = $item;
+                continue;
+            }
+
+            try {
+                $mimeType = $storage->mimeType($path);
+            } catch (\Throwable) {
+                $mimeType = null;
+            }
+            try {
+                $size = $storage->size($path);
+            } catch (\Throwable) {
+                $size = null;
+            }
+            try {
+                $lastModified = $storage->lastModified($path);
+            } catch (\Throwable) {
+                $lastModified = null;
+            }
+
+            $files[] = [
+                'name'          => $filename,
+                'filename'      => $filename,
+                'type'          => $mimeType ?? 'file',
+                'path'          => $storage->url($path),
+                'relative_path' => $path,
+                'size'          => $size,
+                'last_modified' => $lastModified,
+                'thumbnails'    => [],
+            ];
         }
 
         foreach ($files as $key => $file) {
             foreach ($thumbnails as $thumbnail) {
                 if ($file['type'] != 'folder' && Str::startsWith($thumbnail['filename'], $file['filename'])) {
                     $thumbnail['thumb_name'] = str_replace($file['filename'].'-', '', $thumbnail['filename']);
-                    $thumbnail['path'] = Storage::disk($this->filesystem)->url($thumbnail['path']);
+                    $thumbnail['path'] = $storage->url($thumbnail['path']);
                     $files[$key]['thumbnails'][] = $thumbnail;
                 }
             }
