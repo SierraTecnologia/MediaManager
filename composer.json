@@ -26,14 +26,14 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "laravel/framework": "^13.0",
         "sierratecnologia/muleta": "^2.0",
         "league/pipeline": "^1.1",
         "league/flysystem": "^3.36",
         "league/flysystem-ziparchive": "^3.31",
         "league/mime-type-detection": "^1.17",
-        "intervention/image": "^2.7",
+        "intervention/image": "^4.4",
         "spatie/laravel-medialibrary": "^11.23",
         "doctrine/dbal": "^4.4"
     },
@@ -86,5 +86,5 @@
         "phpunit/phpunit": "^13.0",
         "orchestra/testbench": "^11.0"
     },
-    "version": "2.3.0"
+    "version": "2.4.0"
 }

@@ -52,9 +52,7 @@ return array(
     */
 
     'templates' => array(
-        'small' => 'Intervention\Image\Templates\Small',
-        'medium' => 'Intervention\Image\Templates\Medium',
-        'large' => 'Intervention\Image\Templates\Large',
+        // Intervention Image 4 removeu Templates\Small, Medium e Large.
     ),
 
     /*

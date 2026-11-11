@@ -43,7 +43,6 @@ class MediaManagerProvider extends ServiceProvider
          */
         // \CipeMotion\Medialibrary\ServiceProvider::class,
         \SierraTecnologia\Crypto\CryptoProvider::class,
-        \Intervention\Image\ImageServiceProvider::class,
         \Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
 
         \CipeMotion\Medialibrary\ServiceProvider::class,

@@ -8,7 +8,7 @@ use Config;
 use Exception;
 use FileService;
 use Illuminate\Support\Facades\Cache;
-use Intervention\Image\ImageManagerStatic as InterventionImage;
+use Muleta\Image\Image as InterventionImage;
 use Log;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig;

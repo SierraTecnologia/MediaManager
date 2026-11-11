@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
+use Muleta\Image\Image;
 use Log;
 use SplFileInfo;
 use Crypto;
@@ -422,7 +422,7 @@ class MediaService
         return compact('success', 'message');
     }
 
-    private function addWatermarkToImage(\Intervention\Image\Image $image, $options): \Intervention\Image\Image
+    private function addWatermarkToImage(\Muleta\Image\Image $image, $options): \Muleta\Image\Image
     {
         $watermark = Image::make(Storage::disk($this->filesystem)->path($options->source));
         // Resize watermark

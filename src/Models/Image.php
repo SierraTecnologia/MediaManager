@@ -4,6 +4,7 @@ namespace MediaManager\Models;
 
 use Croppa;
 use MediaManager\Models\Model as Base;
+use Muleta\Image\Image as InterventionImage;
 use MediaManager\Template\Markup\ImageElement;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

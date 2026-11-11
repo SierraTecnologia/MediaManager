@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Constraint;
-use Intervention\Image\Facades\Image;
-use League\Flysystem\Util;
+use Muleta\Image\Constraint;
+use Muleta\Image\Image;
 use Illuminate\Http\Request;
 
 /**
@@ -38,6 +37,25 @@ class BaseController extends Controller
         return Response::json(ResponseUtil::makeError($error), $code);
     }
 
+    protected function normalizeRelativePath(string $path): string
+    {
+        $parts = [];
+        foreach (explode('/', str_replace('\\', '/', $path)) as $part) {
+            if ($part === '' || $part === '.') {
+                continue;
+            }
+            if ($part === '..') {
+                if (empty($parts)) {
+                    throw new \LogicException('Caminho fora do diretorio de assets: '.$path);
+                }
+                array_pop($parts);
+                continue;
+            }
+            $parts[] = $part;
+        }
+
+        return implode('/', $parts);
+    }
 
     /**
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
@@ -45,7 +63,7 @@ class BaseController extends Controller
     public function assets(Request $request)
     {
         try {
-            $path = dirname(__DIR__, 3).'/publishes/assets/'.Util::normalizeRelativePath(urldecode($request->path));
+            $path = dirname(__DIR__, 3).'/publishes/assets/'.$this->normalizeRelativePath(urldecode($request->path));
         } catch (\LogicException $e) {
             abort(404);
         }

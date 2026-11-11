@@ -9,14 +9,12 @@ use DB;
 use Exception;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Contracts\Filesystem\Factory as FileSystem;
-use Intervention\Image\Exception\NotSupportedException;
-use Intervention\Image\ImageManager;
+use Muleta\Image\Image as EditableImage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageService extends UploadService
 {
 
-    protected $imageTool;
     protected $cache;
     protected $storageUrl;
     protected $image;
@@ -25,16 +23,14 @@ class ImageService extends UploadService
     /**
      * ImageService constructor.
      *
-     * @param Image        $image
-     * @param ImageManager $imageTool
-     * @param FileSystem   $fileSystem
-     * @param Cache        $cache
-     * @param HttpFetcher  $http
+     * @param Image       $image
+     * @param FileSystem  $fileSystem
+     * @param Cache       $cache
+     * @param HttpFetcher $http
      */
-    public function __construct(Image $image, ImageManager $imageTool, FileSystem $fileSystem, Cache $cache, HttpFetcher $http)
+    public function __construct(Image $image, FileSystem $fileSystem, Cache $cache, HttpFetcher $http)
     {
         $this->image = $image;
-        $this->imageTool = $imageTool;
         $this->cache = $cache;
         $this->http = $http;
         parent::__construct($fileSystem);
@@ -212,9 +208,9 @@ class ImageService extends UploadService
         }
 
         try {
-            $thumb = $this->imageTool->make($storage->get($imagePath));
+            $thumb = EditableImage::make($storage->get($imagePath));
         } catch (Exception $e) {
-            if ($e instanceof \ErrorException || $e instanceof NotSupportedException) {
+            if ($e instanceof \ErrorException) {
                 throw new ImageUploadException(trans('errors.cannot_create_thumbs'));
             }
             throw $e;
